@@ -1,0 +1,7 @@
+{
+  "name": "ionicClient",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

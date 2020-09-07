@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ManagerId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Accounts__Manage__36B12243" FromRole="Accounts" ToRole="Users" />
+    <NavigationProperty Name="UsersAccounts" Relationship="Self.FK__UsersAcco__Accou__412EB0B6" FromRole="Accounts" ToRole="UsersAccount" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__3B75D760" FromRole="Categories" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="FollowUpList">
+    <Key>
+      <PropertyRef Name="FollowUpListId" />
+    </Key>
+    <Property Name="FollowUpListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="FrequencyId" Type="Int64" />
+    <NavigationProperty Name="Frequency" Relationship="Self.FK__FollowUpL__Frequ__38996AB5" FromRole="FollowUpList" ToRole="Frequency" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__FollowUpL__Produ__37A5467C" FromRole="FollowUpList" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Frequency">
+    <Key>
+      <PropertyRef Name="FrequencyId" />
+    </Key>
+    <Property Name="FrequencyId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FrequencyMode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumDays" Type="Int32" Nullable="false" />
+    <Property Name="Exception" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FollowUpLists" Relationship="Self.FK__FollowUpL__Frequ__38996AB5" FromRole="Frequency" ToRole="FollowUpList" />
+  </EntityType>
+  <EntityType Name="List">
+    <Key>
+      <PropertyRef Name="ListId" />
+    </Key>
+    <Property Name="ListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="TypeListId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="TypesList" Relationship="Self.FK__Lists__TypeListI__4316F928" FromRole="Lists" ToRole="TypesList" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__ListI__3F466844" FromRole="List" ToRole="ProductToList" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__3B75D760" FromRole="Products" ToRole="Categories" />
+    <NavigationProperty Name="FollowUpLists" Relationship="Self.FK__FollowUpL__Produ__37A5467C" FromRole="Products" ToRole="FollowUpList" />
+    <NavigationProperty Name="ProductsToTypeLists" Relationship="Self.FK__ProductsT__Produ__3C69FB99" FromRole="Products" ToRole="ProductsToTypeList" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Produ__3E52440B" FromRole="Product" ToRole="ProductToList" />
+  </EntityType>
+  <EntityType Name="ProductsToTypeList">
+    <Key>
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="TypeListId" />
+    </Key>
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="TypeListId" Type="Int64" Nullable="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductsT__Produ__3C69FB99" FromRole="ProductsToTypeList" ToRole="Products" />
+    <NavigationProperty Name="TypesList" Relationship="Self.FK__ProductsT__TypeL__3D5E1FD2" FromRole="ProductsToTypeList" ToRole="TypesList" />
+  </EntityType>
+  <EntityType Name="TypesList">
+    <Key>
+      <PropertyRef Name="TypeListId" />
+    </Key>
+    <Property Name="TypeListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeListName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Lists" Relationship="Self.FK__Lists__TypeListI__4316F928" FromRole="TypesList" ToRole="Lists" />
+    <NavigationProperty Name="ProductsToTypeLists" Relationship="Self.FK__ProductsT__TypeL__3D5E1FD2" FromRole="TypesList" ToRole="ProductsToTypeList" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__Manage__36B12243" FromRole="Users" ToRole="Accounts" />
+    <NavigationProperty Name="UsersAccounts" Relationship="Self.FK__UsersAcco__UserI__4222D4EF" FromRole="Users" ToRole="UsersAccount" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D" FromRole="User" ToRole="ProductToList" />
+  </EntityType>
+  <EntityType Name="UsersAccount">
+    <Key>
+      <PropertyRef Name="UserAccountId" />
+    </Key>
+    <Property Name="UserAccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountId" Type="Int64" Nullable="false" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__UsersAcco__Accou__412EB0B6" FromRole="UsersAccount" ToRole="Accounts" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UsersAcco__UserI__4222D4EF" FromRole="UsersAccount" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__Accounts__Manage__36B12243">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsersAcco__Accou__412EB0B6">
+    <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
+    <End Role="UsersAccount" Type="Self.UsersAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="UsersAccount">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Catego__3B75D760">
+    <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FollowUpL__Frequ__38996AB5">
+    <End Role="Frequency" Type="Self.Frequency" Multiplicity="0..1" />
+    <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Frequency">
+        <PropertyRef Name="FrequencyId" />
+      </Principal>
+      <Dependent Role="FollowUpList">
+        <PropertyRef Name="FrequencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FollowUpL__Produ__37A5467C">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="FollowUpList">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Lists__TypeListI__4316F928">
+    <End Role="TypesList" Type="Self.TypesList" Multiplicity="1" />
+    <End Role="Lists" Type="Self.List" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypesList">
+        <PropertyRef Name="TypeListId" />
+      </Principal>
+      <Dependent Role="Lists">
+        <PropertyRef Name="TypeListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsT__Produ__3C69FB99">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductsToTypeList" Type="Self.ProductsToTypeList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductsToTypeList">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductsT__TypeL__3D5E1FD2">
+    <End Role="TypesList" Type="Self.TypesList" Multiplicity="1" />
+    <End Role="ProductsToTypeList" Type="Self.ProductsToTypeList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypesList">
+        <PropertyRef Name="TypeListId" />
+      </Principal>
+      <Dependent Role="ProductsToTypeList">
+        <PropertyRef Name="TypeListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UsersAcco__UserI__4222D4EF">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="UsersAccount" Type="Self.UsersAccount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UsersAccount">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="FollowUpLists" EntityType="Self.FollowUpList" />
+    <EntitySet Name="Frequencies" EntityType="Self.Frequency" />
+    <EntitySet Name="Lists" EntityType="Self.List" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductsToTypeLists" EntityType="Self.ProductsToTypeList" />
+    <EntitySet Name="TypesLists" EntityType="Self.TypesList" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UsersAccounts" EntityType="Self.UsersAccount" />
+    <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="Self.FK__Accounts__Manage__36B12243">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsersAcco__Accou__412EB0B6" Association="Self.FK__UsersAcco__Accou__412EB0B6">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="UsersAccount" EntitySet="UsersAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Catego__3B75D760" Association="Self.FK__Products__Catego__3B75D760">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FollowUpL__Frequ__38996AB5" Association="Self.FK__FollowUpL__Frequ__38996AB5">
+      <End Role="Frequency" EntitySet="Frequencies" />
+      <End Role="FollowUpList" EntitySet="FollowUpLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FollowUpL__Produ__37A5467C" Association="Self.FK__FollowUpL__Produ__37A5467C">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="FollowUpList" EntitySet="FollowUpLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Lists__TypeListI__4316F928" Association="Self.FK__Lists__TypeListI__4316F928">
+      <End Role="TypesList" EntitySet="TypesLists" />
+      <End Role="Lists" EntitySet="Lists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsT__Produ__3C69FB99" Association="Self.FK__ProductsT__Produ__3C69FB99">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsToTypeList" EntitySet="ProductsToTypeLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductsT__TypeL__3D5E1FD2" Association="Self.FK__ProductsT__TypeL__3D5E1FD2">
+      <End Role="TypesList" EntitySet="TypesLists" />
+      <End Role="ProductsToTypeList" EntitySet="ProductsToTypeLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UsersAcco__UserI__4222D4EF" Association="Self.FK__UsersAcco__UserI__4222D4EF">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersAccount" EntitySet="UsersAccounts" />
+    </AssociationSet>
+    <EntitySet Name="ProductToLists" EntityType="ProjectDBModel.ProductToList" />
+    <AssociationSet Name="FK__ProductTo__ListI__3F466844" Association="ProjectDBModel.FK__ProductTo__ListI__3F466844">
+      <End Role="List" EntitySet="Lists" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductTo__Produ__3E52440B" Association="ProjectDBModel.FK__ProductTo__Produ__3E52440B">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductTo__Buyer__403A8C7D" Association="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProductToList">
+    <Key>
+      <PropertyRef Name="ProductToListId_" />
+    </Key>
+    <Property Name="ProductToListId_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="ListId" Type="Int64" Nullable="false" />
+    <Property Name="BuyerId" Type="Int64" Nullable="false" />
+    <Property Name="DateOfBuy" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="List" Relationship="ProjectDBModel.FK__ProductTo__ListI__3F466844" FromRole="ProductToList" ToRole="List" />
+    <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__ProductTo__Produ__3E52440B" FromRole="ProductToList" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D" FromRole="ProductToList" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__ProductTo__ListI__3F466844">
+    <End Type="ProjectDBModel.List" Role="List" Multiplicity="1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="List">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductTo__Produ__3E52440B">
+    <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductTo__Buyer__403A8C7D">
+    <End Type="ProjectDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="BuyerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

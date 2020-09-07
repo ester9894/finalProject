@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="ProjectDBModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AcountName" ColumnName="AcountName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ProjectDBModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FollowUpLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
+        <MappingFragment StoreEntitySet="FollowUpList">
+          <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Frequencies">
+      <EntityTypeMapping TypeName="ProjectDBModel.Frequency">
+        <MappingFragment StoreEntitySet="Frequency">
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+          <ScalarProperty Name="FrequencyMode" ColumnName="FrequencyMode" />
+          <ScalarProperty Name="NumDays" ColumnName="NumDays" />
+          <ScalarProperty Name="Exception" ColumnName="Exception" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lists">
+      <EntityTypeMapping TypeName="ProjectDBModel.List">
+        <MappingFragment StoreEntitySet="Lists">
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ProjectDBModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsToTypeLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.ProductsToTypeList">
+        <MappingFragment StoreEntitySet="ProductsToTypeList">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypesLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.TypesList">
+        <MappingFragment StoreEntitySet="TypesList">
+          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
+          <ScalarProperty Name="TypeListName" ColumnName="TypeListName" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ProjectDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersAccounts">
+      <EntityTypeMapping TypeName="ProjectDBModel.UsersAccount">
+        <MappingFragment StoreEntitySet="UsersAccount">
+          <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductToLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
+        <MappingFragment StoreEntitySet="ProductToList">
+          <ScalarProperty Name="DateOfBuy" ColumnName="DateOfBuy" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
