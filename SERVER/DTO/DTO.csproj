@@ -46,6 +46,7 @@
     <Compile Include="FollowUpListDTO.cs" />
     <Compile Include="FrequencyDTO.cs" />
     <Compile Include="ListDTO.cs" />
+    <Compile Include="LoginDTO.cs" />
     <Compile Include="ProductsDTO.cs" />
     <Compile Include="ProductsToTypeListDTO.cs" />
     <Compile Include="ProductToListDTO.cs" />

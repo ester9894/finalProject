@@ -3,6 +3,7 @@ import { Router } from  "@angular/router";
 import { AccountsService } from 'src/app/shared/services/accounts.service';
 import { UsersAccount } from 'src/app/shared/models/users_account.model';
 import { FormGroup } from '@angular/forms';
+import { Login } from 'src/app/shared/models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,15 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-userAccount: UsersAccount = new UsersAccount();
+userLogin: Login = new Login();
 loginForm: FormGroup;
   constructor(private accountService: AccountsService, private router: Router) { }
 
   ngOnInit() {
   }
-  login(form){
-    this.accountService.login(form.value).subscribe((res)=>{
-      this.router.navigateByUrl('home');
+  checkLogin(){
+    this.accountService.checkLogin(this.userLogin).subscribe((res)=>{
+      this.router.navigateByUrl('home-page');
     });
   }
 }
