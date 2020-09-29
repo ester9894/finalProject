@@ -13,13 +13,13 @@ namespace API.Controllers
     [RoutePrefix("api/login")]
     public class LoginController : ApiController
     {
-        [Route(""), HttpPost]
+        [Route("checkLogin"), HttpPost,HttpGet]
         public IHttpActionResult checkLogin(LoginDTO login)
         {
             if (BL.AccountsBL.checkLogin(login) == true)
                 return Ok(true);
-            else
-                return Ok(false);//יאלה איתנו
+            return Ok(false);
+
         }
     }
 }

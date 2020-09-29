@@ -17,7 +17,8 @@ loginForm: FormGroup;
 
   ngOnInit() {
   }
-  checkLogin(){
+  checkLogin()
+  {
     this.accountService.checkLogin(this.userLogin).subscribe((res)=>{
       this.router.navigateByUrl('home-page');
     });

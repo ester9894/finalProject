@@ -14,12 +14,12 @@ export class AccountsService {
 
   addAccount(user: User)
   {
-    this.http.post('', user)
+  this.http.post('', user)
   }
 
   checkLogin(user:Login):Observable<boolean> {
     return this.http.post<boolean>(environment.url + 'login/checkLogin', user)
-
+   // return this.http.get<boolean>(environment.url + `login/checkLogin/${user.loginName}+${user.loginPassword}`)
   }
 }
 

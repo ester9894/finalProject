@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
 
   }
   register() {
-    this.userService.addUser(this.user).subscribe((res) => {
+      this.userService.addUser(this.user).subscribe((res) => {
       this.router.navigateByUrl('home-page');
     });
   }
