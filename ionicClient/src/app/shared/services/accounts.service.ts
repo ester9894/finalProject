@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AccountsService {
+ 
 
   constructor(private http:HttpClient) { }
 
@@ -19,7 +20,12 @@ export class AccountsService {
 
   checkLogin(user:Login):Observable<boolean> {
     return this.http.post<boolean>(environment.url + 'login/checkLogin', user)
-   // return this.http.get<boolean>(environment.url + `login/checkLogin/${user.loginName}+${user.loginPassword}`)
+  }
+
+  checkPass(pass: string) {
+    return this.http.post<number>(environment.url + 'account/checkPass', pass)
+
+
   }
 }
 
