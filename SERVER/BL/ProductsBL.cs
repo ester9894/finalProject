@@ -19,12 +19,14 @@ namespace BL
             }
         }
 
-        public static List<ProductsDTO> GetAllProducts()
+        public static Dictionary<string,List<ProductsDTO>> GetAllProducts()
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                return db.Products.ToList().Select(p => CONVERTERS.ProductsConverter.ConvertProductToDTO(p)).ToList();
+
+                return db.Products.ToList().Select(p=>CONVERTERS.ProductsConverter.ConvertProductToDTO(p)).GroupBy(p => p.CategoryName).ToDictionary(p => p.Key, p => p.ToList());
             }
+
             }
        }
 }

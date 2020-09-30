@@ -18,7 +18,7 @@ namespace API.Controllers
         {
             if (BL.AccountsBL.checkLogin(login) == true)
                 return Ok(true);
-            return Ok(false);
+            return BadRequest(); 
 
         }
     }

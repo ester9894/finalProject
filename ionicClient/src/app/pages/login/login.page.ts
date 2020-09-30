@@ -21,6 +21,6 @@ loginForm: FormGroup;
   {
     this.accountService.checkLogin(this.userLogin).subscribe((res)=>{
       this.router.navigateByUrl('home-page');
-    });
+    },err=>alert(""));
   }
 }

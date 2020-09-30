@@ -26,7 +26,8 @@ namespace BL.CONVERTERS
             {
                 CategoryId = p.CategoryId,
                 ProductId = p.ProductId,
-                ProductName = p.ProductName
+                ProductName = p.ProductName,
+                CategoryName=p.Category.CategoryName
             };
         }
     }
