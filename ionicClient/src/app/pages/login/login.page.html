@@ -4,37 +4,44 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content  color="light" style="text-align-last: right;">
-  <form  #form="ngForm" (ngSubmit)="checkLogin()" >
+<ion-content color="light" style="text-align-last: right;">
+  <form #form="ngForm" (ngSubmit)="checkLogin()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
             <h3>!!שמחים לראות אותך</h3>
           </div>
+
           <div padding>
             <ion-item>
-              <ion-input  name="name" type="text" placeholder="שם משתמש" [(ngModel)]="userLogin.userName" required></ion-input>
+              <ion-input name="name" type="text" placeholder="שם משתמש" [(ngModel)]="userLogin.userName" required>
+              </ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="סיסמא" [(ngModel)]="userLogin.userPassword" required></ion-input>
+              <ion-input name="password" type="password" placeholder="סיסמא" [(ngModel)]="userLogin.userPassword"
+                required></ion-input>
             </ion-item>
           </div>
+
           <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">כניסה</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">כניסה</ion-button>
           </div>
+          <br>
+          <div text-center>
+            <ion-item>
+              <ion-input placeholder="להצטרפות לחשבון קיים הכנס סיסמא"></ion-input>
+            </ion-item>
+          </div>
+          <br>
+
           <ion-row>
             <div text-center>
-          אם עוד אין לך חשבון  <a routerLink='/register'>
-           הרשם כאן </a>
+              אם עוד אין לך חשבון <a routerLink='/register'>
+                הרשם כאן </a>
             </div>
           </ion-row>
-            <ion-row>
-            <div text-center>
-             להצטרפות לחשבון קיים <a routerLink='/register'>
-               לחץ כאן </a>
-                </div>
-        </ion-row>
+
         </ion-col>
       </ion-row>
     </ion-grid>

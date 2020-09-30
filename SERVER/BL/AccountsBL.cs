@@ -26,8 +26,14 @@ namespace BL
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                user = db.Users.FirstOrDefault(a => a.UserName == login.userName);
+                if (user == null)
+                    return false;
+                long userId = user.UserId;
                account = db.Accounts.FirstOrDefault(a => a.Password == login.userPassword);
-                if (db.UsersAccounts.FirstOrDefault(a => a.UserId == user.UserId && a.AccountId == account.AccountId)!= null)
+                if (account == null)
+                    return false;
+                long accountId = account.AccountId;
+                if (db.UsersAccounts.FirstOrDefault(a => a.UserId == userId && a.AccountId == accountId)!= null)
                     return true;
                 else
                     return false;
