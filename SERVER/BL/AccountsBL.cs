@@ -40,5 +40,18 @@ namespace BL
             }
 
         }
+
+        public static void CheckPass(string password)
+        {
+            string pass;
+            long accountId;
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                //pass=db.Accounts.FirstOrDefault(a=>a.Password.Equals(password)).Password;
+                //if (pass != null)
+                //    accountId = db.Accounts.Where(a => a.Password.Equals(pass)).Select(a => a.AccountId);
+                
+            }
+        }
     }
 }
