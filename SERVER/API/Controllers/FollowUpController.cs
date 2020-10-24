@@ -13,10 +13,10 @@ namespace API.Controllers
     [RoutePrefix("api/followUp")]
     public class FollowUpController : ApiController
     {
-        [Route("AddFollowUp"), HttpPost]
-        public IHttpActionResult AddFollowUp(FollowUpListDTO f)
+        [Route("saveList"), HttpPost]
+        public IHttpActionResult SaveList(int[] idSelectedProducts)
         {
-            BL.FollowUpBL.AddFollowUp(f);
+            BL.FollowUpBL.AddFollowUp(idSelectedProducts);
             return Ok(true);
         }
     }

@@ -20,11 +20,11 @@ namespace API.Controllers
             return Ok(true);
         }
 
-        [Route("checkPass/{pass}/{accountName}"), HttpGet]
-        public IHttpActionResult CheckPass(string pass, string accountName)
-        {
-            BL.AccountsBL.CheckPass(pass, accountName);
-            return Ok(true);
-        }
+        //[Route("checkPass/{pass}/{accountName}"), HttpGet]
+        //public IHttpActionResult CheckPass(string pass, string accountName)
+        //{
+        //    BL.AccountsBL.CheckPass(pass, accountName);
+        //    return Ok(true);
+        //}
     }
 }
