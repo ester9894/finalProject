@@ -5,7 +5,7 @@
       <PropertyRef Name="AccountId" />
     </Key>
     <Property Name="AccountId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="AcountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ManagerId" Type="bigint" Nullable="false" />
   </EntityType>

@@ -32,14 +32,15 @@
           <br>
           <div text-center>
               להצטרפות לחשבון קיים
-            <ion-item>
-              <ion-input #pass placeholder="הכנס סיסמא"></ion-input>
-            </ion-item>
+    
             <ion-item>
               <ion-input #accountName placeholder="הכנס שם חשבון"></ion-input>
             </ion-item>
+            <ion-item>
+              <ion-input #pass placeholder="הכנס סיסמא"></ion-input>
+            </ion-item>
             <ion-fab horizontal="end" slot="fixed">
-              <ion-fab-button *ngIf="pass.value!=''&&accountName.value!=''" (click)="checkPass(pass,accountName)" color="primary">
+              <ion-fab-button *ngIf="pass.value!=''&&accountName.value!=''" (click)="checkPass(pass.value,accountName.value)" color="primary">
                 <ion-icon name="add"></ion-icon>
               </ion-fab-button>
             </ion-fab>

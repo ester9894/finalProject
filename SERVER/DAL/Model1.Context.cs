@@ -25,7 +25,6 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<FollowUpList> FollowUpLists { get; set; }
         public virtual DbSet<Frequency> Frequencies { get; set; }
@@ -36,5 +35,6 @@ namespace DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAccount> UsersAccounts { get; set; }
         public virtual DbSet<ProductToList> ProductToLists { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace BL.CONVERTERS
             return new Account
             {
                 AccountId = a.AccountId,
-                AcountName = a.AcountName,
+                AccountName = a.AccountName,
                 ManagerId = a.ManagerId,
                 Password = a.Password
             };
@@ -26,7 +26,7 @@ namespace BL.CONVERTERS
             return new AccountDTO
             {
               AccountId=a.AccountId,
-              AcountName=a.AcountName,
+                AccountName = a.AccountName,
               ManagerId=a.ManagerId,
               Password=a.Password
             };
