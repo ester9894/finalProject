@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsService
+ {
   constructor(private http: HttpClient) { }
 
   AddProduct(product: Products):Observable<boolean>
@@ -25,4 +26,6 @@ export class ProductsService {
   {
     return this.http.get<{ [id: string]: Products[] }>(environment.url + 'products/GetAllProducts')
   }
+
+
 }
