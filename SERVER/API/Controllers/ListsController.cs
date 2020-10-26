@@ -20,8 +20,8 @@ namespace API.Controllers
             return Ok(true);
         }
 
-        [Route("GetAllLists")]
-        [HttpGet]
+        //[Route("GetAllLists")]
+        //[HttpGet]
         //public IHttpActionResult GetAllLists()
         //{
         //    return Ok(BL.ListsBL.GetAllLists());

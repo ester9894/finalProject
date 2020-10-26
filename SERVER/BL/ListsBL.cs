@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-   public class ListsBL
+    public class ListsBL
     {
         public static void AddList(ListDTO list)
         {
@@ -18,6 +18,7 @@ namespace BL
                 db.SaveChanges();
             }
         }
+    }
 
     //    public static List<ListDTO> GetAllLists()
     //    {
@@ -28,4 +29,4 @@ namespace BL
 
     //        }
     //    }
-    //}
+  }
