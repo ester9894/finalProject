@@ -18,5 +18,14 @@ namespace BL
                 db.SaveChanges();
             }
         }
-    }
-}
+
+    //    public static List<ListDTO> GetAllLists()
+    //    {
+    //        using (ProjectDBEntities db = new ProjectDBEntities())
+    //        {
+
+    //            return db.Lists.ToList().Select(l => CONVERTERS.ListConverter.ConvertListToDTO(l)).GroupBy(l => l.StartDate);
+
+    //        }
+    //    }
+    //}
