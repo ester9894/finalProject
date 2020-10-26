@@ -22,6 +22,7 @@ export class ProductsPage implements OnInit
 
   constructor(private productService:ProductsService, private followUpService:FollowUpService ,private router: Router) 
   { 
+    //todo
   }
   ngOnInit() 
   {

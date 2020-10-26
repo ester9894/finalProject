@@ -17,7 +17,7 @@ namespace BL
                 db.Users.Add(CONVERTERS.UserConverter.ConvertUserToDAL(user));
 
                 db.SaveChanges();
-
+                
 
                 userId= db.Users.Where(a => a.UserName.Equals(user.UserName) &&
                     a.LastName.Equals(user.LastName) && 
