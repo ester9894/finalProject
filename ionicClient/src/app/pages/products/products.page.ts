@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 import { Products } from 'src/app/shared/models/products.model';
-
+// הערה
 @Component({
   selector: 'app-products',
   templateUrl: './products.page.html',
