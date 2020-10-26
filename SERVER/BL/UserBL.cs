@@ -18,6 +18,7 @@ namespace BL
 
                 db.SaveChanges();
 
+
                 userId= db.Users.Where(a => a.UserName.Equals(user.UserName) &&
                     a.LastName.Equals(user.LastName) && 
                     a.FirstName.Equals(user.FirstName) &&
