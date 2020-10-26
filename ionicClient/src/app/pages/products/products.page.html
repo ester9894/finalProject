@@ -1,26 +1,27 @@
 <div>
- <ion-button style="width: 100%;" (click)="saveList()">סיימתי לבחור</ion-button>
-<ion-list>
-  <ion-list-header>
-    <ion-label>אנא בחר מוצרים לרשימת המעקב</ion-label>
-  </ion-list-header>
-  <ion-searchbar  placeholder="חפש מוצר" showcancelbutton=""
-  (ionInput)="filterList($event)"></ion-searchbar>
-  <div *ngIf="searching" class="spinner-container">
-    <ion-spinner></ion-spinner>
-  </div>
-  <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
-  <ion-item  *ngFor="let item of arrKind; let j=index">
-           <ion-label>{{item}}</ion-label>
-    <ion-select multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]" (ionChange)="onItemSelection(selectedsArray, i)">
-
-      <div  *ngFor= "let p of arrProducts">
-        <div *ngFor = "let i of p">
-        <ion-select-option [value]="i.ProductId" *ngIf="i.CategoryName===item">{{i.ProductName}}</ion-select-option>
-      </div>
-    </div>
-    </ion-select>
-  </ion-item>
-</ion-list>
-{{selectedsArray|json}}
-</div>
+  <ion-button style="width: 100%;" (click)="saveList()">סיימתי לבחור</ion-button>
+ <ion-list>
+   <ion-list-header>
+     <ion-label>אנא בחר מוצרים לרשימת המעקב</ion-label>
+   </ion-list-header>
+   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton=""
+   (ionInput)="filterList($event)"></ion-searchbar>
+   <div *ngIf="searching" class="spinner-container">
+     <ion-spinner></ion-spinner>
+   </div>
+   <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
+   <ion-item  *ngFor="let item of arrKind; let j=index">
+            <ion-label>{{item}}</ion-label>
+     <ion-select multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]" (ionChange)="onItemSelection(selectedsArray, i)">
+ 
+       <div  *ngFor= "let p of arrProducts">
+         <div *ngFor = "let i of p">
+         <ion-select-option [value]="i.ProductId" *ngIf="i.CategoryName===item">{{i.ProductName}}</ion-select-option>
+       </div>
+     </div>
+     </ion-select>
+   </ion-item>
+ </ion-list>
+ {{selectedsArray|json}}
+ </div>
+ 

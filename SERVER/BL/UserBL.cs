@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BL
-{//   
+{
     public class UserBL
     {
         public static long AddUser(UserDTO user)
