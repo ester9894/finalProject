@@ -34,7 +34,7 @@ export class ProductsPage implements OnInit
       Object.keys(res).forEach( element =>
         {
          // console.log(element)
-          this.arrKind.push(element)
+          this.arrKind.push(element)  
          // console.log(this.arrKind)
         });
 
