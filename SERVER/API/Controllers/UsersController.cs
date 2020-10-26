@@ -14,11 +14,10 @@ namespace API.Controllers
     public class UsersController : ApiController
     {
         [Route("addUser"), HttpPost]
-        public IHttpActionResult AddUser(UserDTO user)
+        public long AddUser(UserDTO user)
         {
-            BL.UserBL.AddUser(user);
-            return Ok(true);
-             
+            long userId= BL.UserBL.AddUser(user);
+            return userId;
         }
     }
 }

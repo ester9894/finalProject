@@ -14,17 +14,23 @@ namespace API.Controllers
     public class AccountsController : ApiController
     {
         [Route("AddAccount"), HttpPost]
-        public IHttpActionResult AddAccount(AccountDTO a)
+        public long AddAccount(AccountDTO newAccount)
         {
-            BL.AccountsBL.AddAccount(a);
-            return Ok(true);
+         return BL.AccountsBL.AddAccount(newAccount);
         }
 
-        //[Route("checkPass/{pass}/{accountName}"), HttpGet]
-        //public IHttpActionResult CheckPass(string pass, string accountName)
-        //{
-        //    BL.AccountsBL.CheckPass(pass, accountName);
-        //    return Ok(true);
-        //}
+        [Route("checkPass/{pass}/{accountName}"), HttpGet]
+        public long CheckPass(string pass, string accountName)
+        {
+            return BL.AccountsBL.CheckPass(pass, accountName);
+        }
+
+
+        [Route("addUserAccount/{userId}/{accountId}"), HttpGet]
+        public void addUserAccount(int userId, int accountId)
+        {
+           BL.AccountsBL.addUserAccount(userId, accountId);
+        }
+
     }
 }

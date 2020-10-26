@@ -9,7 +9,7 @@
   <div *ngIf="searching" class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-icon name="add-outline" (click)="addProduct"></ion-icon>
+  <ion-icon name="add-outline" (click)="addProduct()"></ion-icon>
   <ion-item  *ngFor="let item of arrKind; let j=index">
            <ion-label>{{item}}</ion-label>
     <ion-select multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]" (ionChange)="onItemSelection(selectedsArray, i)">

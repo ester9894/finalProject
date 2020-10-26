@@ -9,7 +9,7 @@ namespace DTO
     public class AccountDTO
     {
         public long AccountId { get; set; }
-        public string AcountName { get; set; }
+        public string AccountName { get; set; }
         public string Password { get; set; }
         public long ManagerId { get; set; }
     }

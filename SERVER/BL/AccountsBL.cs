@@ -10,12 +10,23 @@ namespace BL
 {
     public class AccountsBL
     {
-        public static void AddAccount(AccountDTO account)
+        public static long AddAccount(AccountDTO account)
         {
+            //בדיקה האם קיים חשבון עם אותו שם וסיסמה
+            string pass="", accountN="";
+            long accountId;
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
+                if(db.Accounts.Any(a => a.Password.Equals(account.Password)))
+                     pass = db.Accounts.FirstOrDefault(a => a.Password.Equals(account.Password)).Password;
+                if(db.Accounts.Any(a => a.AccountName.Equals(account.AccountName)))
+                    accountN = db.Accounts.FirstOrDefault(a => a.AccountName.Equals(account.AccountName)).AccountName;
+                if (db.Accounts.Any(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)))
+                    return 0;
                 db.Accounts.Add(CONVERTERS.AccountConverter.ConvertAccountToDAL(account));
                 db.SaveChanges();
+                accountId= db.Accounts.Where(a => a.AccountName.Equals(account.AccountName) && a.Password.Equals(account.Password)).Select(a => a.AccountId).ToList()[0];
+                return accountId;
             }
         }
 
@@ -41,16 +52,34 @@ namespace BL
 
         }
 
-        public static void CheckPass(string password)
+        public static void addUserAccount(int userId, int accountId)
         {
-            string pass;
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                db.UsersAccounts.Add(CONVERTERS.UserAccountConverter.ConvertUsersAccountToDAL(new UsersAccountDTO() { 
+                AccountId=accountId,
+               UserId=userId }));
+                db.SaveChanges();
+            }
+
+        }
+
+        public static long CheckPass(string password, string accountName)
+        {
+            string pass="", accountN="";
             long accountId;
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                //pass=db.Accounts.FirstOrDefault(a=>a.Password.Equals(password)).Password;
-                //if (pass != null)
-                //    accountId = db.Accounts.Where(a => a.Password.Equals(pass)).Select(a => a.AccountId);
-                
+                if(db.Accounts.Any(a => a.Password.Equals(password)))
+                     pass = db.Accounts.FirstOrDefault(a => a.Password.Equals(password)).Password;
+                if(db.Accounts.Any(a => a.AccountName.Equals(accountName)))
+                    accountN=db.Accounts.FirstOrDefault(a=>a.AccountName.Equals(accountName)).AccountName;
+                if (db.Accounts.Any(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)))
+                {
+                    accountId = db.Accounts.Where(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)).Select(a => a.AccountId).ToList()[0];
+                    return accountId;
+                }
+                return 0;
             }
         }
     }

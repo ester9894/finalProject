@@ -10,7 +10,7 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AcountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ManagerId" Type="bigint" Nullable="false" />
         </EntityType>
@@ -310,17 +310,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
-          <Key>
-            <PropertyRef Name="AccountId" />
-          </Key>
-          <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AcountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ManagerId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Accounts__Manage__36B12243" FromRole="Accounts" ToRole="Users" />
-          <NavigationProperty Name="UsersAccounts" Relationship="Self.FK__UsersAcco__Accou__412EB0B6" FromRole="Accounts" ToRole="UsersAccount" />
-        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -403,9 +392,9 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK__Accounts__Manage__36B12243" FromRole="Users" ToRole="Accounts" />
           <NavigationProperty Name="UsersAccounts" Relationship="Self.FK__UsersAcco__UserI__4222D4EF" FromRole="Users" ToRole="UsersAccount" />
           <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D" FromRole="User" ToRole="ProductToList" />
+          <NavigationProperty Name="Accounts" Relationship="ProjectDBModel.FK__Accounts__Manage__36B12243" FromRole="User" ToRole="Account" />
         </EntityType>
         <EntityType Name="UsersAccount">
           <Key>
@@ -414,33 +403,9 @@
           <Property Name="UserAccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountId" Type="Int64" Nullable="false" />
           <Property Name="UserId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__UsersAcco__Accou__412EB0B6" FromRole="UsersAccount" ToRole="Accounts" />
           <NavigationProperty Name="User" Relationship="Self.FK__UsersAcco__UserI__4222D4EF" FromRole="UsersAccount" ToRole="Users" />
+          <NavigationProperty Name="Account" Relationship="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6" FromRole="UsersAccount" ToRole="Account" />
         </EntityType>
-        <Association Name="FK__Accounts__Manage__36B12243">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="ManagerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UsersAcco__Accou__412EB0B6">
-          <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
-          <End Role="UsersAccount" Type="Self.UsersAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="UsersAccount">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Products__Catego__3B75D760">
           <End Role="Categories" Type="Self.Category" Multiplicity="1" />
           <End Role="Products" Type="Self.Product" Multiplicity="*" />
@@ -526,7 +491,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="FollowUpLists" EntityType="Self.FollowUpList" />
           <EntitySet Name="Frequencies" EntityType="Self.Frequency" />
@@ -536,14 +500,6 @@
           <EntitySet Name="TypesLists" EntityType="Self.TypesList" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UsersAccounts" EntityType="Self.UsersAccount" />
-          <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="Self.FK__Accounts__Manage__36B12243">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UsersAcco__Accou__412EB0B6" Association="Self.FK__UsersAcco__Accou__412EB0B6">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="UsersAccount" EntitySet="UsersAccounts" />
-          </AssociationSet>
           <AssociationSet Name="FK__Products__Catego__3B75D760" Association="Self.FK__Products__Catego__3B75D760">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
@@ -584,6 +540,15 @@
           <AssociationSet Name="FK__ProductTo__Buyer__403A8C7D" Association="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D">
             <End Role="User" EntitySet="Users" />
             <End Role="ProductToList" EntitySet="ProductToLists" />
+          </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="ProjectDBModel.Account" />
+          <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="ProjectDBModel.FK__Accounts__Manage__36B12243">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UsersAcco__Accou__412EB0B6" Association="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="UsersAccount" EntitySet="UsersAccounts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProductToList">
@@ -635,22 +600,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="ProjectDBModel.FK__Accounts__Manage__36B12243" FromRole="Account" ToRole="User" />
+          <NavigationProperty Name="UsersAccounts" Relationship="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6" FromRole="Account" ToRole="UsersAccount" />
+        </EntityType>
+        <Association Name="FK__Accounts__Manage__36B12243">
+          <End Type="ProjectDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectDBModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UsersAcco__Accou__412EB0B6">
+          <End Type="ProjectDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjectDBModel.UsersAccount" Role="UsersAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="UsersAccount">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
-          <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="ProjectDBModel.Account">
-              <MappingFragment StoreEntitySet="Accounts">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="AcountName" ColumnName="AcountName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="ProjectDBModel.Category">
               <MappingFragment StoreEntitySet="Categories">
@@ -744,6 +734,16 @@
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ProjectDBModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

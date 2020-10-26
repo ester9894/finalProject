@@ -17,7 +17,6 @@ C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERV
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\bin\Debug\EntityFramework.xml
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\obj\Debug\DAL.dll

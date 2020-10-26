@@ -1,6 +1,6 @@
 export class Account {
     AccountId: number
-    AcountName: string
+    AccountName: string
     Password: string
     ManagerId: number
 }

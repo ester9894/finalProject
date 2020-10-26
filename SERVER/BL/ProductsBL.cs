@@ -27,6 +27,6 @@ namespace BL
                 return db.Products.ToList().Select(p=>CONVERTERS.ProductsConverter.ConvertProductToDTO(p)).GroupBy(p => p.CategoryName).ToDictionary(p => p.Key, p => p.ToList());
             }
 
-            }
-       }
+        }
+    }
 }
