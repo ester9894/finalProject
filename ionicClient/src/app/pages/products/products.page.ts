@@ -22,7 +22,6 @@ export class ProductsPage implements OnInit
 
   constructor(private productService:ProductsService, private followUpService:FollowUpService ,private router: Router) 
   { 
-    //todo
   }
   ngOnInit() 
   {
@@ -34,7 +33,7 @@ export class ProductsPage implements OnInit
       Object.keys(res).forEach( element =>
         {
          // console.log(element)
-          this.arrKind.push(element)  
+          this.arrKind.push(element)
          // console.log(this.arrKind)
         });
 
@@ -90,5 +89,4 @@ saveList()
     });
 }
 }
-
 
