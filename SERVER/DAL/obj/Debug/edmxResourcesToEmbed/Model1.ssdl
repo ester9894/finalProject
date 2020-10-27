@@ -76,7 +76,7 @@
     </Key>
     <Property Name="TypeListId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TypeListName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="GroupId" Type="bigint" Nullable="false" />
+    <Property Name="AccountId" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -216,6 +216,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TypesList__Accou__47DBAE45">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="TypesList" Type="Self.TypesList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="TypesList">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__UsersAcco__Accou__412EB0B6">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
     <End Role="UsersAccount" Type="Self.UsersAccount" Multiplicity="*" />
@@ -291,6 +303,10 @@
     <AssociationSet Name="FK__ProductTo__Produ__3E52440B" Association="Self.FK__ProductTo__Produ__3E52440B">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductToList" EntitySet="ProductToList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TypesList__Accou__47DBAE45" Association="Self.FK__TypesList__Accou__47DBAE45">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="TypesList" EntitySet="TypesList" />
     </AssociationSet>
     <AssociationSet Name="FK__UsersAcco__Accou__412EB0B6" Association="Self.FK__UsersAcco__Accou__412EB0B6">
       <End Role="Accounts" EntitySet="Accounts" />

@@ -14,17 +14,17 @@ namespace API.Controllers
     public class ListsController : ApiController
     {
         [Route("AddList"), HttpPost]
-        public IHttpActionResult AddList(ListDTO l)
+        public IHttpActionResult AddList(ListDTO list)
         {
-            BL.ListsBL.AddList(l);
+            BL.ListsBL.AddList(list);
             return Ok(true);
         }
 
-        //[Route("GetAllLists")]
-        //[HttpGet]
-        //public IHttpActionResult GetAllLists()
-        //{
-        //    return Ok(BL.ListsBL.GetAllLists());
-        //}
+        [Route("GetAllTypesList/{accountId}")]
+        [HttpGet]
+        public IHttpActionResult GetAllTypesList(long accountId)
+        {
+            return Ok(BL.TypeListBL.GetAllTypesList(accountId));
+        }
     }
 }

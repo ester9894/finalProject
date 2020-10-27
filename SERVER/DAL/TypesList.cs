@@ -23,8 +23,9 @@ namespace DAL
     
         public long TypeListId { get; set; }
         public string TypeListName { get; set; }
-        public long GroupId { get; set; }
+        public long AccountId { get; set; }
     
+        public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<List> Lists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

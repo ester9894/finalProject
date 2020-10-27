@@ -64,13 +64,14 @@ export class ProductsPage implements OnInit
 
   } 
 // ??add selected items of category to list all selecrted items (multy each product) 
-onItemSelection(item, index:number): void {
+//onItemSelection(item, index:number): void {
   //this.result = this.selectedsArray;
  
 //   this.result.forEach(element => {this.selectedsArray.push(element)
 //   });
 //   console.log('Em result: ', this.result)
- }
+ //}
+
 
 // update follow up list 
 saveList()
@@ -88,5 +89,6 @@ saveList()
         this.router.navigateByUrl('home-page');
     });
 }
+
 }
 
