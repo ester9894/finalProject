@@ -34,10 +34,12 @@ const routes: Routes = [
   {
     path: 'add-account',
     loadChildren: () => import('./pages/add-account/add-account.module').then( m => m.AddAccountPageModule)
-  },  {
+  },
+  {
     path: 'follow-list',
     loadChildren: () => import('./pages/follow-list/follow-list.module').then( m => m.FollowListPageModule)
   },
+ 
 
 ];
 
