@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AccountsService } from 'src/app/shared/services/accounts.service';
 import { Account } from 'src/app/shared/models/account.model';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-account',
@@ -31,7 +32,7 @@ export class AddAccountPage implements OnInit {
     this.accountService.addAccount(this.account).subscribe((accountId) => {
       if (accountId != 0)
         this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {
-          this.router.navigateByUrl('products');
+          this.router.navigate(['products' , {"id":accountId}]);
 
         });
       else

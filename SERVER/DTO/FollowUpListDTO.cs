@@ -10,6 +10,7 @@ namespace DTO
     {
         public long FollowUpListId { get; set; }
         public long ProductId { get; set; }
+        public long AccountId { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<long> FrequencyId { get; set; }
     }

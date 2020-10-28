@@ -10,11 +10,17 @@ namespace BL
 {
     public class ProductsBL
     {
-        public static void AddProduct(ProductsDTO p)
+        public static void AddProduct(ProductsDTO p,long accountId=0)
         {
             using(ProjectDBEntities db = new ProjectDBEntities())
             {
-               db.Products.Add(CONVERTERS.ProductsConverter.ConvertProductToDAL(p));
+                Product product = CONVERTERS.ProductsConverter.ConvertProductToDAL(p);
+                if (accountId != 0)
+                {
+                    Account account = db.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+                    product.Accounts.Add(account);
+                }
+               db.Products.Add(product);
                db.SaveChanges();
             }
         }

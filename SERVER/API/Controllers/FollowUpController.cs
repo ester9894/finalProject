@@ -14,10 +14,17 @@ namespace API.Controllers
     public class FollowUpController : ApiController
     {
         [Route("saveList"), HttpPost]
-        public IHttpActionResult SaveList(int[] idSelectedProducts)
+        public IHttpActionResult SaveList(int[] idSelectedProducts, int idAccount)
         {
-            BL.FollowUpBL.AddFollowUp(idSelectedProducts);
+            BL.FollowUpBL.AddFollowUp(idSelectedProducts, idAccount) ;
             return Ok(true);
+        }
+
+        [Route("getListById/{id}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpGet]
+        public IHttpActionResult GetListById(int id)
+        {
+          return Ok(BL.FollowUpBL.GetListById(id));
         }
     }
 }

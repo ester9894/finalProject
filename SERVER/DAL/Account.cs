@@ -18,6 +18,8 @@ namespace DAL
         public Account()
         {
             this.UsersAccounts = new HashSet<UsersAccount>();
+            this.FollowUpLists = new HashSet<FollowUpList>();
+            this.Products = new HashSet<Product>();
             this.TypesLists = new HashSet<TypesList>();
             this.FollowUpLists = new HashSet<FollowUpList>();
         }
@@ -30,6 +32,10 @@ namespace DAL
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersAccount> UsersAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FollowUpList> FollowUpLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TypesList> TypesLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
