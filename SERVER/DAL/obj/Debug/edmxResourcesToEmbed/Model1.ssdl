@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccountProducts">
+    <Key>
+      <PropertyRef Name="AccountId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="AccountId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="bigint" Nullable="false" />
+  </EntityType>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="AccountId" />
@@ -97,6 +105,30 @@
     <Property Name="AccountId" Type="bigint" Nullable="false" />
     <Property Name="UserId" Type="bigint" Nullable="false" />
   </EntityType>
+  <Association Name="FK__AccountPr__Accou__4BAC3F29">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="AccountProducts" Type="Self.AccountProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="AccountProducts">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AccountPr__Produ__4CA06362">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="AccountProducts" Type="Self.AccountProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="AccountProducts">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Accounts__Manage__36B12243">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
@@ -266,6 +298,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ProjectDBModelStoreContainer">
+    <EntitySet Name="AccountProducts" EntityType="Self.AccountProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FollowUpList" EntityType="Self.FollowUpList" Schema="dbo" store:Type="Tables" />
@@ -277,6 +310,14 @@
     <EntitySet Name="TypesList" EntityType="Self.TypesList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersAccount" EntityType="Self.UsersAccount" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AccountPr__Accou__4BAC3F29" Association="Self.FK__AccountPr__Accou__4BAC3F29">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="AccountProducts" EntitySet="AccountProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AccountPr__Produ__4CA06362" Association="Self.FK__AccountPr__Produ__4CA06362">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="AccountProducts" EntitySet="AccountProducts" />
+    </AssociationSet>
     <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="Self.FK__Accounts__Manage__36B12243">
       <End Role="Users" EntitySet="Users" />
       <End Role="Accounts" EntitySet="Accounts" />
