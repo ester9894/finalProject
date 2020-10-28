@@ -7,11 +7,17 @@ import { Products } from '../models/products.model';
 @Injectable({
   providedIn: 'root'
 })
-export class FollowUpService {
-
+export class FollowUpService 
+{
   constructor(private http: HttpClient) { }
 
-  saveList(idSelectedProducts: Number[]):Observable<boolean> {
-    return this.http.post<boolean>(environment.url + 'FollowUp/saveList', idSelectedProducts)
+  saveList(idSelectedProducts: Number[], idAccount: Number):Observable<boolean> 
+  {
+    return this.http.post<boolean>(environment.url + 'FollowUp/saveList', [idSelectedProducts, idAccount])
   }
+
+  getListById(idAccount: Number) :Observable<{ [id: string]: Products[] }>
+   {
+     return this.http.get<{ [id: string]: Products[] }>(environment.url + 'products/getListById')
+   }
 }

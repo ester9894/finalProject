@@ -17,7 +17,8 @@ namespace BL.CONVERTERS
                 Amount = f.Amount,
                 FollowUpListId = f.FollowUpListId,
                 FrequencyId = f.FrequencyId,
-                ProductId = f.ProductId
+                ProductId = f.ProductId,
+                AccountId = f.AccountId
             };
         }
 
@@ -28,8 +29,10 @@ namespace BL.CONVERTERS
                 Amount=f.Amount,
                 FollowUpListId=f.FollowUpListId,
                 FrequencyId=f.FrequencyId,
-                ProductId=f.ProductId
+                ProductId=f.ProductId,
+                AccountId = f.AccountId
             };
         }
+
     }
 }

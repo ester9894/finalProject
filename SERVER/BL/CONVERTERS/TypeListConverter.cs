@@ -15,7 +15,7 @@ namespace BL.CONVERTERS
             return new TypesList
             {
                 TypeListId = t.TypeListId,
-                GroupId = t.GroupId,
+                AccountId = t.AccountId,
                 TypeListName = t.TypeListName
             };
         }
@@ -25,7 +25,7 @@ namespace BL.CONVERTERS
             return new TypeListDTO
             {
              TypeListId=t.TypeListId,
-             GroupId=t.GroupId,
+             AccountId=t.AccountId,
              TypeListName=t.TypeListName
             };
         }

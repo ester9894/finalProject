@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { first } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 import { Products } from 'src/app/shared/models/products.model';
 // הערה
@@ -19,10 +19,11 @@ export class ProductsPage implements OnInit
   search: string // value of searchbar
   selectedsArray = []; // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
+  idAccount: Number
 
-  constructor(private productService:ProductsService, private followUpService:FollowUpService ,private router: Router) 
-  { 
-    //todo
+  constructor(private productService:ProductsService, private followUpService:FollowUpService ,private router: Router, private activatedRoute: ActivatedRoute) 
+  {  
+    this.activatedRoute.paramMap.subscribe(params => { this.idAccount = +params.get("id") })
   }
   ngOnInit() 
   {
@@ -60,18 +61,7 @@ export class ProductsPage implements OnInit
    {
     this.arrProducts[i]=this.arrProducts[i].filter(item=>item.ProductName.indexOf(searchTerm)!==-1)
    }
-    
-    
-
   } 
-// ??add selected items of category to list all selecrted items (multy each product) 
-onItemSelection(item, index:number): void {
-  //this.result = this.selectedsArray;
- 
-//   this.result.forEach(element => {this.selectedsArray.push(element)
-//   });
-//   console.log('Em result: ', this.result)
- }
 
 // update follow up list 
 saveList()
@@ -85,8 +75,8 @@ saveList()
   }
   console.log(this.allSelectedProducts)
   // send for adding
-      this.followUpService.saveList(this.allSelectedProducts).subscribe((res)=>{
-        this.router.navigateByUrl('home-page');
+      this.followUpService.saveList(this.allSelectedProducts,this.idAccount).subscribe((res)=>{
+        this.router.navigate(['follow-list' , {"AccountId":this.idAccount}]);
     });
 }
 }

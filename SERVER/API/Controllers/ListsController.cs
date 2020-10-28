@@ -19,12 +19,5 @@ namespace API.Controllers
             BL.ListsBL.AddList(l);
             return Ok(true);
         }
-
-        //[Route("GetAllLists")]
-        //[HttpGet]
-        //public IHttpActionResult GetAllLists()
-        //{
-        //    return Ok(BL.ListsBL.GetAllLists());
-        //}
     }
 }

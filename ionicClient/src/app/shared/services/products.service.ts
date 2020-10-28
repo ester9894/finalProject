@@ -17,6 +17,11 @@ export class ProductsService
     return this.http.post<boolean>(environment.url + 'products/AddProduct', product)
   }
 
+  AddProductForProduct(product: Products,accountId:number):Observable<boolean>
+   {
+    return this.http.post<boolean>(environment.url + 'products/AddProductForAccount/'+accountId, product)
+  }
+
   GetNumProducts():Observable<number>
    {
     return this.http.get<number>(environment.url + 'products/GetNumProducts')

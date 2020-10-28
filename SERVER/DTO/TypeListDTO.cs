@@ -10,7 +10,7 @@ namespace DTO
     {
         public long TypeListId { get; set; }
         public string TypeListName { get; set; }
-        public long GroupId { get; set; }
+        public long AccountId { get; set; }
 
     }
 }

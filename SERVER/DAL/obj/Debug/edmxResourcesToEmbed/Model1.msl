@@ -12,6 +12,7 @@
     <EntitySetMapping Name="FollowUpLists">
       <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
         <MappingFragment StoreEntitySet="FollowUpList">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -57,15 +58,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TypesLists">
-      <EntityTypeMapping TypeName="ProjectDBModel.TypesList">
-        <MappingFragment StoreEntitySet="TypesList">
-          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
-          <ScalarProperty Name="TypeListName" ColumnName="TypeListName" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ProjectDBModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -104,6 +96,23 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="AccountName" ColumnName="AccountName" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AccountProducts" TypeName="ProjectDBModel.AccountProducts" StoreEntitySet="AccountProducts">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+      </EndProperty>
+      <EndProperty Name="Account">
+        <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="TypesLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.TypesList">
+        <MappingFragment StoreEntitySet="TypesList">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="TypeListName" ColumnName="TypeListName" />
+          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

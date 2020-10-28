@@ -39,5 +39,12 @@ namespace API.Controllers
             BL.ProductsBL.AddProduct(p);
             return Ok(true);
         }
+
+        [Route("AddProductForAccount/{accountId}"), HttpPost]
+        public IHttpActionResult AddProduct([FromUri]int accountId,[FromBody]ProductsDTO p)
+        {
+            BL.ProductsBL.AddProduct(p,accountId);
+            return Ok(true);
+        }
     }
 }

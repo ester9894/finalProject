@@ -11,15 +11,12 @@
         <EntityTypeShape EntityType="ProjectDBModel.List" Width="1.5" PointX="6" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Product" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.ProductsToTypeList" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectDBModel.TypesList" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.User" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.UsersAccount" Width="1.5" PointX="10.5" PointY="10.75" IsExpanded="true" />
         <AssociationConnector Association="ProjectDBModel.FK__Products__Catego__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Frequ__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Produ__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectDBModel.FK__Lists__TypeListI__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__ProductsT__Produ__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectDBModel.FK__ProductsT__TypeL__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__UsersAcco__UserI__4222D4EF" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ProjectDBModel.ProductToList" Width="1.5" PointX="8.25" PointY="7.375" />
         <AssociationConnector Association="ProjectDBModel.FK__ProductTo__ListI__3F466844" />
@@ -28,6 +25,12 @@
         <EntityTypeShape EntityType="ProjectDBModel.Account" Width="1.5" PointX="8.25" PointY="10.75" />
         <AssociationConnector Association="ProjectDBModel.FK__Accounts__Manage__36B12243" />
         <AssociationConnector Association="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6" />
+        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Accou__5AEE82B9" />
+        <AssociationConnector Association="ProjectDBModel.AccountProducts" />
+        <EntityTypeShape EntityType="ProjectDBModel.TypesList" Width="1.5" PointX="10.5" PointY="14" />
+        <AssociationConnector Association="ProjectDBModel.FK__TypesList__Accou__71D1E811" />
+        <AssociationConnector Association="ProjectDBModel.FK__Lists__TypeListI__3F466844" />
+        <AssociationConnector Association="ProjectDBModel.FK__ProductsT__TypeL__49C3F6B7" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

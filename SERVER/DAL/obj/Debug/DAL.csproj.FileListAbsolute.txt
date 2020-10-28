@@ -28,8 +28,8 @@ C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\bin\Debug\EntityFramework.xml
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.dll
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.pdb
+C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
