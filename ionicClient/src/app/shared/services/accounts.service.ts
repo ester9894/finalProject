@@ -32,7 +32,6 @@ export class AccountsService {
   //  return this.http.post<number>(environment.url + 'accounts/checkPass', pass)
     return this.http.get<number>(environment.url+`/accounts/checkPass/${pass}/${accountName}`)
 
-
   }
   
 }

@@ -29,5 +29,10 @@ namespace BL.CONVERTERS
              TypeListName=t.TypeListName
             };
         }
+
+        public static List<TypeListDTO> ConvertTypeListListToDTO(List<TypesList> typelist)
+        {
+            return typelist.Select(t => ConvertTypeListToDTO(t)).ToList();
+        }
     }
 }
