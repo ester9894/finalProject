@@ -42,8 +42,9 @@ export class RegisterPage implements OnInit {
     else
       //פתיחת חשבון חדש
       this.userService.addUser(this.user).subscribe((userId) => {
+console.log(this.user.UserName);
 
-        this.router.navigate(['add-account',{"userId":userId}]);
+        this.router.navigate(['add-account',{"userId":userId,"userName":this.user.UserName}]);
       });
   }
 }

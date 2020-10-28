@@ -63,6 +63,7 @@
     <Compile Include="FollowUpBL.cs" />
     <Compile Include="ListsBL.cs" />
     <Compile Include="ProductsBL.cs" />
+    <Compile Include="ProductsToTypeListBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeListBL.cs" />
     <Compile Include="UserBL.cs" />

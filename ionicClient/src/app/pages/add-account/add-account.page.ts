@@ -12,13 +12,18 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class AddAccountPage implements OnInit {
   account: Account = new Account();
+  userName: string;
 
   constructor(private accountService: AccountsService, private router: Router, private route: ActivatedRoute) {
-    this.route.paramMap.subscribe(params => { this.account.ManagerId = +params.get("userId") })
-
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.account.ManagerId =+localStorage.getItem('userId')
+      this.userName = params.get("userName")
+      console.log(this.userName);
+
+    })
   }
 
   addAccount() {
@@ -31,7 +36,7 @@ export class AddAccountPage implements OnInit {
 
         });
       else
-        alert("שם משתמש וסיסמא קיימים");
+        alert("שם חשבון זה קיים במערכת, נא הקש שם חדש");
     })
 
   }

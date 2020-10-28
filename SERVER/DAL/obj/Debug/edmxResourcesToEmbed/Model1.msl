@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="ProjectDBModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="ProjectDBModel.Category">
         <MappingFragment StoreEntitySet="Categories">
@@ -12,11 +22,11 @@
     <EntitySetMapping Name="FollowUpLists">
       <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
         <MappingFragment StoreEntitySet="FollowUpList">
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -58,6 +68,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductToLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
+        <MappingFragment StoreEntitySet="ProductToList">
+          <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="DateOfBuy" ColumnName="DateOfBuy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypesLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.TypesList">
+        <MappingFragment StoreEntitySet="TypesList">
+          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
+          <ScalarProperty Name="TypeListName" ColumnName="TypeListName" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="ProjectDBModel.User">
         <MappingFragment StoreEntitySet="Users">
@@ -78,43 +108,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductToLists">
-      <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
-        <MappingFragment StoreEntitySet="ProductToList">
-          <ScalarProperty Name="DateOfBuy" ColumnName="DateOfBuy" />
-          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
-          <ScalarProperty Name="ListId" ColumnName="ListId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="ProjectDBModel.Account">
-        <MappingFragment StoreEntitySet="Accounts">
-          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <AssociationSetMapping Name="AccountProducts" TypeName="ProjectDBModel.AccountProducts" StoreEntitySet="AccountProducts">
-      <EndProperty Name="Product">
-        <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-      </EndProperty>
-      <EndProperty Name="Account">
+      <EndProperty Name="Accounts">
         <ScalarProperty Name="AccountId" ColumnName="AccountId" />
       </EndProperty>
+      <EndProperty Name="Products">
+        <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+      </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="TypesLists">
-      <EntityTypeMapping TypeName="ProjectDBModel.TypesList">
-        <MappingFragment StoreEntitySet="TypesList">
-          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-          <ScalarProperty Name="TypeListName" ColumnName="TypeListName" />
-          <ScalarProperty Name="TypeListId" ColumnName="TypeListId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

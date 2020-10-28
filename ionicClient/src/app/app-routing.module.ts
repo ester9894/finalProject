@@ -35,12 +35,20 @@ const routes: Routes = [
     path: 'add-account',
     loadChildren: () => import('./pages/add-account/add-account.module').then( m => m.AddAccountPageModule)
   },
+  
+  {
+    path: 'types-list',
+    loadChildren: () => import('./pages/types-list/types-list.module').then( m => m.TypesListPageModule)
+  },
+  
+  {
+    path: 'show-list',
+    loadChildren: () => import('./pages/show-list/show-list.module').then( m => m.ShowListPageModule)
+  },
   {
     path: 'follow-list',
     loadChildren: () => import('./pages/follow-list/follow-list.module').then( m => m.FollowListPageModule)
   },
- 
-
 ];
 
 @NgModule({

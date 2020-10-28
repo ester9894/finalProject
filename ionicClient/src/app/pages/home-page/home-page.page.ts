@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.page.scss'],
 })
 export class HomePagePage implements OnInit {
-
+  accountId:number
   constructor() { }
 
   ngOnInit() {
   }
 
+ // this.router.navigate(['types-list',{"accountId":this.accountId}]);
+  
 }

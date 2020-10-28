@@ -18,7 +18,7 @@ namespace DAL
         public long AccountId { get; set; }
         public long UserId { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Account Account { get; set; }
+        public virtual User User { get; set; }
     }
 }
