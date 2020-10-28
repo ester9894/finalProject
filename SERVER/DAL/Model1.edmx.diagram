@@ -29,6 +29,7 @@
         <AssociationConnector Association="ProjectDBModel.FK__TypesList__Accou__47DBAE45" />
         <AssociationConnector Association="ProjectDBModel.FK__Lists__TypeListI__4316F928" />
         <AssociationConnector Association="ProjectDBModel.FK__ProductsT__TypeL__3D5E1FD2" />
+        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__accou__48CFD27E" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,6 +19,7 @@ namespace DAL
         {
             this.UsersAccounts = new HashSet<UsersAccount>();
             this.TypesLists = new HashSet<TypesList>();
+            this.FollowUpLists = new HashSet<FollowUpList>();
         }
     
         public long AccountId { get; set; }
@@ -31,5 +32,7 @@ namespace DAL
         public virtual ICollection<UsersAccount> UsersAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TypesList> TypesLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FollowUpList> FollowUpLists { get; set; }
     }
 }

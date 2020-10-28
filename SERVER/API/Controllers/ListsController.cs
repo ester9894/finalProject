@@ -26,5 +26,12 @@ namespace API.Controllers
         {
             return Ok(BL.TypeListBL.GetAllTypesList(accountId));
         }
+
+        [Route("GetAllProductsByTypeId/{typeListId}")]
+        [HttpGet]
+        public IHttpActionResult GetAllProductsByTypeId(long typeListId)
+        {
+            return Ok(BL.ProductsToTypeListBL.GetAllProductsByTypeId(typeListId));
+        }
     }
 }

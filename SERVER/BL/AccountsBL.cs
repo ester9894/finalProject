@@ -12,17 +12,14 @@ namespace BL
     {
         public static long AddAccount(AccountDTO account)
         {
-            //בדיקה האם קיים חשבון עם אותו שם וסיסמה
-            string pass="", accountN="";
             long accountId;
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                if(db.Accounts.Any(a => a.Password.Equals(account.Password)))
-                     pass = db.Accounts.FirstOrDefault(a => a.Password.Equals(account.Password)).Password;
-                if(db.Accounts.Any(a => a.AccountName.Equals(account.AccountName)))
-                    accountN = db.Accounts.FirstOrDefault(a => a.AccountName.Equals(account.AccountName)).AccountName;
-                if (db.Accounts.Any(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)))
+                if (db.Accounts.Any(a => a.AccountName.Equals(account.AccountName)))
+                    //אם קיים חשבון עם אותו שם שולח הערה לשינוי שם חשבון
                     return 0;
+
+           
                 db.Accounts.Add(CONVERTERS.AccountConverter.ConvertAccountToDAL(account));
                 db.SaveChanges();
                 accountId= db.Accounts.Where(a => a.AccountName.Equals(account.AccountName) && a.Password.Equals(account.Password)).Select(a => a.AccountId).ToList()[0];

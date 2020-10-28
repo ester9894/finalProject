@@ -12,6 +12,7 @@
     <EntitySetMapping Name="FollowUpLists">
       <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
         <MappingFragment StoreEntitySet="FollowUpList">
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
           <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />

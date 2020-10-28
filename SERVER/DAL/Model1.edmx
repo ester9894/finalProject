@@ -29,6 +29,7 @@
           <Property Name="ProductId" Type="bigint" Nullable="false" />
           <Property Name="Amount" Type="int" />
           <Property Name="FrequencyId" Type="bigint" />
+          <Property Name="accountId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Frequency">
           <Key>
@@ -110,6 +111,18 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FollowUpL__accou__48CFD27E">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="FollowUpList">
+              <PropertyRef Name="accountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,6 +286,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
+          <AssociationSet Name="FK__FollowUpL__accou__48CFD27E" Association="Self.FK__FollowUpL__accou__48CFD27E">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="FollowUpList" EntitySet="FollowUpList" />
+          </AssociationSet>
           <AssociationSet Name="FK__FollowUpL__Frequ__38996AB5" Association="Self.FK__FollowUpL__Frequ__38996AB5">
             <End Role="Frequency" EntitySet="Frequency" />
             <End Role="FollowUpList" EntitySet="FollowUpList" />
@@ -344,6 +361,8 @@
           <Property Name="FrequencyId" Type="Int64" />
           <NavigationProperty Name="Frequency" Relationship="Self.FK__FollowUpL__Frequ__38996AB5" FromRole="FollowUpList" ToRole="Frequency" />
           <NavigationProperty Name="Product" Relationship="Self.FK__FollowUpL__Produ__37A5467C" FromRole="FollowUpList" ToRole="Products" />
+          <Property Name="accountId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="ProjectDBModel.FK__FollowUpL__accou__48CFD27E" FromRole="FollowUpList" ToRole="Account" />
         </EntityType>
         <EntityType Name="Frequency">
           <Key>
@@ -536,6 +555,10 @@
             <End Role="TypesList" EntitySet="TypesLists" />
             <End Role="ProductsToTypeList" EntitySet="ProductsToTypeLists" />
           </AssociationSet>
+          <AssociationSet Name="FK__FollowUpL__accou__48CFD27E" Association="ProjectDBModel.FK__FollowUpL__accou__48CFD27E">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="FollowUpList" EntitySet="FollowUpLists" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ProductToList">
           <Key>
@@ -597,6 +620,7 @@
           <NavigationProperty Name="User" Relationship="ProjectDBModel.FK__Accounts__Manage__36B12243" FromRole="Account" ToRole="User" />
           <NavigationProperty Name="UsersAccounts" Relationship="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6" FromRole="Account" ToRole="UsersAccount" />
           <NavigationProperty Name="TypesLists" Relationship="ProjectDBModel.FK__TypesList__Accou__47DBAE45" FromRole="Account" ToRole="TypesList" />
+          <NavigationProperty Name="FollowUpLists" Relationship="ProjectDBModel.FK__FollowUpL__accou__48CFD27E" FromRole="Account" ToRole="FollowUpList" />
         </EntityType>
         <Association Name="FK__Accounts__Manage__36B12243">
           <End Type="ProjectDBModel.User" Role="User" Multiplicity="1" />
@@ -669,6 +693,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__FollowUpL__accou__48CFD27E">
+          <End Type="ProjectDBModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="ProjectDBModel.FollowUpList" Role="FollowUpList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="FollowUpList">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -686,6 +722,7 @@
           <EntitySetMapping Name="FollowUpLists">
             <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
               <MappingFragment StoreEntitySet="FollowUpList">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
                 <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />

@@ -18,8 +18,10 @@ namespace DAL
         public long ProductId { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<long> FrequencyId { get; set; }
+        public long accountId { get; set; }
     
         public virtual Frequency Frequency { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

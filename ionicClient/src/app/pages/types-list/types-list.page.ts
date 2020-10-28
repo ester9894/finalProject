@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TypeList } from 'src/app/shared/models/type_list.model';
 import { ListsService } from 'src/app/shared/services/lists.service';
 
@@ -11,15 +12,25 @@ export class TypesListPage implements OnInit {
   accountId: number = 2;
   typeListArray: Array<TypeList>;
 
-  constructor(private listsService: ListsService) { }
+  constructor(private listsService: ListsService, private router: Router) { }
 
   ngOnInit() {
+    // this.route.paramMap.subscribe(params => {
+    // this.accountId = +params.get("accountId")})
+
     this.listsService.GetAllTypesList(this.accountId).subscribe((arry) => {
       console.log(arry);
-      this.typeListArray=arry;
+      this.typeListArray = arry;
     });
   }
 
-  addTypeList(){}
+  editList(typeListId: number) {
+    console.log(typeListId);
+
+    this.router.navigate(['show-list', { "typeListId": typeListId }]);
+
+  }
+
+  addTypeList() { }
 
 }
