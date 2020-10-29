@@ -19,17 +19,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FollowUpLists">
-      <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
-        <MappingFragment StoreEntitySet="FollowUpList">
-          <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
-          <ScalarProperty Name="accountId" ColumnName="accountId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Frequencies">
       <EntityTypeMapping TypeName="ProjectDBModel.Frequency">
         <MappingFragment StoreEntitySet="Frequency">
@@ -116,5 +105,16 @@
         <ScalarProperty Name="ProductId" ColumnName="ProductId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="FollowUpLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.FollowUpList">
+        <MappingFragment StoreEntitySet="FollowUpList">
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

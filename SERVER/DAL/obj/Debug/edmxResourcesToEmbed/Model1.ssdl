@@ -32,7 +32,7 @@
     <Property Name="ProductId" Type="bigint" Nullable="false" />
     <Property Name="Amount" Type="int" />
     <Property Name="FrequencyId" Type="bigint" />
-    <Property Name="accountId" Type="bigint" Nullable="false" />
+    <Property Name="AccountId" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="Frequency">
     <Key>
@@ -141,7 +141,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FollowUpL__accou__48CFD27E">
+  <Association Name="FK__FollowUpL__Accou__5165187F">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
     <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
     <ReferentialConstraint>
@@ -149,11 +149,11 @@
         <PropertyRef Name="AccountId" />
       </Principal>
       <Dependent Role="FollowUpList">
-        <PropertyRef Name="accountId" />
+        <PropertyRef Name="AccountId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FollowUpL__Frequ__38996AB5">
+  <Association Name="FK__FollowUpL__Frequ__5070F446">
     <End Role="Frequency" Type="Self.Frequency" Multiplicity="0..1" />
     <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
     <ReferentialConstraint>
@@ -165,7 +165,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FollowUpL__Produ__37A5467C">
+  <Association Name="FK__FollowUpL__Produ__4F7CD00D">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="*" />
     <ReferentialConstraint>
@@ -322,15 +322,15 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Accounts" EntitySet="Accounts" />
     </AssociationSet>
-    <AssociationSet Name="FK__FollowUpL__accou__48CFD27E" Association="Self.FK__FollowUpL__accou__48CFD27E">
+    <AssociationSet Name="FK__FollowUpL__Accou__5165187F" Association="Self.FK__FollowUpL__Accou__5165187F">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="FollowUpList" EntitySet="FollowUpList" />
     </AssociationSet>
-    <AssociationSet Name="FK__FollowUpL__Frequ__38996AB5" Association="Self.FK__FollowUpL__Frequ__38996AB5">
+    <AssociationSet Name="FK__FollowUpL__Frequ__5070F446" Association="Self.FK__FollowUpL__Frequ__5070F446">
       <End Role="Frequency" EntitySet="Frequency" />
       <End Role="FollowUpList" EntitySet="FollowUpList" />
     </AssociationSet>
-    <AssociationSet Name="FK__FollowUpL__Produ__37A5467C" Association="Self.FK__FollowUpL__Produ__37A5467C">
+    <AssociationSet Name="FK__FollowUpL__Produ__4F7CD00D" Association="Self.FK__FollowUpL__Produ__4F7CD00D">
       <End Role="Products" EntitySet="Products" />
       <End Role="FollowUpList" EntitySet="FollowUpList" />
     </AssociationSet>
