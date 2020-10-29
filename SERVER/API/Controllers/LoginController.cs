@@ -16,10 +16,9 @@ namespace API.Controllers
         [Route("checkLogin"), HttpPost,HttpGet]
         public IHttpActionResult checkLogin(LoginDTO login)
         {
-            if (BL.AccountsBL.checkLogin(login) == true)
-                return Ok(true);
-            return BadRequest(); 
-
+            if(BL.AccountsBL.checkLogin(login)!=null)
+             return Ok(BL.AccountsBL.checkLogin(login));
+            return BadRequest();
         }
     }
 }

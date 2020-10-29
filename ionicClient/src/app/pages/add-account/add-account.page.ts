@@ -14,14 +14,18 @@ export class AddAccountPage implements OnInit {
   account: Account = new Account();
   userName: string;
 
+
   constructor(private accountService: AccountsService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.account.ManagerId =+localStorage.getItem('userId')
+      this.account.ManagerId = +localStorage.getItem('userId')
       this.userName = params.get("userName")
+
+
       console.log(this.userName);
+      console.log("localStorage " + this.account.ManagerId);
 
     })
   }
@@ -30,9 +34,11 @@ export class AddAccountPage implements OnInit {
     console.log(this.account);
 
     this.accountService.addAccount(this.account).subscribe((accountId) => {
+      localStorage.setItem('accountId', accountId.toString())
+
       if (accountId != 0)
         this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {
-          this.router.navigate(['products' , {"id":accountId}]);
+          this.router.navigate(['products']);
 
         });
       else

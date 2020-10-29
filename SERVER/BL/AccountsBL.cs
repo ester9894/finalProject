@@ -27,7 +27,7 @@ namespace BL
             }
         }
 
-        public static bool checkLogin(LoginDTO login)
+        public static UsersAccountDTO checkLogin(LoginDTO login)
         {
             User user;
             Account account;
@@ -35,16 +35,16 @@ namespace BL
             {
                user = db.Users.FirstOrDefault(a => a.UserName == login.userName);
                 if (user == null)
-                    return false;
+                    return null;
                 long userId = user.UserId;
                account = db.Accounts.FirstOrDefault(a => a.Password == login.userPassword);
                 if (account == null)
-                    return false;
+                    return null;
                 long accountId = account.AccountId;
                 if (db.UsersAccounts.FirstOrDefault(a => a.UserId == userId && a.AccountId == accountId)!= null)
-                    return true;
+                    return CONVERTERS.UserAccountConverter.ConvertUsersAccountToDTO( db.UsersAccounts.FirstOrDefault(a => a.UserId == userId && a.AccountId == accountId));
                 else
-                    return false;
+                    return null;
             }
 
         }

@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-item  *ngFor="let item of typeListArray">
-    <ion-button (click)="editList(item.TypeListId)">{{item.TypeListName}}</ion-button>
+    <ion-button (click)="editList(item.TypeListId, item.TypeListName)">{{item.TypeListName}}</ion-button>
   </ion-item>
 
 

@@ -18,23 +18,28 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   checkLogin() {
-    this.accountService.checkLogin(this.userLogin).subscribe((res) => {
+    this.accountService.checkLogin(this.userLogin).subscribe((userAccount) => {
+      localStorage.setItem('userId', userAccount.UserId.toString())
+      localStorage.setItem('accountId', userAccount.AccountId.toString())
+
       this.router.navigateByUrl('home-page');
     }, err => alert("שם משתמש או סיסמה שגויים"));
   }
 
-  
+
   checkPass(pass, accountName) {
-    console.log(pass+" "+accountName);
-    
+    console.log(pass + " " + accountName);
+
     this.accountService.checkPass(pass, accountName).subscribe((accountId) => {
       console.log(accountId);
+      localStorage.setItem('accountId', accountId.toString())
+
       if (accountId != 0)
-        this.router.navigate(['register',{"accountId":accountId}]);
-        //this.router.navigate(['register'],{queryParams:{accountId}});
-        // accountId <-לשלוח עם הניווט הזה את המספר חשבון
+        this.router.navigate(['register']);
+      //this.router.navigate(['register',{"accountId":accountId}]);
+
       else
-      alert("פרטי החשבון שגויים")
+        alert("פרטי החשבון שגויים")
     })
   }
 }
