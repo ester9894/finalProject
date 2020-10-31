@@ -27,7 +27,6 @@ namespace DAL
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<FollowUpList> FollowUpLists { get; set; }
         public virtual DbSet<Frequency> Frequencies { get; set; }
         public virtual DbSet<List> Lists { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -36,5 +35,6 @@ namespace DAL
         public virtual DbSet<TypesList> TypesLists { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAccount> UsersAccounts { get; set; }
+        public virtual DbSet<FollowUpList> FollowUpLists { get; set; }
     }
 }

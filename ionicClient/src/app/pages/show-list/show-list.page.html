@@ -1,13 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>show-list</ion-title>
+    <ion-title>{{TypeListName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- <ion-item>{{TypeListName}}</ion-item> -->
 
-  <ion-item  *ngFor="let item of productsList">
+  <ion-item *ngFor="let item of productsList">
     <ion-item>{{item.ProductName}}</ion-item>
+
+    <!--  לא מציג את המספרים לכמות -->
+    <!-- <ion-input type="number" value="item.Amount"></ion-input> -->
+
   </ion-item>
 
 

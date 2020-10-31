@@ -11,16 +11,18 @@ import { ListsService } from 'src/app/shared/services/lists.service';
 export class ShowListPage implements OnInit {
 
   typeListId: number;
-  productsList:Array<ProductsToTypeList>;
-  constructor(private route: ActivatedRoute, private router: Router, private listsService:ListsService) { }
+  TypeListName: string;
+  productsList: Array<ProductsToTypeList>;
+  constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.typeListId = +params.get("typeListId")
-      this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list)=>{
-this.productsList=list;
-console.log(this.productsList);
-
+       this.TypeListName = params.get("TypeListName")
+      this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
+        this.productsList = list;
+        console.log(this.productsList);
+        console.log(this.TypeListName);
       })
     })
 

@@ -5,6 +5,7 @@ import { Login } from '../models/login.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Account } from '../models/account.model';
+import { UsersAccount } from '../models/users_account.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class AccountsService {
   return this.http.get<number>(environment.url+`/accounts/addUserAccount/${userId}/${accountId}`)
 }
 
-  checkLogin(user:Login):Observable<boolean> {
-    return this.http.post<boolean>(environment.url + 'login/checkLogin', user)
+  checkLogin(user:Login):Observable<UsersAccount> {
+    return this.http.post<UsersAccount>(environment.url + 'login/checkLogin', user)
   }
 
   checkPass(pass: string, accountName:string):Observable<number> {

@@ -7,7 +7,6 @@
       <Diagram DiagramId="27a924fedcf049179e1e82ed2fa4b82d" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="ProjectDBModel.Account" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Category" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectDBModel.FollowUpList" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Frequency" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.List" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Product" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
@@ -17,12 +16,9 @@
         <EntityTypeShape EntityType="ProjectDBModel.User" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.UsersAccount" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="ProjectDBModel.FK__Accounts__Manage__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__accou__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__TypesList__Accou__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__UsersAcco__Accou__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__Products__Catego__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Frequ__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Produ__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__Lists__TypeListI__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__ProductTo__ListI__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__ProductsT__Produ__3C69FB99" ManuallyRouted="false" />
@@ -31,6 +27,10 @@
         <AssociationConnector Association="ProjectDBModel.FK__ProductTo__Buyer__403A8C7D" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.FK__UsersAcco__UserI__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectDBModel.AccountProducts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjectDBModel.FollowUpList" Width="1.5" PointX="5.625" PointY="7.75" />
+        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Accou__5165187F" />
+        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Frequ__5070F446" />
+        <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
