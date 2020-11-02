@@ -1,6 +1,8 @@
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Key } from 'protractor';
+import { followUpList } from 'src/app/shared/models/follow_up_list.model';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 
 @Component({
@@ -10,16 +12,31 @@ import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 })
 export class FollowListPage implements OnInit {
 accountId: Number
-  constructor(private followListService:FollowUpService, private router: Router,private active: ActivatedRoute) 
+o = new Object() 
+map= new Map()
+arrKind = new Array()// categories products
+  arrProducts = new Array() // all products
+  constructor(private followListService:FollowUpService, private router: Router) 
   { 
-    this.active.paramMap.subscribe(params => { this.accountId = +params.get("AccountId") })
+
   }
 
   ngOnInit() 
   {
-    this.followListService.getListById(this.accountId).subscribe(res=>{
-      console.log(res);
+    console.log(localStorage.setItem('1','1'))
+    this.accountId =Number(localStorage.getItem('1')) ;
+    console.log(this.accountId)
+
+    this.followListService.getListById(this.accountId).subscribe(res=>
+      {
+      //console.log(res);
+      Object.keys(res).forEach( key => { this.map.set(key, res[key]); } );
+        Object.keys(res).forEach(element => {
+          this.arrKind.push(element)
         });
+        console.log(this.map.get('ירקות'));
+       console.log(this.map.keys()) 
+      });
   }
 
 }
