@@ -13,5 +13,6 @@ namespace DTO
         public long AccountId { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<long> FrequencyId { get; set; }
+       public string ProductName { get; set; }
     }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { followUpList } from '../models/follow_up_list.model';
 import { Products } from '../models/products.model';
 
 @Injectable({
@@ -13,11 +14,11 @@ export class FollowUpService
 
   saveList(idSelectedProducts: Number[], idAccount: Number):Observable<boolean> 
   {
-    return this.http.post<boolean>(environment.url + 'FollowUp/saveList', [idSelectedProducts, idAccount])
+    return this.http.post<boolean>(environment.url + 'FollowUp/saveList', {idSelectedProducts, idAccount})
   }
 
-  getListById(idAccount: Number) :Observable<{ [id: string]: Products[] }>
+  getListById(idAccount: Number) :Observable<{ [id: string]: followUpList[] }>
    {
-     return this.http.get<{ [id: string]: Products[] }>(environment.url + 'products/getListById')
+     return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/FollowUp/getListById/${idAccount}`)
    }
 }

@@ -25,9 +25,9 @@ export class ProductsPage implements OnInit {
     //localStorage במקום
   }
   ngOnInit() {
-
-    this.idAccount =+ localStorage.getItem('accountId')
-
+this.idAccount = 1;
+    //this.idAccount =+ localStorage.getItem('accountId')
+    console.log(this.idAccount )
     // create arr of categories and arr of all products
     this.productService.getAllProducts().subscribe(res => {
       console.log(res);
@@ -66,7 +66,7 @@ export class ProductsPage implements OnInit {
     {
       if (this.selectedsArray[i] != null)// if seleced items in this Categories so
       {
-        this.selectedsArray[i].forEach(idProduct => { this.allSelectedProducts.push(idProduct) }); // push products the costumer is choose to array 
+        this.selectedsArray[i].forEach(idProduct=> { this.allSelectedProducts.push(idProduct) }); // push products the costumer is choose to array 
       }
     }
     console.log(this.allSelectedProducts)

@@ -30,7 +30,8 @@ namespace BL.CONVERTERS
                 FollowUpListId=f.FollowUpListId,
                 FrequencyId=f.FrequencyId,
                 ProductId=f.ProductId,
-                AccountId = f.AccountId
+                AccountId = f.AccountId,
+                ProductName = f.Product.ProductName
             };
         }
 
