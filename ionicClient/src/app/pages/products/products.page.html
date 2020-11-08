@@ -1,26 +1,34 @@
 <div>
- <ion-button style="width: 100%;" (click)="saveList()">סיימתי לבחור</ion-button>
 <ion-list>
-  <ion-list-header>
-    <ion-label>אנא בחר מוצרים לרשימת המעקב</ion-label>
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-list-header>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>רשימת המוצרים</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-list-header dir="ltr">
+      <ion-button (click)="saveList()">סיימתי לבחור</ion-button>
+      <ion-button (click)="presentAlertPromptNewProduct()"*ngIf= "isPageForUpdateFollowList">
+        <ion-icon name="add-sharp"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+
   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton=""
   (ionInput)="filterList($event)"></ion-searchbar>
   <div class="spinner-container">
     <ion-spinner></ion-spinner>
   </div>
-  <ion-item  *ngFor="let item of arrKind; let j=index">
-           <ion-label>{{item}}</ion-label>
+  <div>
+   <ion-item  *ngFor="let item of arrKind; let j=index">
+    <ion-label>{{item}}</ion-label>
     <ion-select multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]" >
-
       <div  *ngFor= "let p of arrProducts">
         <div *ngFor = "let i of p">
-        <ion-select-option [value]="i.ProductId" *ngIf="i.CategoryName===item">{{i.ProductName}}</ion-select-option>
-      </div>
-    </div>
-    </ion-select>
-  </ion-item>
+          <ion-select-option [value]="i.ProductId" *ngIf="i.CategoryName===item">{{i.ProductName}}</ion-select-option>
+        </div>
+     </div>
+    </ion-select> 
+   </ion-item>
+  </div>
 </ion-list>
-{{selectedsArray|json}}
 </div>

@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
   },
   {
+    path: 'products/:isForUpdateFollowList',
+    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
+  },
+  {
     path: 'add-account',
     loadChildren: () => import('./pages/add-account/add-account.module').then( m => m.AddAccountPageModule)
   },
@@ -49,6 +53,11 @@ const routes: Routes = [
     path: 'follow-list',
     loadChildren: () => import('./pages/follow-list/follow-list.module').then( m => m.FollowListPageModule)
   },
+  {
+    path: 'create-list',
+    loadChildren: () => import('./pages/create-list/create-list.module').then( m => m.CreateListPageModule)
+  },
+
 ];
 
 @NgModule({

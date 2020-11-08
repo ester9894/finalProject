@@ -13,6 +13,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class AddAccountPage implements OnInit {
   account: Account = new Account();
   userName: string;
+  forUdateFollowList: true
 
 
   constructor(private accountService: AccountsService, private router: Router, private route: ActivatedRoute) {
@@ -38,7 +39,7 @@ export class AddAccountPage implements OnInit {
 
       if (accountId != 0)
         this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {
-          this.router.navigate(['products']);
+          this.router.navigate(['products', this.forUdateFollowList]);
 
         });
       else

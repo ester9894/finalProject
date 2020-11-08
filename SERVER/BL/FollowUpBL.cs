@@ -38,9 +38,24 @@ namespace BL
              Dictionary<string, List<FollowUpListDTO>> d = db.FollowUpLists.Where(f => f.AccountId == id).ToList().
                     GroupBy(p => p.Product.Category.CategoryName)
                     .ToDictionary(p => p.Key, p => p.Select(item => CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDTO(item)).ToList());
-                // .Values.Select(list => list.Select(item => CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDTO(item)));
                 return d;
 
+            }
+        }
+
+        public static void removeProductsFromFollowUp(int[] idSelectedProducts, int accountId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                foreach (int item in idSelectedProducts)
+                {
+                    FollowUpListDTO f = new FollowUpListDTO();
+                    if (db.FollowUpLists.Any(a => a.AccountId == accountId && a.ProductId == item))
+                    {
+                        db.FollowUpLists.Remove(CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDAL(f));
+                    }
+                }
+                db.SaveChanges();
             }
         }
     }
