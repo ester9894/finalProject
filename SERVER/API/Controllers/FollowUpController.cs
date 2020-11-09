@@ -13,11 +13,11 @@ namespace API.Controllers
     [RoutePrefix("api/followUp")]
     public class FollowUpController : ApiController
     {
-        [Route("saveList"), HttpPost]
-        public IHttpActionResult SaveList(int[] idSelectedProducts, int idAccount)
+        [Route("saveList/{accountId}"), HttpPost]
+        public IHttpActionResult SaveList([FromUri] int accountId, [FromBody] int[] idSelectedProducts)
         {
-            BL.FollowUpBL.AddFollowUp(idSelectedProducts, idAccount) ;
-            return Ok(true);
+            BL.FollowUpBL.AddFollowUp(idSelectedProducts, accountId) ;
+             return Ok(true);
         }
 
         [Route("getListById/{id}")]// ניתוב לפונקציה  המקבלת פרמטר
@@ -25,6 +25,13 @@ namespace API.Controllers
         public IHttpActionResult GetListById(int id)
         {
           return Ok(BL.FollowUpBL.GetListById(id));
+        }
+
+        [Route("removeFromList/{accountId}"), HttpPost]
+        public IHttpActionResult removeFromList([FromUri] int accountId, [FromBody] int[] idSelectedProducts)
+        {
+            BL.FollowUpBL.removeProductsFromFollowUp(idSelectedProducts, accountId);
+            return Ok(true);
         }
     }
 }

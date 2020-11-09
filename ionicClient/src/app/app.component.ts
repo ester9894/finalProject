@@ -39,14 +39,14 @@ export class AppComponent implements OnInit {
       icon: 'trash'
     },
     {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
+      title: 'רשימה חדשה',
+      url: '/create-list',
+      icon: 'create'
     },
     {
       title: 'מוצרים למעקב',
       url: '/follow-list',
-      icon: 'warning'
+      icon: 'alert'
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

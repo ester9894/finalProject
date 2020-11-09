@@ -12,13 +12,18 @@ export class FollowUpService
 {
   constructor(private http: HttpClient) { }
 
-  saveList(idSelectedProducts: Number[], idAccount: Number):Observable<boolean> 
+  saveList(idSelectedProducts: Number[], accountId: Number):Observable<boolean> 
   {
-    return this.http.post<boolean>(environment.url + 'FollowUp/saveList', {idSelectedProducts, idAccount})
+    return this.http.post<boolean>(environment.url + `followUp/saveList/${accountId}`, idSelectedProducts)
   }
 
   getListById(idAccount: Number) :Observable<{ [id: string]: followUpList[] }>
    {
-     return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/FollowUp/getListById/${idAccount}`)
+     return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/followUp/getListById/${idAccount}`)
+   }
+
+   removeFromList(listForRemove: Number[], accountId:Number)
+   {
+    return this.http.post<boolean>(environment.url + `followUp/removeFromList/${accountId}`, listForRemove)
    }
 }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AccountDTO.cs" />
     <Compile Include="CategoryDTO.cs" />
+    <Compile Include="ListForChangeDTO.cs" />
     <Compile Include="FollowUpListDTO.cs" />
     <Compile Include="FrequencyDTO.cs" />
     <Compile Include="ListDTO.cs" />
