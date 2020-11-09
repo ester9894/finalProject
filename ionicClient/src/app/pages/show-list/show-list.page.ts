@@ -11,21 +11,42 @@ import { ListsService } from 'src/app/shared/services/lists.service';
 export class ShowListPage implements OnInit {
 
   typeListId: number;
-  TypeListName: string;
+  typeListName: string;
+  amount:number
   productsList: Array<ProductsToTypeList>;
   constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.typeListId = +params.get("typeListId")
-       this.TypeListName = params.get("TypeListName")
+      this.typeListName = params.get("TypeListName")
       this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
         this.productsList = list;
         console.log(this.productsList);
-        console.log(this.TypeListName);
+        console.log(this.typeListName);
       })
     })
 
   }
 
+  updateList() {
+    this.productsList = [{
+      ProductId: 11004, TypeListId: 1, Amount: 2, ProductName: 'חסה'
+    },
+    {
+      ProductId: 11019, TypeListId: 1, Amount: 3, ProductName: 'צלחות גדולות'
+    }]
+    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
+      //   this.router.navigate(['show-list', { "typeListId": this.typeListId , "TypeListName": this.typeListName}]);
+
+    })
+    this.router.navigateByUrl('types-list');
+
+  }
+  up(){
+    this.amount++
+  }
+  down(){
+    this.amount--;
+  }
 }

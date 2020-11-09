@@ -24,11 +24,11 @@ export class TypesListPage implements OnInit {
     });
   }
 
-  editList(typeListId: number, TypeListName:string) {
+  editList(typeListId: number, typeListName:string) {
     console.log(typeListId);
-    console.log(TypeListName);
+    console.log(typeListName);
 
-    this.router.navigate(['show-list', { "typeListId": typeListId , "TypeListName":TypeListName}]);
+    this.router.navigate(['show-list', { "typeListId": typeListId , "TypeListName":typeListName}]);
 
   }
 

@@ -1,19 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{TypeListName}}</ion-title>
+    <ion-title>{{typeListName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-item>{{TypeListName}}</ion-item> -->
 
   <ion-item *ngFor="let item of productsList">
-    <ion-item>{{item.ProductName}}</ion-item>
 
-    <!--  לא מציג את המספרים לכמות -->
-    <!-- <ion-input type="number" value="item.Amount"></ion-input> -->
+    <ion-checkbox color="primary" checked="false"></ion-checkbox>
+
+    <ion-label>{{item.ProductName}}</ion-label>
+    <!--  לא מציג את הכמות מהדטהבייס -->
+    <ion-label >{{item.Amount}} </ion-label>
+
+    <!-- <ion-input type="number" value="item.Amount" min="1"></ion-input> -->
 
   </ion-item>
 
+  <ion-button color="primary" (click)="updateList()">שמור</ion-button>
 
 </ion-content>
