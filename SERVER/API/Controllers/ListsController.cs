@@ -33,5 +33,12 @@ namespace API.Controllers
         {
             return Ok(BL.ProductsToTypeListBL.GetAllProductsByTypeId(typeListId));
         }
+
+        [Route("updateList/{typeListId}")]
+        [HttpGet, HttpPost]
+        public IHttpActionResult updateList(List<ProductsToTypeListDTO> productsList, long typeListId)
+        {
+            return Ok(BL.ProductsToTypeListBL.updateList(productsList, typeListId));
+        }
     }
 }

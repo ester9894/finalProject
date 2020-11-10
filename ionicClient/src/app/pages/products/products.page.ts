@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/shared/services/products.service';
-import { combineAll, first } from 'rxjs/operators';
+import { combineAll, first, ignoreElements } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 import { Products } from 'src/app/shared/models/products.model';
 import { AlertController } from '@ionic/angular';
 import { SelectorMatcher } from '@angular/compiler';
+import { parse } from 'path';
 // הערה
 @Component({
   selector: 'app-products',
@@ -24,11 +25,19 @@ export class ProductsPage implements OnInit {
   newProduct: Products
   isPageForUpdateFollowList: boolean
   selectedProducts=[1001,1008];
+  addProductsToList:boolean
+  typeListId: number;
+  typeListName: string;
 
   constructor(private productService: ProductsService, private followUpService: FollowUpService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
       this.route.params.subscribe(params => {
       this.isPageForUpdateFollowList = params['isForUpdateFollowList']; 
+      this.addProductsToList=params['addProducts']
+      this.typeListId = +params['typeListId']
+      this.typeListName = params['typeListName']
+      console.log(this.addProductsToList);
+      
     });
     console.log(this.isPageForUpdateFollowList)
   }
@@ -161,6 +170,9 @@ async presentAlertPromptNewProduct()
       this.followUpService.saveList(this.allSelectedProducts, this.idAccount).subscribe((res) => {
         this.router.navigate(['follow-list']);
        });
+     }
+     else if(this.addProductsToList){
+      this.router.navigate(['show-list',{"allSelectedProducts":this.allSelectedProducts,"typeListId":this.typeListId, "typeListName":this.typeListName}]);
      }
      else
      {
