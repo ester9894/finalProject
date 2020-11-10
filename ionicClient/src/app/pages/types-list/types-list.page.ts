@@ -28,7 +28,7 @@ export class TypesListPage implements OnInit {
     console.log(typeListId);
     console.log(typeListName);
 
-    this.router.navigate(['show-list', { "typeListId": typeListId , "TypeListName":typeListName}]);
+    this.router.navigate(['show-list', { "typeListId": typeListId , "typeListName":typeListName}]);
 
   }
 

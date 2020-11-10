@@ -36,6 +36,26 @@ namespace BL
 
         }
 
+        public static bool addNewProductsToList(int[] newProducts, long typeListId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                for (int i = 0; i < newProducts.Length; i++)
+                {
+                    db.ProductsToTypeLists.Add(new ProductsToTypeList()
+                    {
+                        Amount = 1,
+                        ProductId = newProducts[i],
+                        TypeListId = typeListId
+                    });
+                    db.SaveChanges();
+                }
+
+            }
+
+                return true;
+        }
+
         public static bool updateList(List<ProductsToTypeListDTO> productsListToUpdate, long typeListId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())

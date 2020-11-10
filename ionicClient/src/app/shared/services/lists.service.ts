@@ -28,4 +28,9 @@ export class ListsService {
     
     return this.http.post<boolean>(environment.url + `/lists/updateList/${typeListId}`,productsList)
   }
+
+  addNewProductsToList(newProducts:number[], typeListId: number){
+    return this.http.post<boolean>(environment.url + `/lists/addNewProductsToList/${typeListId}`,newProducts)
+
+  }
 }
