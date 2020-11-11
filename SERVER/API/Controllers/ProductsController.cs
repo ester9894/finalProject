@@ -46,5 +46,13 @@ namespace API.Controllers
             BL.ProductsBL.AddProduct(p,accountId);
             return Ok(true);
         }
+
+        [Route("GetProductsByIdProduct/{idProducts}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpGet]
+        public IHttpActionResult GetProductsByIdProduct(int[] idProducts)
+        {
+           // BL.ProductsBL.GetProductsByIdProduct(idProducts);
+            return Ok(true);
+        }
     }
 }

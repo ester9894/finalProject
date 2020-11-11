@@ -7,6 +7,7 @@ import { Products } from 'src/app/shared/models/products.model';
 import { AlertController } from '@ionic/angular';
 import { SelectorMatcher } from '@angular/compiler';
 import { parse } from 'path';
+import { count } from 'console';
 // הערה
 @Component({
   selector: 'app-products',
@@ -22,12 +23,18 @@ export class ProductsPage implements OnInit {
   selectedsArray = []; // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
   idAccount: Number
-  newProduct: Products
+  newProducts= new Array()
   isPageForUpdateFollowList: boolean
+  categoryProduct: string;
+  nameProduct: Number;
+  currentItems =new Array()
+
   selectedProducts=[1001,1008];
   addProductsToList:boolean
   typeListId: number;
   typeListName: string;
+
+
 
   constructor(private productService: ProductsService, private followUpService: FollowUpService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
@@ -64,25 +71,56 @@ export class ProductsPage implements OnInit {
       {
         // console.log(element)
         this.arrProducts.push(element)
-        // console.log(this.arrProducts)
       });
+         console.log(this.arrProducts)
     });
     this.arrProducts1 = this.arrProducts // copy for searchbar
   }
 
 
   // filter func for searchbar
-  async filterList(evt) {
-
-    this.arrProducts = this.arrProducts1;
-    const searchTerm = evt.srcElement.value;
-
-    if (!searchTerm) { return; }
-
-    for (let i = 0; i < this.arrProducts.length; i++) {
-      this.arrProducts[i] = this.arrProducts[i].filter(item => item.ProductName.indexOf(searchTerm) !== -1)
+  getItems(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.currentItems = [];
+      return;
     }
+    console.log(val)
+    this.query({
+      name: val 
+    })
+    console.log(this.currentItems)
   }
+
+  query(params?: any) 
+  {
+    this.currentItems = []
+    if (!params) { return this.arrProducts; }
+    console.log(params)
+     return this.arrProducts.forEach(arr => 
+      {
+        arr.filter((item) => {
+        for (let key in params.name) 
+        {
+          let field = item.ProductName[key];
+          if (!(typeof field == 'string' && field.indexOf(params.name[key]) >= 0)) 
+          { 
+            //console.log(item.ProductName)
+            return item.ProductName
+          } 
+          else if (!(field == params.name[key]) )
+          {
+            return item.ProductName
+          } 
+        }
+        this.currentItems.push(item)
+        console.log(item.ProductName)
+        return null;
+      });
+    }); 
+  }
+
+
 // add product to follow for this account
 async presentAlertPromptNewProduct() 
  {
@@ -107,7 +145,7 @@ async presentAlertPromptNewProduct()
         text: 'שמור',
         handler: (alertData) => 
         {
-          console.log(alertData.textarea)
+          this.nameProduct = alertData.textarea
           this.presentAlertPromptCategory()
         }
       }
@@ -141,8 +179,11 @@ async presentAlertPromptNewProduct()
         text: 'שמור',
         handler: (alertData) => 
         {
-          console.log(alertData)
-          console.log('Confirm Ok');
+          this.categoryProduct = alertData;
+          if(!this.isPageForUpdateFollowList)
+          {
+            this.newProducts.push({"name":this.nameProduct,"category":this.categoryProduct})
+          }
         }
       }
     ]
@@ -153,6 +194,30 @@ async presentAlertPromptNewProduct()
 }
 
 
+addForSaveList(productId: Number)
+{
+  if(!this.allSelectedProducts.find(item=> item == productId))
+  {
+    this.allSelectedProducts.push(productId) 
+    this.showAlert("המוצר נוסף")
+    console.log( this.allSelectedProducts)
+  }
+  else
+  {
+    this.allSelectedProducts.splice(this.allSelectedProducts.indexOf(productId), productId.toString().length)  
+    this.showAlert("המוצר הוסר")
+    console.log( this.allSelectedProducts)
+  }
+}
+async showAlert(message: string)
+{
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    message: message,
+    buttons: ['אישור']
+  });
+  await alert.present();
+}
   // update follow up list 
   saveList() 
   {
@@ -160,7 +225,11 @@ async presentAlertPromptNewProduct()
     {
       if (this.selectedsArray[i] != null)// if seleced items in this Categories so
       {
-        this.selectedsArray[i].forEach(idProduct=> { this.allSelectedProducts.push(idProduct) }); // push products the costumer is choose to array 
+        this.selectedsArray[i].forEach(idProduct=> 
+          { 
+            if(!this.allSelectedProducts.find(item=> item == idProduct))
+                this.allSelectedProducts.push(idProduct) 
+          }); // push products the costumer is choose to array 
       }
     }
     console.log(this.allSelectedProducts)
@@ -171,13 +240,16 @@ async presentAlertPromptNewProduct()
         this.router.navigate(['follow-list']);
        });
      }
-     else if(this.addProductsToList){
-      this.router.navigate(['show-list',{"allSelectedProducts":this.allSelectedProducts,"typeListId":this.typeListId, "typeListName":this.typeListName}]);
-     }
-     else
-     {
-      this.router.navigate(['create-list/allSelectedProducts']);
-     }
+     else if(this.addProductsToList)
+        {
+          this.router.navigate(['show-list',{"allSelectedProducts":this.allSelectedProducts,"typeListId":this.typeListId, "typeListName":this.typeListName}]);
+        }
+      else
+        {
+          console.log(this.allSelectedProducts)
+          console.log(this.newProducts)
+          this.router.navigate(['create-list',{"productsList": this.allSelectedProducts,"undefinedProducts": this.newProducts}]);
+        }
   }
 }
 

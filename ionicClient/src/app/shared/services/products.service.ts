@@ -32,5 +32,9 @@ export class ProductsService
     return this.http.get<{ [id: string]: Products[] }>(environment.url + 'products/GetAllProducts')
   }
 
+  getProductsByIdProduct(idproducts: Number[]):Observable<Products[]>
+  {
+    return this.http.get<Products[] >(environment.url + 'products/GetProductsByIdProduct/'+idproducts)
+  }
 
 }

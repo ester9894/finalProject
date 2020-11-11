@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>צור רשימה חדשה</ion-title>
+    <ion-title>רשימה חדשה</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-button color="medium">
+<ion-button color="medium" (click)="goProductsList()">
   <ion-icon name="create">הוסף מוצרים לרשימה</ion-icon>
 </ion-button>
 <ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor= 'let item of productsList'>
+       {{item}}
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
