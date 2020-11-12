@@ -40,5 +40,20 @@ namespace API.Controllers
         {
             return Ok(BL.ProductsToTypeListBL.updateList(productsList, typeListId));
         }
+
+
+        [Route("addNewProductsToList/{typeListId}")]
+        [HttpGet, HttpPost]
+        public IHttpActionResult addNewProductsToList( int[] newProducts, long typeListId)
+        {
+            return Ok(BL.ProductsToTypeListBL.addNewProductsToList(newProducts, typeListId));
+        }
+
+        [Route("removeProduct/{TypeListId}/{ProductId}")]
+        [HttpGet]
+        public IHttpActionResult removeProduct(long TypeListId, long ProductId)
+        {
+            return Ok(BL.ProductsToTypeListBL.removeProduct(TypeListId, ProductId));
+        }
     }
 }
