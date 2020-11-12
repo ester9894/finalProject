@@ -32,6 +32,9 @@ export class TypesListPage implements OnInit {
 
   }
 
-  addTypeList() { }
+  addTypeList() {
+    this.router.navigateByUrl('create-list')
 
+   }
+ 
 }

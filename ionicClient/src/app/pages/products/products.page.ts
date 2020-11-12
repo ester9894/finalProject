@@ -172,7 +172,7 @@ async presentAlertPromptNewProduct()
        });
      }
      else if(this.addProductsToList){
-      this.router.navigate(['show-list',{"allSelectedProducts":this.allSelectedProducts,"typeListId":this.typeListId, "typeListName":this.typeListName}]);
+      this.router.navigate(['show-list',{"status":"true", "allSelectedProducts":JSON.stringify(this.allSelectedProducts),"typeListId":this.typeListId, "typeListName":this.typeListName}]);
      }
      else
      {

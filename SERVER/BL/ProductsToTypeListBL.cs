@@ -40,21 +40,28 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
+               
                 for (int i = 0; i < newProducts.Length; i++)
                 {
-                    db.ProductsToTypeLists.Add(new ProductsToTypeList()
+                    long productId = newProducts[i];
+                    if (!db.ProductsToTypeLists.Any(p => p.ProductId == productId))
                     {
-                        Amount = 1,
-                        ProductId = newProducts[i],
-                        TypeListId = typeListId
-                    });
-                    db.SaveChanges();
+                        db.ProductsToTypeLists.Add(new ProductsToTypeList()
+                        {
+                            Amount = 1,
+                            ProductId = newProducts[i],
+                            TypeListId = typeListId
+                        });
+                        db.SaveChanges();
+                    }
                 }
 
             }
 
                 return true;
         }
+
+        
 
         public static bool updateList(List<ProductsToTypeListDTO> productsListToUpdate, long typeListId)
         {
@@ -77,7 +84,7 @@ namespace BL
                     }
                 }
 
-                ProductsToTypeList productsToType;
+               // ProductsToTypeList productsToType;
                 //עדכון שינויים
                 for (int i = 0; i < productsListToUpdate.Count; i++)//הרשימה החדשה
                 {
@@ -85,22 +92,38 @@ namespace BL
                     {
                        if(productsListToUpdate[i].ProductId==products[j].ProductId)
                         {
-                            productsToType = CONVERTERS.ProductsToTypeListConverter.ConvertProductsToTypeListToDAL(productsListToUpdate[i]);
-                            db.Entry(productsToType).State = EntityState.Modified;
+                            if(products[j].Amount != productsListToUpdate[i].Amount)
+                            //productsToType = CONVERTERS.ProductsToTypeListConverter.ConvertProductsToTypeListToDAL(productsListToUpdate[i]);
+                            products[j].Amount = productsListToUpdate[i].Amount;
+                          //  db.Entry(productsToType).State = EntityState.Modified;
                             db.SaveChanges();
 
                             break;
                         }
-                        if (j + 1 == products.Count)
-                            db.ProductsToTypeLists.Add(new ProductsToTypeList()
-                            {
-                                Amount = productsListToUpdate[i].Amount,
-                                ProductId = productsListToUpdate[i].ProductId,
-                                TypeListId = productsListToUpdate[i].TypeListId
-                            });
+
+                       //מוסיף עם הכפתור
+                        //if (j + 1 == products.Count)
+                        //    db.ProductsToTypeLists.Add(new ProductsToTypeList()
+                        //    {
+                        //        Amount = productsListToUpdate[i].Amount,
+                        //        ProductId = productsListToUpdate[i].ProductId,
+                        //        TypeListId = productsListToUpdate[i].TypeListId
+                        //    });
                     }
 
                 }
+            }
+
+            return true;
+        }
+
+        public static bool removeProduct(long typeListId, long productId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                ProductsToTypeList product = db.ProductsToTypeLists.Where(p =>p.TypeListId== typeListId  && p.ProductId == productId ).ToList()[0];
+                db.ProductsToTypeLists.Remove(product);
+                db.SaveChanges();
             }
 
             return true;

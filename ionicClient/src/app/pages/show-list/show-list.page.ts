@@ -21,13 +21,19 @@ export class ShowListPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      this.addProductsToList = JSON.parse(params.get('status'))
+
+      console.log(this.addProductsToList);
+
       if (this.addProductsToList == true) {
+
+        console.log(this.addProductsToList);
 
         this.newProducts = JSON.parse(params.get('allSelectedProducts'))
         console.log('המוצרים החדשים ' + this.newProducts);
 
-        this.addProductsToList = false;
-        this.addNewProductsToList();
+        this.addNewProductsToList(+params.get("typeListId"));
+        this.router.navigate(['show-list', { "status": "false", "typeListId": +params.get("typeListId"), "typeListName": params.get("typeListName") }])
       }
       this.typeListId = +params.get("typeListId")
       this.typeListName = params.get("typeListName")
@@ -35,7 +41,6 @@ export class ShowListPage implements OnInit {
       this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
         this.productsList = list;
 
-        console.log('המוצרים החדשים' + this.newProducts);
 
         console.log(this.productsList);
         console.log(this.typeListName);
@@ -44,28 +49,38 @@ export class ShowListPage implements OnInit {
 
   }
 
-  addNewProductsToList() {
-    this.listsService.addNewProductsToList(this.newProducts, this.typeListId).subscribe((res) => { })
-  }
-  updateList() {
-    this.productsList = [{
-      ProductId: 11004, TypeListId: 1, Amount: 2, ProductName: 'חסה'
-    },
-    {
-      ProductId: 11019, TypeListId: 1, Amount: 3, ProductName: 'צלחות גדולות'
-    }]
-    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
-      //   this.router.navigate(['show-list', { "typeListId": this.typeListId , "TypeListName": this.typeListName}]);
-
+  addNewProductsToList(typeListId: number) {
+    this.listsService.addNewProductsToList(this.newProducts, typeListId).subscribe((res) => {
+      alert("המוצרים נוספו בהצלחה")
     })
-    this.router.navigateByUrl('types-list');
+  }
 
+
+  updateList() {
+    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
+      alert("השינויים נשמרו")
+    })
+    this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
+
+    //this.router.navigateByUrl('types-list');
   }
 
 
   addProducts() {
     this.addProductsToList = true;
     this.router.navigate(['products', { "addProducts": true, "typeListId": this.typeListId, "typeListName": this.typeListName }]);
+
+  }
+
+  back() {
+    this.router.navigateByUrl('types-list')
+  }
+
+  removeProduct(TypeListId: number, ProductId: number) {
+    this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
+      alert("המוצר נמחק")
+    })
+    this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
 
   }
 }
