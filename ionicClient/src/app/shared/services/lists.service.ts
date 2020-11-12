@@ -10,7 +10,6 @@ import { TypeList } from '../models/type_list.model';
 })
 export class ListsService {
 
-
   constructor(private http: HttpClient) { }
 
   GetAllTypesList(accountId: number): Observable<TypeList[]> {
@@ -24,13 +23,12 @@ export class ListsService {
   }
 
   updateList(productsList: Array<ProductsToTypeList>, typeListId: number): Observable<boolean> {
-    console.log(productsList,typeListId);
-    
+    console.log(productsList,typeListId);   
     return this.http.post<boolean>(environment.url + `/lists/updateList/${typeListId}`,productsList)
   }
 
   addNewProductsToList(newProducts:number[], typeListId: number){
     return this.http.post<boolean>(environment.url + `/lists/addNewProductsToList/${typeListId}`,newProducts)
-
   }
+
 }

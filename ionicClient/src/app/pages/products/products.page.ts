@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { SelectorMatcher } from '@angular/compiler';
 import { parse } from 'path';
 import { count } from 'console';
+import { ListsService } from 'src/app/shared/services/lists.service';
 // הערה
 @Component({
   selector: 'app-products',
@@ -36,7 +37,7 @@ export class ProductsPage implements OnInit {
 
 
 
-  constructor(private productService: ProductsService, private followUpService: FollowUpService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
+  constructor(private productService: ProductsService, private followUpService: FollowUpService, private listService: ListsService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
       this.route.params.subscribe(params => {
       this.isPageForUpdateFollowList = params['isForUpdateFollowList']; 
@@ -85,41 +86,27 @@ export class ProductsPage implements OnInit {
       this.currentItems = [];
       return;
     }
-    console.log(val)
-    this.query({
-      name: val 
-    })
-    console.log(this.currentItems)
+    this.query(val)
   }
 
-  query(params?: any) 
+  query(val?: any) 
   {
     this.currentItems = []
-    if (!params) { return this.arrProducts; }
-    console.log(params)
+    if (!val) { return this.arrProducts; }
      return this.arrProducts.forEach(arr => 
       {
         arr.filter((item) => {
-        for (let key in params.name) 
+        for (let key in val) 
         {
           let field = item.ProductName[key];
-          if (!(typeof field == 'string' && field.indexOf(params.name[key]) >= 0)) 
-          { 
-            //console.log(item.ProductName)
-            return item.ProductName
-          } 
-          else if (!(field == params.name[key]) )
-          {
-            return item.ProductName
-          } 
+          if (!(typeof field == 'string' && field.indexOf(val[key]) >= 0)) { return item.ProductName } 
+          else if (!(field == val[key])) { return item.ProductName} 
         }
         this.currentItems.push(item)
-        console.log(item.ProductName)
         return null;
       });
     }); 
   }
-
 
 // add product to follow for this account
 async presentAlertPromptNewProduct() 
@@ -246,8 +233,6 @@ async showAlert(message: string)
         }
       else
         {
-          console.log(this.allSelectedProducts)
-          console.log(this.newProducts)
           this.router.navigate(['create-list',{"productsList": this.allSelectedProducts,"undefinedProducts": this.newProducts}]);
         }
   }
