@@ -32,9 +32,9 @@
       <ion-skeleton-text ></ion-skeleton-text>
       <ion-list *ngFor="let item of map.get(kind)">
         <ion-toolbar>
-          <ion-item>
+          <ion-item >
             <ion-item *ngIf="showCheckbox">
-              <ion-checkbox  slot="start" [(ngModel)]="item.isChecked" ></ion-checkbox> 
+              <ion-checkbox checked slot="start" [(ngModel)]="item.isChecked" ></ion-checkbox> 
             </ion-item>
             <ion-label>{{item.ProductName}}</ion-label>
           </ion-item>

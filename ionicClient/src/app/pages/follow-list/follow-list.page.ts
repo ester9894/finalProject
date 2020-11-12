@@ -51,6 +51,7 @@ anyProductSellected:boolean=false;
             item.isChecked = false
         }
       });
+      this.itemsForRemoveArray=[]
   }
 
   removeFromList()
@@ -63,17 +64,17 @@ anyProductSellected:boolean=false;
         if(item.isChecked == true)
           this.itemsForRemoveArray.push(item.ProductId) 
       }
-
     });
     console.log(this.itemsForRemoveArray)
-    if(!this.itemsForRemoveArray.values)
+    if(this.itemsForRemoveArray.length)
     {
       this.followListService.removeFromList(this.itemsForRemoveArray, this.accountId)
       this.changeShowCheckbox()
     }
     else
-    this.showAlert()
-     
+    {
+      this.showAlert()
+    }  
   }
 
   closePage()

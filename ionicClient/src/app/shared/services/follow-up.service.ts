@@ -22,8 +22,8 @@ export class FollowUpService
      return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/followUp/getListById/${idAccount}`)
    }
 
-   removeFromList(listForRemove: Number[], accountId:Number)
+   removeFromList(idSelectedProducts: Number[], accountId:Number):Observable<boolean> 
    {
-    return this.http.post<boolean>(environment.url + `followUp/removeFromList/${accountId}`, listForRemove)
+    return this.http.post<boolean>(environment.url + `followUp/removeFromList/${accountId}`, idSelectedProducts)
    }
 }
