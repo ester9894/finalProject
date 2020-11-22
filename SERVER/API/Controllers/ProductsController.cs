@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
-    [EnableCors("*","*","*")]
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/products")]// הניתוב לעמוד הזה, מכיוון שיש כמה פונקציות get צריך לדעת לאיזה מהם לגשת
     public class ProductsController : ApiController
     {
@@ -20,11 +20,11 @@ namespace API.Controllers
             return Ok();
         }
 
-        [Route("GetAllProducts")]// ניתוב לפונקציה הזאת
+        [Route("GetAllProducts/{accountId}")]// ניתוב לפונקציה הזאת
         [HttpGet]
-        public IHttpActionResult GetAllProducts()
+        public IHttpActionResult GetAllProducts(int accountId)
         {
-            return Ok(BL.ProductsBL.GetAllProducts());
+            return Ok(BL.ProductsBL.GetAllProducts(accountId));
         }
 
         [Route("GetProducts/{p}")]// ניתוב לפונקציה  המקבלת פרמטר
@@ -41,18 +41,16 @@ namespace API.Controllers
         }
 
         [Route("AddProductForAccount/{accountId}"), HttpPost]
-        public IHttpActionResult AddProduct([FromUri]int accountId,[FromBody]ProductsDTO p)
+        public List<long> AddProduct([FromUri] int accountId, [FromBody] List<ProductsDTO> p)
         {
-            BL.ProductsBL.AddProduct(p,accountId);
-            return Ok(true);
+           return(BL.ProductsBL.AddPersonalProducts(p, accountId));
         }
 
-        [Route("GetProductsByIdProduct/{idProducts}")]// ניתוב לפונקציה  המקבלת פרמטר
-        [HttpGet]
+        [Route("GetProductsByIdProduct")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpPost]
         public IHttpActionResult GetProductsByIdProduct(int[] idProducts)
         {
-           // BL.ProductsBL.GetProductsByIdProduct(idProducts);
-            return Ok(true);
+            return Ok(BL.ProductsBL.GetProductsByIdProduct(idProducts));
         }
     }
 }

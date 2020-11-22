@@ -3,13 +3,22 @@
     <ion-title>רשימה חדשה</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-button color="medium" (click)="goProductsList()">
-  <ion-icon name="create">הוסף מוצרים לרשימה</ion-icon>
-</ion-button>
 <ion-content>
-  <ion-list>
-    <ion-item-sliding *ngFor= 'let item of productsList'>
-       {{item}}
-    </ion-item-sliding>
-  </ion-list>
+  <ion-buttons color="medium" dir="ltr">
+      <ion-button (click)="saveList()"><ion-icon button name="bookmark"></ion-icon></ion-button>
+      <ion-button  (click)="goProductsList()"> <ion-icon name="create" ></ion-icon></ion-button>
+  </ion-buttons>
+
+    <ion-list *ngFor= 'let category of map.keys()'>
+      <ion-text>{{category}}</ion-text>
+      <ion-skeleton-text></ion-skeleton-text>
+       <ion-list *ngFor="let item of map.get(category)">
+        <ion-toolbar>
+          <ion-item >
+            <ion-label>{{item.ProductName}}</ion-label>
+          </ion-item>
+        </ion-toolbar>
+      </ion-list>
+    </ion-list>
 </ion-content>
+

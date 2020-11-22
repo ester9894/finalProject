@@ -20,6 +20,12 @@ namespace API.Controllers
             return Ok(true);
         }
 
+        [Route("addProductsToList/{accountId}"), HttpPost]
+        public IHttpActionResult AddProductsToList([FromUri] int accountId, [FromBody] ListForChangeDTO listForAdd)
+        {
+            return Ok(BL.TypeListBL.SaveList(accountId, listForAdd));
+        }
+
         [Route("GetAllTypesList/{accountId}")]
         [HttpGet]
         public IHttpActionResult GetAllTypesList(long accountId)

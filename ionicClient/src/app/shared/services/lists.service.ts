@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ListForChange } from '../models/list_for_change';
 import { ProductsToTypeList } from '../models/products_to_type_list.model';
 import { TypeList } from '../models/type_list.model';
 
@@ -30,10 +31,14 @@ export class ListsService {
 
   addNewProductsToList(newProducts:number[], typeListId: number): Observable<boolean>{
     return this.http.post<boolean>(environment.url + `lists/addNewProductsToList/${typeListId}`,newProducts)
-
   }
 
   removeProduct(TypeListId: number, ProductId: number): Observable<boolean> {
     return this.http.get<boolean>(environment.url + `lists/removeProduct/${TypeListId}/${ProductId}`)
+  }
+
+  addProductsToList(accountId: Number, listForAdd: ListForChange) :Observable<boolean>
+  {
+    return this.http.post<boolean>(environment.url + `/lists/addProductsToList/${accountId}`,listForAdd)
   }
 }

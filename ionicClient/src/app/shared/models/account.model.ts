@@ -1,4 +1,5 @@
-export class Account {
+export class Account 
+{
     AccountId: number
     AccountName: string
     Password: string

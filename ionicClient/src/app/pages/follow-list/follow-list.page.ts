@@ -2,6 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController, MenuController } from '@ionic/angular';
+import { TIMEOUT } from 'dns';
 import { Key } from 'protractor';
 import { followUpList } from 'src/app/shared/models/follow_up_list.model';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
@@ -20,6 +21,7 @@ arrKind = new Array()// categories products
 itemsForRemoveArray = []; // items for remove from followlist
 forUdateFollowList: boolean = true
 anyProductSellected:boolean=false;
+TIME_IN_MS = 5000;
   constructor(private followListService:FollowUpService, private router: Router, private alertController: AlertController) 
   { 
   }
@@ -68,12 +70,15 @@ anyProductSellected:boolean=false;
     console.log(this.itemsForRemoveArray)
     if(this.itemsForRemoveArray.length)
     {
-      this.followListService.removeFromList(this.itemsForRemoveArray, this.accountId)
+      this.followListService.removeFromList(this.itemsForRemoveArray, this.accountId).subscribe(res=>
+        {
+          this.showAlert("הוסר בהצלחה")
+        });
       this.changeShowCheckbox()
     }
     else
     {
-      this.showAlert()
+      this.showAlert('אנא בחר מוצרים להסרה')
     }  
   }
 
@@ -82,11 +87,11 @@ anyProductSellected:boolean=false;
     this.router.navigate(['home-page']);
   }
 
-  async showAlert()
+  async showAlert(mess: string)
   {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      message: 'אנא בחר מוצרים להסרה',
+      message: mess,
       buttons: ['הבנתי']
     });
     await alert.present();

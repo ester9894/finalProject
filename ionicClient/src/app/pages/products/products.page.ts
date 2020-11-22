@@ -9,6 +9,7 @@ import { SelectorMatcher } from '@angular/compiler';
 import { parse } from 'path';
 import { count } from 'console';
 import { ListsService } from 'src/app/shared/services/lists.service';
+import { element } from 'protractor';
 // הערה
 @Component({
   selector: 'app-products',
@@ -24,11 +25,13 @@ export class ProductsPage implements OnInit {
   selectedsArray = []; // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
   idAccount: Number
-  newProducts= new Array()
+  newProducts:Products[]= new Array()
   isPageForUpdateFollowList: boolean
-  categoryProduct: string;
-  nameProduct: Number;
+  categoryProduct: number;
+  nameProduct: string;
   currentItems =new Array()
+  map= new Map()
+ newListId = []
 
   selectedProducts=[1001,1008];
   addProductsToList:boolean
@@ -56,7 +59,7 @@ export class ProductsPage implements OnInit {
     console.log(this.idAccount )
 
     // create arr of categories and arr of all products
-    this.productService.getAllProducts().subscribe(res => 
+    this.productService.getAllProducts(this.idAccount).subscribe(res => 
     {
       console.log(res);
       this.o = Array.of(res)
@@ -144,6 +147,7 @@ async presentAlertPromptNewProduct()
 
  async presentAlertPromptCategory() 
  {
+ // {"name":this.nameProduct,"category":this.categoryProduct}
    let alertInputs=[];
    this.arrKind.forEach(element => 
     { 
@@ -167,9 +171,13 @@ async presentAlertPromptNewProduct()
         handler: (alertData) => 
         {
           this.categoryProduct = alertData;
-          if(!this.isPageForUpdateFollowList)
+          if(this.isPageForUpdateFollowList)
           {
-            this.newProducts.push({"name":this.nameProduct,"category":this.categoryProduct})
+            let p=new Products();
+            p.ProductName=this.nameProduct;
+            console.log(this.o[0][this.categoryProduct])
+            p.CategoryId=this.o[0][this.categoryProduct][0].CategoryId
+            this.newProducts.push(p)
           }
         }
       }
@@ -208,6 +216,7 @@ async showAlert(message: string)
   // update follow up list 
   saveList() 
   {
+    this.allSelectedProducts=[]
     for (let i = 0; i < this.selectedsArray.length; i++)// over all Categories for checking which Categories are selected items
     {
       if (this.selectedsArray[i] != null)// if seleced items in this Categories so
@@ -223,9 +232,12 @@ async showAlert(message: string)
     // send for adding
     if(this.isPageForUpdateFollowList)
      {
-      this.followUpService.saveList(this.allSelectedProducts, this.idAccount).subscribe((res) => {
-        this.router.navigate(['follow-list']);
-       });
+       this.followUpService.addPersonalItems(this.newProducts,this.idAccount).subscribe((newProducts)=>
+       {        
+         newProducts.forEach(element => {if(element) this.newListId.push(element)});
+        this.allSelectedProducts.push(...this.newListId)
+        this.followUpService.saveList(this.allSelectedProducts, this.idAccount).subscribe((res) => { this.router.navigate(['follow-list']);});
+      });
      }
      else if(this.addProductsToList)
         {
@@ -233,7 +245,7 @@ async showAlert(message: string)
         }
       else
         {
-          this.router.navigate(['create-list',{"productsList": this.allSelectedProducts,"undefinedProducts": this.newProducts}]);
+            this.router.navigate(['create-list',{"productsList": this.allSelectedProducts,"undefinedProducts": this.newProducts}]);
         }
   }
 }
