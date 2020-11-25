@@ -10,6 +10,7 @@ import { parse } from 'path';
 import { count } from 'console';
 import { ListsService } from 'src/app/shared/services/lists.service';
 import { element } from 'protractor';
+import {Location} from '@angular/common'
 // הערה
 @Component({
   selector: 'app-products',
@@ -40,7 +41,7 @@ export class ProductsPage implements OnInit {
 
 
 
-  constructor(private productService: ProductsService, private followUpService: FollowUpService, private listService: ListsService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
+  constructor(private _location: Location, private productService: ProductsService, private followUpService: FollowUpService, private listService: ListsService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
       this.route.params.subscribe(params => {
       this.isPageForUpdateFollowList = params['isForUpdateFollowList']; 
@@ -247,6 +248,11 @@ async showAlert(message: string)
         {
             this.router.navigate(['create-list',{"productsList": this.allSelectedProducts,"undefinedProducts": this.newProducts}]);
         }
+  }
+
+  backPage()
+  {
+    this._location.back();
   }
 }
 

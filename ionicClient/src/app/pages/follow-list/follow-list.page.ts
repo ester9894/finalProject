@@ -21,7 +21,6 @@ arrKind = new Array()// categories products
 itemsForRemoveArray = []; // items for remove from followlist
 forUdateFollowList: boolean = true
 anyProductSellected:boolean=false;
-TIME_IN_MS = 5000;
   constructor(private followListService:FollowUpService, private router: Router, private alertController: AlertController) 
   { 
   }
@@ -30,7 +29,6 @@ TIME_IN_MS = 5000;
   {
     this.accountId =+localStorage.getItem('accountId') ;
     console.log(this.accountId)
-
     this.followListService.getListById(this.accountId).subscribe(res=>
       {
       //console.log(res);

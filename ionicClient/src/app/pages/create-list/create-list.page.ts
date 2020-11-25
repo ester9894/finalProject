@@ -6,6 +6,7 @@ import { mapTo } from 'rxjs/operators';
 import { ListForChange } from 'src/app/shared/models/list_for_change';
 import { ListsService } from 'src/app/shared/services/lists.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-create-list',
@@ -19,7 +20,7 @@ export class CreateListPage implements OnInit
   nameList: string
   idAccount: Number;
   list= new ListForChange()
-  constructor(private router: Router, private route:ActivatedRoute,private listService:ListsService, private productService:ProductsService, private alertController: AlertController) 
+  constructor(private _location: Location, private router: Router, private route:ActivatedRoute,private listService:ListsService, private productService:ProductsService, private alertController: AlertController) 
   {
     this.route.params.subscribe(params => 
       {
