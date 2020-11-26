@@ -11,7 +11,7 @@ import { UsersAccount } from '../models/users_account.model';
   providedIn: 'root'
 })
 export class AccountsService {
- 
+
 
   constructor(private http:HttpClient) { }
 
@@ -34,6 +34,18 @@ export class AccountsService {
     return this.http.get<number>(environment.url+`/accounts/checkPass/${pass}/${accountName}`)
 
   }
+
+  GetAccount(accountId:number):Observable<Account>{
+    return this.http.get<Account>(environment.url + `accounts/GetAccount/${accountId}`)
+
+  }
+
+  
+  GetAllAccountsByUser(userId: number) :Observable<Account[]>{
+    return this.http.get<Account[]>(environment.url + `accounts/GetAllAccountsByUser/${userId}`)
+    
+  }
+ 
   
 }
 

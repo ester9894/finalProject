@@ -49,6 +49,36 @@ namespace BL
 
         }
 
+        public static List<AccountDTO> GetAllAccountsByUser(long userId)
+        {
+            List<long> accountsId = new List<long>();
+            List<AccountDTO> accountsList = new List<AccountDTO>();
+            Account account = new Account();
+            long accountId=0;
+
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                accountsId = db.UsersAccounts.Where(u => u.UserId == userId).Select(u => u.AccountId).ToList();
+                for (int i = 0; i < accountsId.Count; i++)
+                {
+                    accountId = accountsId[i];
+                    account = db.Accounts.Where(a => a.AccountId == accountId).ToList()[0];
+                    accountsList.Add(CONVERTERS.AccountConverter.ConvertAccountToDTO(account));
+                }
+            }
+            return accountsList;
+        }
+
+        public static AccountDTO GetAccount(long accountId)
+        {
+                using (ProjectDBEntities db = new ProjectDBEntities())
+                {
+                    return CONVERTERS.AccountConverter.ConvertAccountToDTO(db.Accounts.Where(a=>a.AccountId==accountId).ToList()[0]);
+                }
+
+            
+        }
+
         public static void addUserAccount(int userId, int accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())

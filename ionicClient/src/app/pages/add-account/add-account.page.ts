@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/shared/services/accounts.service';
 import { Account } from 'src/app/shared/models/account.model';
 import { identifierModuleUrl } from '@angular/compiler';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-account',
@@ -13,10 +14,10 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class AddAccountPage implements OnInit {
   account: Account = new Account();
   userName: string;
-  forUdateFollowList: true
+  forUpdateFollowList: true
 
 
-  constructor(private accountService: AccountsService, private router: Router, private route: ActivatedRoute) {
+  constructor(private alertCtrl: AlertController, private accountService: AccountsService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -24,27 +25,33 @@ export class AddAccountPage implements OnInit {
       this.account.ManagerId = +localStorage.getItem('userId')
       this.userName = params.get("userName")
 
-
-      console.log(this.userName);
-      console.log("localStorage " + this.account.ManagerId);
-
     })
   }
 
   addAccount() {
-    console.log(this.account);
-
     this.accountService.addAccount(this.account).subscribe((accountId) => {
-      localStorage.setItem('accountId', accountId.toString())
 
-      if (accountId != 0)
+      if (accountId != 0) {
+        localStorage.setItem('accountId', accountId.toString())
+
         this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {
-          this.router.navigate(['products', this.forUdateFollowList]);
 
         });
+       this.router.navigate(['products', {"isForUpdateFollowList":this.forUpdateFollowList}]);
+
+      }
       else
-        alert("שם חשבון זה קיים במערכת, נא הקש שם חדש");
+        this.presentAlert();
     })
 
+  }
+
+  async presentAlert() {
+    let alert = this.alertCtrl.create({
+      //title: 'Low battery',
+      message: 'שם חשבון זה קיים במערכת, נא הקש שם חדש',
+      buttons: ['הבנתי']
+    });
+    (await alert).present();
   }
 }

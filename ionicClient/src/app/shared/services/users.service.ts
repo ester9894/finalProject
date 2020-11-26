@@ -14,4 +14,10 @@ export class UsersService {
   addUser(user: User ):Observable<number> {
     return this.http.post<number>(environment.url + 'users/addUser', user)
   }
+
+  GetUser(userId:number):Observable<User>{
+    return this.http.get<User>(environment.url + `users/GetUser/${userId}`)
+
+  }
+
 }

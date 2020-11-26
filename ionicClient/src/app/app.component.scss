@@ -1,3 +1,16 @@
+.circle {
+  height: 25px;
+  width: 25px;
+  background-color:primary;
+  border-radius: 100px 100px 100px 100px;
+  display: inline-block;
+  margin-left: 0px;
+  margin-right: 90%;
+}
+.button{
+  background-color: primary;
+}
+
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
