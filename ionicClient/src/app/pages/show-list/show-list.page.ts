@@ -4,6 +4,7 @@ import { List } from 'src/app/shared/models/list.model';
 import { Products } from 'src/app/shared/models/products.model';
 import { ProductsToTypeList } from 'src/app/shared/models/products_to_type_list.model';
 import { ListsService } from 'src/app/shared/services/lists.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-show-list',
@@ -17,7 +18,9 @@ export class ShowListPage implements OnInit {
   productsList: Array<ProductsToTypeList>;
   newProducts: number[]
   addProductsToList: boolean = false
-  constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService, public alertController: AlertController) { }
+
+ 
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -38,31 +41,37 @@ export class ShowListPage implements OnInit {
       this.typeListId = +params.get("typeListId")
       this.typeListName = params.get("typeListName")
 
-      this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
-        this.productsList = list;
-
-
-        console.log(this.productsList);
-        console.log(this.typeListName);
-      })
+      this.getAllProducts();
     })
 
   }
 
+  getAllProducts()
+  {
+    this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
+      this.productsList = list;
+      console.log(this.productsList);
+        console.log(this.typeListName);
+    })
+  }
+
   addNewProductsToList(typeListId: number) {
     this.listsService.addNewProductsToList(this.newProducts, typeListId).subscribe((res) => {
-      alert("המוצרים נוספו בהצלחה")
+      //alert("המוצרים נוספו בהצלחה")
+      this.getAllProducts();
     })
   }
 
 
   updateList() {
+  
     this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
-      alert("השינויים נשמרו")
+      //alert("השינויים נשמרו")
+      this.getAllProducts();
     })
-    this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
 
-    //this.router.navigateByUrl('types-list');
+    this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
+    
   }
 
 
@@ -78,8 +87,12 @@ export class ShowListPage implements OnInit {
 
   removeProduct(TypeListId: number, ProductId: number) {
     this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
-      alert("המוצר נמחק")
+     // alert("המוצר נמחק")
+     this.getAllProducts();
     })
+
+    location.reload();
+
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
 
   }

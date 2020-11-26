@@ -4,6 +4,7 @@ import { AccountsService } from 'src/app/shared/services/accounts.service';
 import { UsersAccount } from 'src/app/shared/models/users_account.model';
 import { FormGroup } from '@angular/forms';
 import { Login } from 'src/app/shared/models/login.model';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,10 @@ import { Login } from 'src/app/shared/models/login.model';
 export class LoginPage implements OnInit {
   userLogin: Login = new Login();
   loginForm: FormGroup;
-  constructor(private accountService: AccountsService, private router: Router) { }
+  constructor(private accountService: AccountsService, private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
+    
   }
   checkLogin() {
     this.accountService.checkLogin(this.userLogin).subscribe((userAccount) => {
@@ -23,23 +25,20 @@ export class LoginPage implements OnInit {
       localStorage.setItem('accountId', userAccount.AccountId.toString())
 
       this.router.navigateByUrl('home-page');
-    }, err => alert("שם משתמש או סיסמה שגויים"));
+
+    }, err => this.presentAlert());
+
+  }
+
+  async presentAlert() {
+    let alert = this.alertCtrl.create({
+      //title: 'Low battery',
+      message: 'פרטי המשתמש שגויים',
+      buttons: ['הבנתי']
+    });
+    (await alert).present();
   }
 
 
-  checkPass(pass, accountName) {
-    console.log(pass + " " + accountName);
-
-    this.accountService.checkPass(pass, accountName).subscribe((accountId) => {
-      console.log(accountId);
-      localStorage.setItem('accountId', accountId.toString())
-
-      if (accountId != 0)
-        this.router.navigate(['register']);
-      //this.router.navigate(['register',{"accountId":accountId}]);
-
-      else
-        alert("פרטי החשבון שגויים")
-    })
-  }
+ 
 }

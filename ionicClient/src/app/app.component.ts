@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { User } from './shared/models/user.model';
+import { UsersService } from './shared/services/users.service';
+import { Account } from './shared/models/account.model';
+import { AccountsService } from './shared/services/accounts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,31 +17,25 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   idAccount: Number
+  user: User = new User();
+  account: Account = new Account();
+  accountName: string
+  accountsList: Account[]
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
+      title: 'הרשימות שלי',
+      url: '/types-list',
+      icon: 'list'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
+      title: 'לוח התראות',
+      url: '/home-page',
+      icon: 'warning'
     },
     {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
+      title: 'רשימת מוצרים',
+      url: '/products',
+      icon: 'star'
     },
     {
       title: 'רשימה חדשה',
@@ -49,15 +48,18 @@ export class AppComponent implements OnInit {
       icon: 'alert'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private userService: UsersService,
+    private accountService: AccountsService,
+    private alertController: AlertController,
+    private router: Router
   ) {
     this.initializeApp();
-    
+
   }
 
   initializeApp() {
@@ -72,5 +74,85 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+
+    if (this.IsUserLogedIn()) {
+      this.userService.GetUser(+localStorage.getItem('userId')).subscribe((user) => {
+        console.log(user);
+
+        this.user = user;
+      });
+
+      this.accountService.GetAccount(+localStorage.getItem('accountId')).subscribe((account) => {
+        console.log(account);
+
+        this.account = account;
+        this.accountName = account.AccountName.charAt(0);
+      });
+
+      this.accountService.GetAllAccountsByUser(+localStorage.getItem('userId')).subscribe((accounts) => {
+        console.log(accounts);
+
+        this.accountsList = accounts;
+      })
+    }
+  }
+  async presentAlertAccount() {
+    let alertInputs = [];
+    this.accountsList.forEach(element => {
+      alertInputs.push({
+        name: element.AccountId, type: 'radio', value: element.AccountId, label: element.AccountName,
+        handler: (input) => {
+          localStorage.setItem('accountId', input.value)
+          this.router.navigateByUrl('home-page')
+          console.log(input.value);
+        },
+        checked: element.AccountId == +localStorage.getItem('accountId'),
+      })
+    });
+    var alert = await this.alertController.create(
+      {
+        cssClass: 'my-custom-class',
+        header: 'החשבונות שלי',
+        inputs: alertInputs,
+        buttons:
+          [
+            {
+              text: 'הוספת חשבון חדש',
+              cssClass: 'secondary',
+              handler: () => {
+                this.router.navigate(['add-account', { "userName": this.user.UserName }]);
+
+              }
+            },
+            {
+              text: 'הצטרפות לחשבון קיים',
+              handler: (alertData) => {
+                this.router.navigateByUrl('join');
+
+              }
+            },
+            {
+              text: 'החלף משתמש',
+              cssClass:"button",
+              handler: (alertData) => {
+                localStorage.clear();
+                this.router.navigateByUrl('main');
+
+              }
+            }
+          ]
+      });
+
+    console.log(alert.inputs.length)
+    await alert.present();
+  }
+
+  showAccounts() {
+    console.log(this.account.AccountName);
+    this.presentAlertAccount();
+  }
+
+  IsUserLogedIn() {
+    return localStorage.getItem('userId') != null && localStorage.getItem('accountId') != null;
   }
 }

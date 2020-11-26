@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Local } from 'protractor/built/driverProviders';
 import { TypeList } from 'src/app/shared/models/type_list.model';
 import { ListsService } from 'src/app/shared/services/lists.service';
 
@@ -9,7 +10,7 @@ import { ListsService } from 'src/app/shared/services/lists.service';
   styleUrls: ['./types-list.page.scss'],
 })
 export class TypesListPage implements OnInit {
-  accountId: number = 2;
+  accountId: number;
   typeListArray: Array<TypeList>;
 
   constructor(private listsService: ListsService, private router: Router) { }
@@ -18,7 +19,7 @@ export class TypesListPage implements OnInit {
     // this.route.paramMap.subscribe(params => {
     // this.accountId = +params.get("accountId")})
 
-    this.listsService.GetAllTypesList(this.accountId).subscribe((arry) => {
+    this.listsService.GetAllTypesList(+localStorage.getItem('accountId')).subscribe((arry) => {
       console.log(arry);
       this.typeListArray = arry;
     });

@@ -32,5 +32,17 @@ namespace API.Controllers
            BL.AccountsBL.addUserAccount(userId, accountId);
         }
 
+        [Route("GetAccount/{accountId}"), HttpGet]
+        public AccountDTO GetAccount(long accountId)
+        {
+            return BL.AccountsBL.GetAccount(accountId);
+        }
+
+        [Route("GetAllAccountsByUser/{userId}"), HttpGet]
+        public List<AccountDTO> GetAllAccountsByUser(long userId)
+        {
+            return BL.AccountsBL.GetAllAccountsByUser(userId);
+        }
+
     }
 }

@@ -26,5 +26,14 @@ namespace BL
                 return userId;
             }
         }
+
+        public static UserDTO GetUser(long userId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                return CONVERTERS.UserConverter.ConvertUserToDTO( db.Users.Where(u => u.UserId == userId).ToList()[0]);
+            }
+               
+        }
     }
 }

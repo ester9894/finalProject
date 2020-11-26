@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'main',
     pathMatch: 'full'
   },
   {
@@ -57,6 +57,17 @@ const routes: Routes = [
     path: 'create-list',
     loadChildren: () => import('./pages/create-list/create-list.module').then( m => m.CreateListPageModule)
   },
+  {
+    path: 'join',
+    loadChildren: () => import('./pages/join/join.module').then( m => m.JoinPageModule)
+  },
+
+  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
+  },
+
+
 
 ];
 

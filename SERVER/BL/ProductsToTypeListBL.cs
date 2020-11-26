@@ -44,7 +44,7 @@ namespace BL
                 for (int i = 0; i < newProducts.Length; i++)
                 {
                     long productId = newProducts[i];
-                    if (!db.ProductsToTypeLists.Any(p => p.ProductId == productId))
+                    if (!db.ProductsToTypeLists.Any(p => p.ProductId == productId&& p.TypeListId==typeListId))
                     {
                         db.ProductsToTypeLists.Add(new ProductsToTypeList()
                         {

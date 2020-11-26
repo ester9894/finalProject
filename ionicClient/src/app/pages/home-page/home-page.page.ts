@@ -11,13 +11,9 @@ export class HomePagePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
     this.userId = + localStorage.getItem('userId')
     this.accountId = + localStorage.getItem('accountId')
-
-
-
   }
-
-  // this.router.navigate(['types-list',{"accountId":this.accountId}]);
 
 }

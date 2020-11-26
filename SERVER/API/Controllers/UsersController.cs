@@ -19,5 +19,13 @@ namespace API.Controllers
             long userId= BL.UserBL.AddUser(user);
             return userId;
         }
+
+        [Route("GetUser/{userId}"), HttpGet]
+        public UserDTO GetUser(long userId)
+        {
+            return BL.UserBL.GetUser(userId);
+        }
     }
+
+
 }
