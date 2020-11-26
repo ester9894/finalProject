@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Products } from '../models/products.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -27,14 +27,15 @@ export class ProductsService
     return this.http.get<number>(environment.url + 'products/GetNumProducts')
   }
 
-  getAllProducts():Observable<{ [id: string]: Products[] }>
+  getAllProducts(accountId:Number):Observable<{ [id: string]: Products[] }>
   {
-    return this.http.get<{ [id: string]: Products[] }>(environment.url + 'products/GetAllProducts')
+    return this.http.get<{ [id: string]: Products[] }>(environment.url + `/products/GetAllProducts/${accountId}`)
   }
 
-  getProductsByIdProduct(idproducts: Number[]):Observable<Products[]>
+  getProductsByIdProduct(idproducts: Number[]):Observable<{ [id: string]: Products[] }>
   {
-    return this.http.get<Products[] >(environment.url + 'products/GetProductsByIdProduct/'+idproducts)
+    return this.http.post<{ [id: string]: Products[] }>(environment.url + 'products/GetProductsByIdProduct',idproducts)
   }
-
+  
 }
+

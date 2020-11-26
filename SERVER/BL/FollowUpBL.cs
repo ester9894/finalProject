@@ -49,14 +49,16 @@ namespace BL
             {
                 foreach (int item in idSelectedProducts)
                 {
-                    FollowUpListDTO f = new FollowUpListDTO();
+                    FollowUpList f = new FollowUpList();
                     if (db.FollowUpLists.Any(a => a.AccountId == accountId && a.ProductId == item))
                     {
-                        db.FollowUpLists.Remove(CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDAL(f));
+                        f = db.FollowUpLists.FirstOrDefault(a => a.AccountId == accountId && a.ProductId == item);
+                        db.FollowUpLists.Remove(f);
                     }
                 }
                 db.SaveChanges();
             }
         }
+
     }
 }

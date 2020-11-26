@@ -9,7 +9,9 @@ namespace DTO
 {
    public class ListForChangeDTO
     {
-        public long accountId { get; set; }
-        public List<ProductsDTO> listForChange { get; set; }
+        public string NameList { get; set; }
+       public int[] idProductsList { get; set; }
+
+
     }
 }
