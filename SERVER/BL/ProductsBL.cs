@@ -55,6 +55,8 @@ namespace BL
 
         }
 
+      
+
         public static Dictionary<string, List<ProductsDTO>> GetProductsByIdProduct(int[] idProducts)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())

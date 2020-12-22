@@ -3,5 +3,6 @@ export class Products {
     ProductName: string
     CategoryId: number
     CategoryName:string
+  length: number
 
 }

@@ -7,6 +7,7 @@ import { ListForChange } from 'src/app/shared/models/list_for_change';
 import { ListsService } from 'src/app/shared/services/lists.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import {Location} from '@angular/common'
+import { Products } from 'src/app/shared/models/products.model';
 
 @Component({
   selector: 'app-create-list',
@@ -15,31 +16,34 @@ import {Location} from '@angular/common'
 })
 export class CreateListPage implements OnInit 
 {
-  productsList:Number[]
+  productsList=[] // array of id products at this list
   map= new Map()
   nameList: string
   idAccount: Number;
   list= new ListForChange()
+  arrProductsInList: Products[] = []
   constructor(private _location: Location, private router: Router, private route:ActivatedRoute,private listService:ListsService, private productService:ProductsService, private alertController: AlertController) 
   {
     this.route.params.subscribe(params => 
       {
-        console.log(Array.of(params['productsList'])) 
-       this.productsList=(params['productsList'].split(',')).map(x=>+x);
-        if(this.productsList != undefined)
-           this.getProductsById()
+       console.log(Array.of(params['productsList'])) 
+       if(params['productsList'] != undefined)
+       {
+        this.productsList=(params['productsList'].split(',')).map(x=>+x);
+        this.getProductsById()
+       }
       });
  }
 
   ngOnInit() 
   {
     this.idAccount =+ localStorage.getItem('accountId')
-    console.log(this.idAccount )      
+    console.log(this.idAccount )     
   }
 
   goProductsList()
   {
-    this.router.navigateByUrl('products')
+     this.router.navigate(['products',{"productsInList": this.productsList}])
   }
 
   saveList()
@@ -81,9 +85,9 @@ export class CreateListPage implements OnInit
 
   getProductsById()
   {
-        this.productService.getProductsByIdProduct(this.productsList).subscribe((res) => 
-        {
-          Object.keys(res).forEach( key => { this.map.set(key, res[key]); } );
-        });
+    this.productService.getProductsByIdProduct(this.productsList).subscribe((res) => 
+      {
+        Object.keys(res).forEach( key => { this.map.set(key, res[key]); } );
+      });
   }
 }

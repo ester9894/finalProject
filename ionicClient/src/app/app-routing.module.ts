@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
   },
   {
-    path: 'products/:isForUpdateFollowList',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
-  },
-  {
     path: 'add-account',
     loadChildren: () => import('./pages/add-account/add-account.module').then( m => m.AddAccountPageModule)
   },

@@ -2,35 +2,35 @@
       <ion-toolbar>
         <ion-title>רשימת המוצרים</ion-title>
         <ion-buttons slot="start" >
-          <ion-back-button ></ion-back-button>
+          <ion-back-button icon="arrow-forward-outline"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-<ion-content>
+
     <ion-list-header dir="ltr">
       <ion-button (click)="saveList()">סיימתי לבחור</ion-button>
-      <ion-button (click)="presentAlertPromptNewProduct()">
+      <ion-button (click)="presentAlertPromptNewProduct()">מוצר חדש
         <ion-icon name="add-sharp"></ion-icon>
       </ion-button>
     </ion-list-header>
 
-  <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-item button *ngFor="let item of currentItems" (click)="addForSaveList(item.ProductId)">{{item.ProductName}} 
-    </ion-item>
+   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)"></ion-searchbar>
+   <ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
+   <ion-skeleton-text></ion-skeleton-text>
 
+  <ion-content>
   <div>
-    <ion-skeleton-text></ion-skeleton-text>
   <ion-list>
    <ion-item  *ngFor="let item of arrKind; let j=index">
     <ion-label>{{item}}</ion-label>
-    <ion-select  multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]" >
+    <ion-select  multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]"  [selectedText]="selectText(j)" [compareWith]="compareById">
       <div  *ngFor= "let p of arrProducts">
         <div *ngFor = "let i of p">
-          <ion-select-option  [value]="i.ProductId" *ngIf="i.CategoryName===item">{{i.ProductName}}</ion-select-option>
+          <ion-select-option [id]="i.ProductId" checked="true" [value]="i" *ngIf="i.CategoryName===item">{{i.ProductName}} </ion-select-option>
         </div>
      </div>
-    </ion-select > 
-   </ion-item>
+    </ion-select> 
+   </ion-item> 
   </ion-list>
   </div>
 </ion-content>
