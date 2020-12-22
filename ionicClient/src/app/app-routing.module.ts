@@ -65,7 +65,15 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
+  },  {
+    path: 'buy-list',
+    loadChildren: () => import('./pages/buy-list/buy-list.module').then( m => m.BuyListPageModule)
   },
+  {
+    path: 'active-buy-list',
+    loadChildren: () => import('./pages/active-buy-list/active-buy-list.module').then( m => m.ActiveBuyListPageModule)
+  },
+
 
 
 

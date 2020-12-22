@@ -5,9 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-item  *ngFor="let item of typeListArray">
-    <ion-button (click)="editList(item.TypeListId, item.TypeListName)">{{item.TypeListName}}</ion-button>
+
+  <ion-item button *ngFor="let item of typeListArray" (click)="editList(item.TypeListId, item.TypeListName)">
+    {{item.TypeListName}}
   </ion-item>
+
+  <!-- <ion-item  *ngFor="let item of typeListArray">
+    <ion-button expand="full" (click)="editList(item.TypeListId, item.TypeListName)">{{item.TypeListName}}</ion-button>
+  </ion-item> -->
 
 
 

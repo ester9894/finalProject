@@ -60,5 +60,28 @@ namespace BL
             }
         }
 
-    }
+        public static void SetFrequency(FollowUpList follow)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                
+               
+               List<ProductToList> lastBuys= db.ProductToLists.
+                    Where(p =>p.DateOfBuy!=null&& p.ProductId == follow.ProductId && p.List.TypesList.AccountId == follow.AccountId).
+                    OrderByDescending(p => p.DateOfBuy).ToList();
+                var daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
+                var daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
+                var rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
+                if (follow.Frequency!=null&&lastBuys.Count>=2&&(rangeDates >= daysbefore && rangeDates <= daysafter)) { 
+                
+                
+                }
+                    
+
+
+           
+            }
+        }
+
+   }
 }

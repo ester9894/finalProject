@@ -76,8 +76,9 @@
     <Property Name="ProductToListId " Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProductId" Type="bigint" Nullable="false" />
     <Property Name="ListId" Type="bigint" Nullable="false" />
-    <Property Name="BuyerId" Type="bigint" Nullable="false" />
-    <Property Name="DateOfBuy" Type="datetime" Nullable="false" />
+    <Property Name="BuyerId" Type="bigint" />
+    <Property Name="DateOfBuy" Type="datetime" />
+    <Property Name="Amount" Type="int" />
   </EntityType>
   <EntityType Name="TypesList">
     <Key>
@@ -225,8 +226,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductTo__Buyer__403A8C7D">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+  <Association Name="FK__ProductTo__Buyer__5AEE82B9">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="ProductToList" Type="Self.ProductToList" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -350,7 +351,7 @@
       <End Role="TypesList" EntitySet="TypesList" />
       <End Role="ProductsToTypeList" EntitySet="ProductsToTypeList" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductTo__Buyer__403A8C7D" Association="Self.FK__ProductTo__Buyer__403A8C7D">
+    <AssociationSet Name="FK__ProductTo__Buyer__5AEE82B9" Association="Self.FK__ProductTo__Buyer__5AEE82B9">
       <End Role="Users" EntitySet="Users" />
       <End Role="ProductToList" EntitySet="ProductToList" />
     </AssociationSet>

@@ -87,13 +87,19 @@ export class ShowListPage implements OnInit {
 
   removeProduct(TypeListId: number, ProductId: number) {
     this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
-     // alert("המוצר נמחק")
      this.getAllProducts();
+     this.presentAlert();
     })
-
-    location.reload();
-
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
 
+  }
+
+  async presentAlert() {
+    let alert = this.alertController.create({
+      //title: 'Low battery',
+      message: 'המוצר הוסר בהצלחה',
+      buttons: ['הבנתי']
+    });
+    (await alert).present();
   }
 }

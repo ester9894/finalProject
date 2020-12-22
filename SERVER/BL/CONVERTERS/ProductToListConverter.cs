@@ -18,7 +18,9 @@ namespace BL.CONVERTERS
                 ProductId = p.ProductId,
                 ListId = p.ListId,
                 BuyerId = p.BuyerId,
-                DateOfBuy = p.DateOfBuy
+                DateOfBuy = p.DateOfBuy,
+                Amount = p.Amount
+
             };
         }
 
@@ -30,8 +32,15 @@ namespace BL.CONVERTERS
               ProductId=p.ProductId,
               ListId=p.ListId,
               BuyerId=p.BuyerId,
-              DateOfBuy=p.DateOfBuy
+              DateOfBuy=p.DateOfBuy,
+              Amount=p.Amount,
+              ProductName=p.Product.ProductName
             };
+        }
+
+        public static List<ProductToListDTO> ConvertProductToListToDTO(List<ProductToList> p)
+        {
+            return p.Select(pr => ConvertProductToListToDTO(pr)).ToList();
         }
     }
 }

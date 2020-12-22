@@ -46,7 +46,7 @@ namespace BL
                 {
                     ProductsToTypeList p = new ProductsToTypeList();
                     p.TypeListId = db.TypesLists.FirstOrDefault(type => type.TypeListName == typeList.TypeListName && type.AccountId == typeList.AccountId).TypeListId;
-                    p.Amount = 0;
+                    p.Amount = 1;
                     p.ProductId = id;
                     db.ProductsToTypeLists.Add(p);
                 }

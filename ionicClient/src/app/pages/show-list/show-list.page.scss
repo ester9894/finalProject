@@ -1,9 +1,25 @@
 .product_name{
-    margin-left: 3%;
-    margin-right: 3%;
+    
+    text-align: right;
+margin-bottom: 0px;
+margin-top: 20px;
+margin-right: 3px;
 }
 
 .back{
     color: blue;
     font-size: 25px;
 }
+
+.number{
+   // vertical-align: center;
+   // margin-bottom: 0px;
+    margin-top: 15px;
+    text-align: center;
+}
+.del{
+    // vertical-align: center;
+    // margin-bottom: 0px;
+     margin-top: 25px;
+     text-align: left;
+ }

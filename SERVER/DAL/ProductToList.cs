@@ -17,8 +17,9 @@ namespace DAL
         public long ProductToListId_ { get; set; }
         public long ProductId { get; set; }
         public long ListId { get; set; }
-        public long BuyerId { get; set; }
-        public System.DateTime DateOfBuy { get; set; }
+        public Nullable<long> BuyerId { get; set; }
+        public Nullable<System.DateTime> DateOfBuy { get; set; }
+        public Nullable<int> Amount { get; set; }
     
         public virtual List List { get; set; }
         public virtual Product Product { get; set; }

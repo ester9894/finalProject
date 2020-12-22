@@ -69,7 +69,7 @@ export class CreateListPage implements OnInit
            console.log(alertData.nameList)
           this.list.nameList = alertData.nameList
           this.list.idProductsList = this.productsList
-          this.listService.addProductsToList(this.idAccount,this.list).subscribe((res) => { this.router.navigateByUrl('show-list') });
+          this.listService.addProductsToList(this.idAccount,this.list).subscribe((res) => { this.router.navigateByUrl('types-list') });
          }
        }
      ]

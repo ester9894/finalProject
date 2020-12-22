@@ -31,10 +31,10 @@ namespace DAL
         public virtual DbSet<List> Lists { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductsToTypeList> ProductsToTypeLists { get; set; }
-        public virtual DbSet<ProductToList> ProductToLists { get; set; }
         public virtual DbSet<TypesList> TypesLists { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAccount> UsersAccounts { get; set; }
         public virtual DbSet<FollowUpList> FollowUpLists { get; set; }
+        public virtual DbSet<ProductToList> ProductToLists { get; set; }
     }
 }
