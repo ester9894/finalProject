@@ -32,10 +32,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
   },
   {
-    path: 'products/:isForUpdateFollowList',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
-  },
-  {
     path: 'add-account',
     loadChildren: () => import('./pages/add-account/add-account.module').then( m => m.AddAccountPageModule)
   },
@@ -65,15 +61,7 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
-  },  {
-    path: 'buy-list',
-    loadChildren: () => import('./pages/buy-list/buy-list.module').then( m => m.BuyListPageModule)
   },
-  {
-    path: 'active-buy-list',
-    loadChildren: () => import('./pages/active-buy-list/active-buy-list.module').then( m => m.ActiveBuyListPageModule)
-  },
-
 
 
 

@@ -11,9 +11,11 @@ import { Products } from '../models/products.model';
 export class FollowUpService 
 {
   
-  addPersonalItems(newProducts: Products[],accountId):Observable<Products[]> {
-    return this.http.post<Products[]>(environment.url + `products/AddProductForAccount/${accountId}`, newProducts)
+  getSortedFolowList(idAccount: Number) :Observable<Products[]>{
+    return this.http.get<Products[]>(environment.url + `/followUp/getSortedFolowList/${idAccount}`)
   }
+  
+
   constructor(private http: HttpClient) { }
 
   saveList(idSelectedProducts: Number[], accountId: Number):Observable<boolean> 

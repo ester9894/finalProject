@@ -21,37 +21,34 @@ arrKind = new Array()// categories products
 itemsForRemoveArray = []; // items for remove from followlist
 forUdateFollowList: boolean = true
 anyProductSellected:boolean=false;
-  constructor(private followListService:FollowUpService, private router: Router, private alertController: AlertController) 
-  { 
-  }
+
+  constructor(private followListService:FollowUpService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() 
   {
     this.accountId =+localStorage.getItem('accountId') ;
     console.log(this.accountId)
     this.followListService.getListById(this.accountId).subscribe(res=>
-      {
-      //console.log(res);
+    {
+      console.log(res);
       Object.keys(res).forEach( key => { this.map.set(key, res[key]); } );
-        Object.keys(res).forEach(element => {
-          this.arrKind.push(element)
-        });
-       console.log(this.map.keys()) 
-      });
+      Object.keys(res).forEach(element => { this.arrKind.push(element) });
+      this.arrKind.sort()
+    });
   }
 
   changeShowCheckbox()// change seen checkbox and every button that contact it
   {
     this.showCheckbox= !this.showCheckbox
     this.arrKind.forEach(element => 
-      { 
-        for(let item of this.map.get(element))
-        {
-          if(item.isChecked == true)
-            item.isChecked = false
-        }
-      });
-      this.itemsForRemoveArray=[]
+    { 
+      for(let item of this.map.get(element))
+      {
+        if(item.isChecked == true)
+          item.isChecked = false
+      }
+    });
+    this.itemsForRemoveArray=[]
   }
 
   removeFromList()
@@ -70,13 +67,13 @@ anyProductSellected:boolean=false;
     {
       this.followListService.removeFromList(this.itemsForRemoveArray, this.accountId).subscribe(res=>
         {
-          this.showAlert("הוסר בהצלחה")
+          this.showAlert("לא נעקוב אחר מוצרים אלו")
         });
       this.changeShowCheckbox()
     }
     else
     {
-      this.showAlert('אנא בחר מוצרים להסרה')
+      this.showAlert('בחר את מוצרים שברצונך שנפסיק לעקוב אחריהם')
     }  
   }
 
@@ -97,6 +94,6 @@ anyProductSellected:boolean=false;
 
   moveToProductsListPage()
   {
-    this.router.navigate(['products/true']);
+    this.router.navigate(['products',{isForFollowList: 'true'}]);
   }
 }

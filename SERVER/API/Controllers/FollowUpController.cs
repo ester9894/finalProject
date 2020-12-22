@@ -27,6 +27,13 @@ namespace API.Controllers
           return Ok(BL.FollowUpBL.GetListById(id));
         }
 
+        [Route("GetSortedFolowList/{id}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpGet]
+        public IHttpActionResult GetSortedFolowList(int id)
+        {
+            return Ok(BL.FollowUpBL.GetSortedFolowList(id));
+        }
+
         [Route("removeFromList/{accountId}"), HttpPost]
         public IHttpActionResult removeFromList([FromUri] int accountId, [FromBody] int[] idSelectedProducts)
         {

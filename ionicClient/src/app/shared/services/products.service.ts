@@ -36,6 +36,9 @@ export class ProductsService
   {
     return this.http.post<{ [id: string]: Products[] }>(environment.url + 'products/GetProductsByIdProduct',idproducts)
   }
+  addPersonalItems(newProducts: Products[],accountId):Observable<Products[]> {
+    return this.http.post<Products[]>(environment.url + `products/AddProductForAccount/${accountId}`, newProducts)
+  }
   
 }
 

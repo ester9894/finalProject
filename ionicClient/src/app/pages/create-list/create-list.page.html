@@ -3,12 +3,11 @@
     <ion-title>רשימה חדשה</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-buttons color="medium" dir="ltr">
-      <ion-button (click)="saveList()"><ion-icon button name="bookmark"></ion-icon></ion-button>
-      <ion-button  (click)="goProductsList()"> <ion-icon name="create" ></ion-icon></ion-button>
-  </ion-buttons>
-
+<ion-list-header dir="ltr">
+      <ion-button *ngIf="productsList.length>1" (click)="saveList()">שמור<ion-icon name="bookmark" ></ion-icon></ion-button>
+      <ion-button (click)="goProductsList()"> ערוך<ion-icon name="create" ></ion-icon></ion-button>
+    </ion-list-header>
+   <ion-content>
     <ion-list *ngFor= 'let category of map.keys()'>
       <ion-text>{{category}}</ion-text>
       <ion-skeleton-text></ion-skeleton-text>

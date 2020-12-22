@@ -25,7 +25,11 @@ namespace BL
                         f.AccountId = idAccount;
                         db.FollowUpLists.Add(CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDAL(f));
                     }
+                   
                 }
+                db.SaveChanges();
+                var removedItems = db.FollowUpLists.Where(p => !idSelectedProducts.Any(p2 => p2 == p.ProductId) && p.AccountId == idAccount).ToList();
+                db.FollowUpLists.RemoveRange(removedItems);
                 db.SaveChanges();
             }
         }
@@ -41,6 +45,31 @@ namespace BL
                 return d;
 
             }
+        }
+
+        public static List<ProductsDTO>[] GetSortedFolowList(int accountId)
+        {
+
+
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                int index = 0;
+                int numCategories = db.Categories.Count();
+                List<ProductsDTO>[] selectedProductsByCategory = new List<ProductsDTO>[numCategories];
+                var usersProducts = db.FollowUpLists.Where(a => a.AccountId == accountId).Select(f => f.Product).GroupBy(p => p.CategoryId).ToDictionary(p => p.Key, p => p.ToList());
+                int numUsersCategories = usersProducts.Count;
+                var allCategories = db.Categories.ToList();
+                for (int i = 0; i < numCategories; i++)
+                {
+                    if (index < numUsersCategories && allCategories[i].CategoryId == usersProducts.ElementAt(index).Key)
+                        selectedProductsByCategory[i] = usersProducts.ElementAt(index++).Value.Select(p => CONVERTERS.ProductsConverter.ConvertProductToDTO(p)).ToList();
+                    else
+                        selectedProductsByCategory[i] = new List<ProductsDTO>();
+
+                }
+                return selectedProductsByCategory;
+            }
+
         }
 
         public static void removeProductsFromFollowUp(int[] idSelectedProducts, int accountId)
