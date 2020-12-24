@@ -13,7 +13,7 @@ namespace API.Controllers
     [RoutePrefix("api/lists")]
     public class ListsController : ApiController
     {
-        [Route("AddList"), HttpPost]
+        [Route("addList"), HttpPost]
         public IHttpActionResult AddList(ListDTO list)
         {
             BL.ListsBL.AddList(list);

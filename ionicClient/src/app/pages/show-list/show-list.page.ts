@@ -18,9 +18,10 @@ export class ShowListPage implements OnInit {
   productsList: Array<ProductsToTypeList>;
   newProducts: number[]
   addProductsToList: boolean = false
+  endDate: Date;
   constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService, public alertController: AlertController) { }
 
- 
+
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -46,12 +47,11 @@ export class ShowListPage implements OnInit {
 
   }
 
-  getAllProducts()
-  {
+  getAllProducts() {
     this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
       this.productsList = list;
       console.log(this.productsList);
-        console.log(this.typeListName);
+      console.log(this.typeListName);
     })
   }
 
@@ -64,14 +64,14 @@ export class ShowListPage implements OnInit {
 
 
   updateList() {
-  
+
     this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
       //alert("השינויים נשמרו")
       this.getAllProducts();
     })
 
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
-    
+
   }
 
 
@@ -87,8 +87,8 @@ export class ShowListPage implements OnInit {
 
   removeProduct(TypeListId: number, ProductId: number) {
     this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
-     this.getAllProducts();
-     this.presentAlert();
+      this.getAllProducts();
+      this.presentAlert();
     })
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
 
@@ -101,5 +101,38 @@ export class ShowListPage implements OnInit {
       buttons: ['הבנתי']
     });
     (await alert).present();
+  }
+
+
+  toBuy() {
+    this.presentAlertToBuy();
+  }
+
+
+  async presentAlertToBuy() {
+    var alert = await this.alertController.create(
+      {
+        cssClass: 'my-custom-class',
+        header: 'הכנס תאריך לסיום הקניה',
+        inputs: [{ type: 'date', name: 'endDate' }],
+        buttons:
+          [
+            {
+              text: 'ביטול',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: () => { console.log('Confirm Cancel'); }
+            },
+            {
+              text: 'שמור',
+              handler: (alertData) => {
+                console.log(alertData.endDate)
+                this.endDate = alertData.endDate
+                this.router.navigate(['buy-list', { "endDate": this.endDate, "typeListId": this.typeListId ,"typeListName": this.typeListName}]);
+              }
+            }
+          ]
+      });
+    await alert.present();
   }
 }
