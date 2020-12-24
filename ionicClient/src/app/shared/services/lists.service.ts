@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { List } from '../models/list.model';
 import { ListForChange } from '../models/list_for_change';
 import { ProductsToTypeList } from '../models/products_to_type_list.model';
 import { ProductToList } from '../models/product_to_list.model';
@@ -15,8 +16,13 @@ export class ListsService {
     return this.http.post<boolean>(environment.url + 'lists/updateBuyList/',{userId, typeListId, productsList})
   }
  
+ 
   constructor(private http: HttpClient) { }
 
+  aadList(list: List):Observable<boolean> {
+    return this.http.post<boolean>(environment.url + 'lists/addList', list)
+   
+  }
   GetAllTypesList(accountId: number): Observable<TypeList[]> {
     return this.http.get<TypeList[]>(environment.url + `/lists/GetAllTypesList/${accountId}`)
 
