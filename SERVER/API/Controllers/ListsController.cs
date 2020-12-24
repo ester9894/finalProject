@@ -61,5 +61,13 @@ namespace API.Controllers
         {
             return Ok(BL.ProductsToTypeListBL.removeProduct(TypeListId, ProductId));
         }
+
+        [Route("updateBuyList"), HttpPost]
+        public IHttpActionResult updateBuyList(int userId, int typeListId, List<ProductToListDTO> products)
+        {
+            BL.ProductToListBL.AddProductsToList(userId, typeListId, products);
+            return Ok(true);
+        }
+
     }
 }

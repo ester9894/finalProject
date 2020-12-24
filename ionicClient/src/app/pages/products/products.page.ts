@@ -20,7 +20,7 @@ export class ProductsPage implements OnInit {
   arrProducts = new Array() // all products
   arrProducts1 = new Array()// copy all products
   search: string // value of searchbar
-  selectedsArray:Products[] = [] // list of all categories that contain also selected products (matriza)
+  selectedsArray= [] // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
   idAccount: Number
   newProducts:Products[]= new Array()

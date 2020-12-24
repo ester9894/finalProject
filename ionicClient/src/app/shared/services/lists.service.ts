@@ -4,12 +4,16 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ListForChange } from '../models/list_for_change';
 import { ProductsToTypeList } from '../models/products_to_type_list.model';
+import { ProductToList } from '../models/product_to_list.model';
 import { TypeList } from '../models/type_list.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListsService {
+  updateBuyList(typeListId: number, userId: number, productsList: ProductToList[]):Observable<boolean> {
+    return this.http.post<boolean>(environment.url + 'lists/updateBuyList/',{userId, typeListId, productsList})
+  }
  
   constructor(private http: HttpClient) { }
 

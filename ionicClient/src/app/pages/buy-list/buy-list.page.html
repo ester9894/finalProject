@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>buy-list</ion-title>
+    <ion-title>{{listDetails.TypeListName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-item *ngFor="let product of productsList">
+      <ion-checkbox>
+        <ion-checkbox checked slot="start" [(ngModel)]="product.isChecked" ></ion-checkbox> 
+        <ion-label>{{product.Amount}}</ion-label>
+        <ion-label>{{product.ProductName}}</ion-label>
+    </ion-checkbox>
+    </ion-item>
 </ion-content>
