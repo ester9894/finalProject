@@ -27,7 +27,6 @@ export class BuyListPage implements OnInit {
     });
   }
 
-
   addList() {
     this.list.EndDate = this.endDate;
     this.list.TypeListId = this.typeListId;

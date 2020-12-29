@@ -10,6 +10,11 @@ namespace BL
 {
     public class AccountsBL
     {
+        /// <summary>
+        /// הוספת חשבון חדש
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public static long AddAccount(AccountDTO account)
         {
             long accountId;
@@ -26,7 +31,11 @@ namespace BL
                 return accountId;
             }
         }
-
+        /// <summary>
+        /// פונקציה הבודקת אם שם משתמש וסיסמא קיימים במערכת
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public static UsersAccountDTO checkLogin(LoginDTO login)
         {
             User user;
@@ -48,7 +57,11 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        /// פונקציה המחזירה את חשבונותיו של משתמש מסויים
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static List<AccountDTO> GetAllAccountsByUser(long userId)
         {
             List<long> accountsId = new List<long>();
@@ -68,7 +81,11 @@ namespace BL
             }
             return accountsList;
         }
-
+        /// <summary>
+        /// מחזירה חשבון על פי קוד חשבון
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public static AccountDTO GetAccount(long accountId)
         {
                 using (ProjectDBEntities db = new ProjectDBEntities())
@@ -78,7 +95,11 @@ namespace BL
 
             
         }
-
+        /// <summary>
+        /// פונקציה המקשרת בין משתמש לחשבון
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="accountId"></param>
         public static void addUserAccount(int userId, int accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
@@ -90,7 +111,12 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        ///פונקציה הבודקת אם קיים שם חשבון זה עם סיסמא זו, במידה שקיים מחזירה את קוד החשבון.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="accountName"></param>
+        /// <returns></returns>
         public static long CheckPass(string password, string accountName)
         {
             string pass="", accountN="";

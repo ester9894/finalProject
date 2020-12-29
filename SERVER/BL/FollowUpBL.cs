@@ -12,6 +12,11 @@ namespace BL
 {
    public class FollowUpBL
     {
+        /// <summary>
+        /// הוספת מוצרים לרשימת המוצרים למעקב על פי בחירת המשתמש לחשבון
+        /// </summary>
+        /// <param name="idSelectedProducts"></param>
+        /// <param name="idAccount"></param>
         public static void AddFollowUp(int[] idSelectedProducts, int idAccount)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
@@ -33,24 +38,30 @@ namespace BL
                 db.SaveChanges();
             }
         }
-
-        public static Dictionary<string, List<FollowUpListDTO>> GetListById(int id)
+        /// <summary>
+        ///  מחזירה רשימת מעקב ממויינת על פי קטגוריות לחשבון מסויים
+        ///  /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
+        public static Dictionary<string, List<FollowUpListDTO>> GetListById(int accountId)
         {
 
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-             Dictionary<string, List<FollowUpListDTO>> d = db.FollowUpLists.Where(f => f.AccountId == id).ToList().
+             Dictionary<string, List<FollowUpListDTO>> d = db.FollowUpLists.Where(f => f.AccountId == accountId).ToList().
                     GroupBy(p => p.Product.Category.CategoryName)
                     .ToDictionary(p => p.Key, p => p.Select(item => CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDTO(item)).ToList());
                 return d;
 
             }
         }
-
+        /// <summary>
+        /// רשימת מעקב ממוינת לפי קטגוריות
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns></returns>
         public static List<ProductsDTO>[] GetSortedFolowList(int accountId)
         {
-
-
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                 int index = 0;
@@ -71,7 +82,11 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        /// מחיקת מוצר מרשימת המעקב
+        /// </summary>
+        /// <param name="idSelectedProducts"></param>
+        /// <param name="accountId"></param>
         public static void removeProductsFromFollowUp(int[] idSelectedProducts, int accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
@@ -88,7 +103,10 @@ namespace BL
                 db.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// הגדרת תדירות למוצר ועדכונה כל קניה 
+        /// </summary>
+        /// <param name="follow"></param>
         public static void SetFrequency(FollowUpList follow)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())

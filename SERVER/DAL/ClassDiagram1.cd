@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.ProjectDBEntities">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAAAAAAAAAAAAAAIAgEAAEEQCAQAAAAAAAAIQ=</HashCode>
+      <FileName>Model1.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Account">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAACAAAAAAAAAAgAIAAAAAAAEAAACQAQAAAAAAAQ=</HashCode>
+      <FileName>Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Category">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAACAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.FollowUpList">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAAgAAAACAAIAAAAAAAAAEEAAAAEA=</HashCode>
+      <FileName>FollowUpList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Frequency">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAEAAAAAEAAAAAABEAAAAAAA=</HashCode>
+      <FileName>Frequency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.List">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAmAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>List.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.Product">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAgAAAAAAAIAAAAAEAACAAAAAAAAICIA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ProductsToTypeList">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProductsToTypeList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ProductToList">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAADAAAAAAAAAAAAAAABEACEAQAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ProductToList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.TypesList">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAgAAAAACAAAAAQAAAAAAAAAAAMA=</HashCode>
+      <FileName>TypesList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.User">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAECAACAAAAAAAAAAAIgAAAAAAACAAQAAAAAAAAg=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.UsersAccount">
+    <Position X="2" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAIAAAAAAgAAAAgAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>UsersAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
