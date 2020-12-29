@@ -1,9 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>active-buy-list</ion-title>
+
+<ion-note dir="ltr">
+  <img src="/assets/images/fullLogo.png" width="150px" height="50px">
+</ion-note>
+<ion-toolbar>
+    <ion-title>רשימות שעדיין לא הושלמה קנייתם</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
   </ion-toolbar>
-</ion-header>
 
 <ion-content>
-
+  <ion-list *ngFor="let list of activeLists">
+    <ion-item button (click)="goToBuyList(list)">
+        <ion-label>{{list.TypeListName}}</ion-label>
+        <ion-label>{{list.EndDate}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

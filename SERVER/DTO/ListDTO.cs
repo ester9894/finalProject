@@ -12,5 +12,7 @@ namespace DTO
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public long TypeListId { get; set; }
+        public string TypeListName { get; set; }
+
     }
 }

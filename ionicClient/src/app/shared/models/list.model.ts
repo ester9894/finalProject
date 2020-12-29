@@ -3,4 +3,5 @@ export class List {
     StartDate: Date
     EndDate: Date
     TypeListId: number
+    TypeListName: string
 }

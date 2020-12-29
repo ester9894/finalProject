@@ -1,11 +1,16 @@
-<ion-header>
+<ion-note dir="ltr" class="listHeader" >
+  <img src="/assets/images/fullLogo.png" width="150px" height="50px">
+</ion-note>
   <ion-toolbar>
     <ion-title>רשימת המעקב שלך</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     </ion-toolbar>
-</ion-header>
-<ion-list-header dir="ltr">
+
+<ion-list-header dir="ltr" style="background-color: white;" >
   <ion-button (click)="closePage()">
-    <ion-item>סגור</ion-item>
+    <ion-label>סגור</ion-label>
   </ion-button>
   <ion-button (click)="moveToProductsListPage()">
     <ion-icon name="add-sharp"></ion-icon>
@@ -22,7 +27,8 @@
        </ion-buttons>
     </ion-item-group>
 </ion-list-header>
-<ion-content>
+
+<ion-content >
     <ion-list *ngFor="let kind of arrKind ; let j=index">
       <ion-text>{{kind}}</ion-text>
       <ion-skeleton-text ></ion-skeleton-text>

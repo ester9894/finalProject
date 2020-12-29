@@ -28,5 +28,6 @@ namespace DAL
         public virtual TypesList TypesList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductToList> ProductToLists { get; set; }
+        public string TypeListName { get; set; }
     }
 }

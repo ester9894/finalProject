@@ -28,14 +28,9 @@ export class AppComponent implements OnInit {
       icon: 'list'
     },
     {
-      title: 'לוח התראות',
-      url: '/home-page',
+      title: 'רשימות פעילות',
+      url: '/active-buy-list',
       icon: 'warning'
-    },
-    {
-      title: 'רשימת מוצרים',
-      url: '/products',
-      icon: 'star'
     },
     {
       title: 'רשימה חדשה',
@@ -46,7 +41,13 @@ export class AppComponent implements OnInit {
       title: 'מוצרים למעקב',
       url: '/follow-list',
       icon: 'alert'
+    },
+    {
+      title: 'לוח התראות',
+      url: '/home-page',
+      icon: 'notifications'
     }
+
   ];
 
   constructor(

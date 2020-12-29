@@ -20,7 +20,7 @@ export class ProductsPage implements OnInit {
   arrProducts = new Array() // all products
   arrProducts1 = new Array()// copy all products
   search: string // value of searchbar
-  selectedsArray = [] // list of all categories that contain also selected products (matriza)
+  selectedsArray= [] // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
   idAccount: Number
   newProducts:Products[]= new Array()
@@ -251,14 +251,14 @@ addForSaveList(product: Products)// מעדכן את המוצר שנבחר מתי
 }
 
 async showAlert(message: string)
- {
+{
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     message: message,
     buttons: ['אישור']
   });
   await alert.present();
- }
+}
   // update follow up list 
   saveList() 
   {

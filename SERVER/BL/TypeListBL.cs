@@ -44,11 +44,14 @@ namespace BL
             {
                 foreach (int id in listForChange.idProductsList)
                 {
-                    ProductsToTypeList p = new ProductsToTypeList();
-                    p.TypeListId = db.TypesLists.FirstOrDefault(type => type.TypeListName == typeList.TypeListName && type.AccountId == typeList.AccountId).TypeListId;
-                    p.Amount = 1;
-                    p.ProductId = id;
-                    db.ProductsToTypeLists.Add(p);
+                    if (id != 0)
+                    {
+                        ProductsToTypeList p = new ProductsToTypeList();
+                        p.TypeListId = db.TypesLists.FirstOrDefault(type => type.TypeListName == typeList.TypeListName && type.AccountId == typeList.AccountId).TypeListId;
+                        p.Amount = 1;
+                        p.ProductId = id;
+                        db.ProductsToTypeLists.Add(p);
+                    }
                 }
                 db.SaveChanges();
                 return true;

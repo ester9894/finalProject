@@ -1,9 +1,24 @@
-<ion-header>
+<ion-note dir="ltr" >
+  <img src="/assets/images/fullLogo.png" width="150px" height="50px">
+</ion-note>
   <ion-toolbar>
-    <ion-title>{{typeListName}} -רשימת קניות  </ion-title>
+    <ion-title>{{listDetails.TypeListName}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
-</ion-header>
 
+
+<ion-list-header dir="ltr" class="listHeader">   
+  <ion-button (click)="finishShopping()">
+    <ion-label>סיימתי קניה</ion-label>
+  </ion-button>
+</ion-list-header>
+<ion-label class="listHeader" style="opacity: 0.5;"> לתשומת לבך למוצרים הנמצאים תחת מעקב תתבקש להקיש כמות </ion-label>
 <ion-content>
-
+    <ion-item *ngFor="let product of productsList">
+        <ion-checkbox checked slot="start" [(ngModel)]="product.isChecked" (click)="checkIfFollowProduct(product)" ></ion-checkbox> 
+        <ion-label>{{product.Amount}}</ion-label>
+        <ion-label>{{product.ProductName}}</ion-label>
+    </ion-item>
 </ion-content>

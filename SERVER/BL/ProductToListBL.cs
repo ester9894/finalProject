@@ -11,14 +11,14 @@ namespace BL
 {
    public class ProductToListBL
     {
-        public static void AddProductsToList(long listId,long buyerId,List<ProductToListDTO> products)
+        public static void AddProductsToList(BuyListDTO buyList)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                foreach (var pr in products)
+                foreach (var pr in buyList.Products)
                 {
                     var prod = db.ProductToLists.FirstOrDefault(p => p.ProductToListId_ == pr.ProductToListId_);
-                    prod.BuyerId = buyerId;
+                    prod.BuyerId = buyList.UserId;
                     prod.DateOfBuy = DateTime.Now;
                     prod.Amount = pr.Amount;
                     db.SaveChanges();

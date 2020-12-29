@@ -62,15 +62,6 @@ namespace BL
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                 List<ProductsDTO> list = new List<ProductsDTO>();
-                //ProductsDTO product = new ProductsDTO();
-                // Product product1 = new Product();
-                //foreach (var product in db.Products)
-                //{
-                //    if (idProducts.Where(idProduct => idProduct == product.ProductId) != null)
-                //    {
-                //        list.Add(CONVERTERS.ProductsConverter.ConvertProductToDTO(product));
-                //    }
-                //}
 
                 foreach (var id in idProducts)
                 {
@@ -78,10 +69,6 @@ namespace BL
                     if(p1.FirstOrDefault() != null)
                         list.Add(CONVERTERS.ProductsConverter.ConvertProductToDTO(p1.FirstOrDefault()));
                 }
-
-                //product1 = db.Products.SingleOrDefault(idFromTable => idFromTable.ProductId == idProduct);
-                // product =CONVERTERS.ProductsConverter.ConvertProductToDTO(product1) ;
-                // list.Add(product);
                 return list.GroupBy(p => p.CategoryName).ToDictionary(p => p.Key, p => p.ToList());
                
             }
