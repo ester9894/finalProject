@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-content{
+    --background: #fff url('/assets/images/fullLogoOpacity.jpg') no-repeat center 290px;
+}
+.listHeader{
+    background-color:rgb(17, 19, 35);
+  }
+  .button{
+ //   color:rgb(253, 186, 14)
+   // color:rgb(6, 218, 174)
+    color:rgb(166, 100, 253)
+
+}
+  .text{
+color:rgb(253, 186, 14) turquoise
+  }

@@ -1,8 +1,8 @@
-<ion-app>
 
-  <ion-split-pane contentId="main-content">
-    <ion-menu *ngIf="IsUserLogedIn()" contentId="main-content" type="overlay">
-      <ion-content>
+<ion-app>
+  <ion-split-pane contentId="main-content"> 
+    <ion-menu *ngIf="IsUserLogedIn()" contentId="main-content">
+      <ion-content >
         <ion-list id="inbox-list">
           <ion-list-header>{{user.FirstName}}</ion-list-header>
           <ion-note>{{user.Email}}</ion-note>
@@ -13,12 +13,16 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list> 
-      </ion-content>
+        <ion-item button  *ngIf="IsUserLogedIn()" (click)="showAccounts()">
+          <ion-icon name="people-circle-outline"></ion-icon>
+          <ion-label>החשבונות שלי</ion-label>
+        </ion-item>
+    </ion-content>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
 
-  <ion-button *ngIf="IsUserLogedIn()" class="circle" size="small" type="button" (click)="showAccounts()">{{accountName}}</ion-button>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane> 
+  <!-- <ion-button *ngIf="IsUserLogedIn()" class="circle" size="small" type="button" (click)="showAccounts()">{{accountName}}</ion-button> -->
 </ion-app>
 
 

@@ -16,8 +16,7 @@ namespace API.Controllers
         [Route("addList"), HttpPost]
         public IHttpActionResult AddList(ListDTO list)
         {
-            BL.ListsBL.AddList(list);
-            return Ok(true);
+            return Ok(BL.ListsBL.AddList(list));
         }
 
         [Route("addProductsToList/{accountId}"), HttpPost]
@@ -42,7 +41,7 @@ namespace API.Controllers
 
         [Route("updateList/{typeListId}")]
         [HttpGet, HttpPost]
-        public IHttpActionResult updateList(List<ProductsToTypeListDTO> productsList, long typeListId)
+        public IHttpActionResult UpdateList(List<ProductsToTypeListDTO> productsList, long typeListId)
         {
             return Ok(BL.ProductsToTypeListBL.updateList(productsList, typeListId));
         }
@@ -50,24 +49,26 @@ namespace API.Controllers
 
         [Route("addNewProductsToList/{typeListId}")]
         [HttpGet, HttpPost]
-        public IHttpActionResult addNewProductsToList( int[] newProducts, long typeListId)
+        public IHttpActionResult AddNewProductsToList( int[] newProducts, long typeListId)
         {
             return Ok(BL.ProductsToTypeListBL.addNewProductsToList(newProducts, typeListId));
         }
 
         [Route("removeProduct/{TypeListId}/{ProductId}")]
         [HttpGet]
-        public IHttpActionResult removeProduct(long TypeListId, long ProductId)
+        public IHttpActionResult RemoveProduct(long TypeListId, long ProductId)
         {
             return Ok(BL.ProductsToTypeListBL.removeProduct(TypeListId, ProductId));
         }
 
         [Route("updateBuyList"), HttpPost]
-        public IHttpActionResult updateBuyList(int userId, int typeListId, List<ProductToListDTO> products)
+        public IHttpActionResult UpdateBuyList(BuyListDTO buyList)
         {
-            BL.ProductToListBL.AddProductsToList(userId, typeListId, products);
+            BL.ProductToListBL.AddProductsToList(buyList);
             return Ok(true);
         }
+
+
 
     }
 }
