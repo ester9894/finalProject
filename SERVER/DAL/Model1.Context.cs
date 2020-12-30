@@ -35,6 +35,7 @@ namespace DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersAccount> UsersAccounts { get; set; }
         public virtual DbSet<FollowUpList> FollowUpLists { get; set; }
+        public virtual DbSet<Alert> Alerts { get; set; }
         public virtual DbSet<ProductToList> ProductToLists { get; set; }
     }
 }

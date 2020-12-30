@@ -21,7 +21,7 @@ namespace BL
                       Select(pl => new ProductToList { ProductId = pl.ProductId }).ToList();
                 products.ForEach(p => newList.ProductToLists.Add(p));    
                 db.SaveChanges();
-                return Convert.ToInt64(db.Lists.OrderByDescending(product => product.StartDate).Take(1).Select(p=>p.ListId));
+                return db.Lists.OrderByDescending(product => product.StartDate).Take(1).Select(p=>p.ListId).ToList()[0];
             }
         }
 

@@ -67,9 +67,7 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-
                 List<ProductsToTypeList> products = db.ProductsToTypeLists.Where(p => p.TypeListId == typeListId).ToList();
-
                 //בדיקה האם יש מוצר שנמחק- ומחיקתו מהדטהבייס
                 for (int i = 0; i < products.Count; i++)//הרשימה בדטהבייס
                 {
@@ -83,8 +81,6 @@ namespace BL
                         db.SaveChanges();
                     }
                 }
-
-               // ProductsToTypeList productsToType;
                 //עדכון שינויים
                 for (int i = 0; i < productsListToUpdate.Count; i++)//הרשימה החדשה
                 {
@@ -93,22 +89,12 @@ namespace BL
                        if(productsListToUpdate[i].ProductId==products[j].ProductId)
                         {
                             if(products[j].Amount != productsListToUpdate[i].Amount)
-                            //productsToType = CONVERTERS.ProductsToTypeListConverter.ConvertProductsToTypeListToDAL(productsListToUpdate[i]);
                             products[j].Amount = productsListToUpdate[i].Amount;
-                          //  db.Entry(productsToType).State = EntityState.Modified;
                             db.SaveChanges();
 
                             break;
                         }
 
-                       //מוסיף עם הכפתור
-                        //if (j + 1 == products.Count)
-                        //    db.ProductsToTypeLists.Add(new ProductsToTypeList()
-                        //    {
-                        //        Amount = productsListToUpdate[i].Amount,
-                        //        ProductId = productsListToUpdate[i].ProductId,
-                        //        TypeListId = productsListToUpdate[i].TypeListId
-                        //    });
                     }
 
                 }

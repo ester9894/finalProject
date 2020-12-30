@@ -20,9 +20,9 @@ namespace API.Controllers
         }
 
         [Route("checkPass/{pass}/{accountName}"), HttpGet]
-        public long CheckPass(string pass, string accountName)
+        public long CheckPassOfAccount(string pass, string accountName)
         {
-            return BL.AccountsBL.CheckPass(pass, accountName);
+            return BL.AccountsBL.CheckPassOfAccount(pass, accountName);
         }
 
 

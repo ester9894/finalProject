@@ -8,7 +8,7 @@ namespace DTO
 {
     public class ProductToListDTO
     {
-        public long ProductToListId_ { get; set; }
+        public long ProductToListId { get; set; }
         public long ProductId { get; set; }
         public string ProductName { get; set; }
         public long ListId { get; set; }

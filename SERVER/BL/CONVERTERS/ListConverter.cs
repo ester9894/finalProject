@@ -29,7 +29,7 @@ namespace BL.CONVERTERS
                 StartDate = l.StartDate,
                 ListId = l.ListId,
                 TypeListId = l.TypeListId,
-                TypeListName = l.TypeListName
+                TypeListName = l.TypesList.TypeListName
             };
         }
 

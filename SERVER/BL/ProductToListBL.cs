@@ -17,7 +17,7 @@ namespace BL
             {
                 foreach (var pr in buyList.Products)
                 {
-                    var prod = db.ProductToLists.FirstOrDefault(p => p.ProductToListId_ == pr.ProductToListId_);
+                    var prod = db.ProductToLists.FirstOrDefault(p => p.ProductToListId == pr.ProductToListId);
                     prod.BuyerId = buyList.UserId;
                     prod.DateOfBuy = DateTime.Now;
                     prod.Amount = pr.Amount;

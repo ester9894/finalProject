@@ -1,22 +1,23 @@
 <ion-note>
-<ion-buttons>
-<ion-back-button icon="arrow-forward-outline"></ion-back-button>
-</ion-buttons></ion-note>
-<ion-note dir="ltr">
-  <img src="/assets/images/fullLogo.png" width="150px" height="50px" >
+  <ion-buttons>
+    <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+  </ion-buttons>
 </ion-note>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title class="text">הרשימות שלי</ion-title>
-  </ion-toolbar>
+<ion-note dir="ltr">
+  <img src="/assets/images/fullLogo.png" width="150px" height="50px">
+</ion-note>
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <ion-title class="text">הרשימות שלי</ion-title>
+</ion-toolbar>
 
 <ion-list-header dir="ltr" class="listHeader">
-    <ion-button class="button" (click)="addTypeList()" >
-      <ion-icon name="add"></ion-icon>
-    </ion-button>
-  </ion-list-header>
+  <ion-button class="button" (click)="addTypeList()">
+    <ion-icon name="add"></ion-icon>
+  </ion-button>
+</ion-list-header>
 
 <ion-content>
   <ion-item button *ngFor="let item of typeListArray" (click)="editList(item.TypeListId, item.TypeListName)">

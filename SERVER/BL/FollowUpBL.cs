@@ -108,6 +108,7 @@ namespace BL
         /// </summary>
         /// <param name="follow"></param>
         public static void SetFrequency(FollowUpList follow)
+
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
@@ -117,12 +118,67 @@ namespace BL
                 var daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
                 var daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
                 var rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
-                if (follow.Frequency!=null&&lastBuys.Count>=2&&(rangeDates >= daysbefore && rangeDates <= daysafter)) { 
-                   
+                if ((follow.Frequency!=null&&lastBuys.Count>=3&&rangeDates >= daysbefore && rangeDates <= daysafter) ||
+                    lastBuys.Count < 3 )
+                { 
+                   return;
                 }
-               
+                int[] differences = new int[2];
+                for (int i = 0; i < 2; i++)
+                {
+                     differences[i]= (int)(lastBuys[i].DateOfBuy - lastBuys[i+1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
+                }
+
+                foreach (var frequency in db.Frequencies)
+                {
+                    int i = 0;
+                     daysbefore =frequency.NumDays - frequency.Exception; // חריגה לפני
+                     daysafter = frequency.NumDays + frequency.Exception; //חריגה אחרי
+                    for (; i < 2; i++)
+                    {
+                        if (!(differences[i] >= daysbefore && differences[i] <= daysafter))
+                            break;
+                    }
+                    if (i < 2)
+                        continue;
+
+                    db.FollowUpLists.FirstOrDefault(f=>f.FollowUpListId==follow.FollowUpListId).FrequencyId = frequency.FrequencyId;
+                    db.SaveChanges();
+                    break;
+                }
             }
         }
+
+        public static void CreateAlertsForAccount(long accountId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                Account account = db.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+                var productList = account.TypesLists.SelectMany(l => l.Lists).SelectMany(p => p.ProductToLists.Where(d=>d.DateOfBuy!=null)).OrderByDescending(d=>d.DateOfBuy).ToList();
+             //  var followList =  db.FollowUpLists.Where(a => a.AccountId == accountId).ToList();
+                foreach (var follow in account.FollowUpLists.ToList())
+                {
+                    var lastBuy = productList.FirstOrDefault(p => p.ProductId == follow.ProductId);
+                    int days=(int) (DateTime.Today - lastBuy.DateOfBuy).Value.TotalDays;
+
+                    if (follow.Frequency.NumDays > days)
+                        continue;
+
+                    db.Alerts.Add(
+                        new Alert
+                        {
+                            Date=DateTime.Today,
+                            FollowUpListId=follow.FollowUpListId,
+                            IsActivated=true,
+                            days= days,
+                            ProductId = follow.ProductId
+
+                        });  
+                }
+
+            }
+
+            }
 
    }
 }
