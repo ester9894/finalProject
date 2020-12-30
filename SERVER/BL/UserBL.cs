@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 namespace BL
 {
     public class UserBL
-    {
+    {/// <summary>
+    /// מוסיפה משתמש חדש לטבלה
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
         public static long AddUser(UserDTO user)
         {
             long userId;

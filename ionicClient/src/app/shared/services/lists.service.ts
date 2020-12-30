@@ -21,6 +21,7 @@ export class ListsService
     return this.http.post<boolean>(environment.url + 'lists/addList', list)
    
   }
+  
   GetAllTypesList(accountId: number): Observable<TypeList[]> {
     return this.http.get<TypeList[]>(environment.url + `/lists/GetAllTypesList/${accountId}`)
 

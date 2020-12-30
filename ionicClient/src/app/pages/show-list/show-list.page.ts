@@ -27,7 +27,6 @@ export class ShowListPage implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.addProductsToList = JSON.parse(params.get('status'))
-
       console.log(this.addProductsToList);
 
       if (this.addProductsToList == true) {
