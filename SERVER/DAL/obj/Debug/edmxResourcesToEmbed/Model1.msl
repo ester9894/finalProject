@@ -105,18 +105,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Alerts">
-      <EntityTypeMapping TypeName="ProjectDBModel.Alert">
-        <MappingFragment StoreEntitySet="Alert">
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
-          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="days" ColumnName="days" />
-          <ScalarProperty Name="AlertId" ColumnName="AlertId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ProductToLists">
       <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
         <MappingFragment StoreEntitySet="ProductToList">
@@ -126,6 +114,18 @@
           <ScalarProperty Name="ListId" ColumnName="ListId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="ProductToListId" ColumnName="ProductToListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alerts">
+      <EntityTypeMapping TypeName="ProjectDBModel.Alert">
+        <MappingFragment StoreEntitySet="Alert">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
+          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="days" ColumnName="days" />
+          <ScalarProperty Name="AlertId" ColumnName="AlertId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

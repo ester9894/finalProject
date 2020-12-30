@@ -20,8 +20,8 @@ namespace DAL
             this.ProductsToTypeLists = new HashSet<ProductsToTypeList>();
             this.Accounts = new HashSet<Account>();
             this.FollowUpLists = new HashSet<FollowUpList>();
-            this.Alerts = new HashSet<Alert>();
             this.ProductToLists = new HashSet<ProductToList>();
+            this.Alerts = new HashSet<Alert>();
         }
     
         public long ProductId { get; set; }
@@ -36,8 +36,8 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FollowUpList> FollowUpLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alert> Alerts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductToList> ProductToLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alert> Alerts { get; set; }
     }
 }
