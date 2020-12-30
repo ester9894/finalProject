@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { type } from 'os';
 import { buyList } from 'src/app/shared/models/buyList.model';
+import { List } from 'src/app/shared/models/list.model';
 import { Products } from 'src/app/shared/models/products.model';
 import { ProductsToTypeList } from 'src/app/shared/models/products_to_type_list.model';
 import { ProductToList } from 'src/app/shared/models/product_to_list.model';
@@ -22,6 +23,7 @@ export class BuyListPage implements OnInit {
   arrProductsBuy = [];
   followProductsList =[]
   buyList: buyList = new buyList()
+  list:List
   constructor(private listsService: ListsService, private followUpService: FollowUpService, private route: ActivatedRoute, private alertController: AlertController) 
   {
     this.route.params.subscribe(params => 
@@ -29,8 +31,12 @@ export class BuyListPage implements OnInit {
         this.listDetails.AccountId =+ localStorage.getItem('accountId')
         this.listDetails.TypeListId= params['typeListId']; 
         this.listDetails.TypeListName = params['typeListName']; 
-      
-    
+        this.buyList.ListId=params['listId'];
+        this.listDetails.AccountId =+ localStorage.getItem('accountId')
+        // this.list=params['list']
+        // this.listDetails.TypeListId = this.list.TypeListId
+        // this.listDetails.TypeListName=this.list.TypeListName
+        // this.buyList.ListId=this.list.ListId  
       });
   }
 
@@ -61,14 +67,14 @@ export class BuyListPage implements OnInit {
     this.productsList.forEach(product => 
     { 
         if(product.isChecked == true)
-          this.arrProductsBuy.push(product.ProductId) 
+          this.arrProductsBuy.push(product) 
     });
     console.log(this.arrProductsBuy)
     if(this.arrProductsBuy.length)
     {
       this.buyList.userId = this.userId
       this.buyList.typeListId = this.listDetails.TypeListId
-      this.buyList.products = this.productsList
+      this.buyList.products = this.arrProductsBuy
       this.listsService.updateBuyList(this.buyList).subscribe(res=>
         {
           this.showMessage("הקניה בוצעה בהצלחה")

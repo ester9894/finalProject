@@ -5,5 +5,6 @@ export class buyList
 {
     userId: Number
     typeListId: Number
+    ListId: Number
     products: ProductToList[]
 } 

@@ -72,10 +72,7 @@ const routes: Routes = [
   {
     path: 'active-buy-list',
 loadChildren: () => import('./pages/active-buy-list/active-buy-list.module').then( m => m.ActiveBuyListPageModule)
-  }
-
-
-
+  },
 ];
 
 @NgModule({

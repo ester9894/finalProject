@@ -68,7 +68,12 @@ namespace API.Controllers
             return Ok(true);
         }
 
-
+        [Route("GetAllActiveLists/{accountId}")]
+        [HttpGet]
+        public IHttpActionResult GetActiveLists(int accountId)
+        {
+            return Ok(BL.ListsBL.GetActiveLists(accountId));
+        }
 
     }
 }

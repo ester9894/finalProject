@@ -1,26 +1,24 @@
-<ion-note dir="ltr">
-  <img src="/assets/images/fullLogo.png" width="150px" height="50px">
+<ion-note dir="ltr" class="BackgroundGrey" >
+  <img src="/assets/images/LogoDarkWR.png" width="150px" height="50px">
 </ion-note>
       <ion-toolbar>
-        <ion-title>רשימת המוצרים</ion-title>
+        <ion-title class="title">רשימת המוצרים</ion-title>
         <ion-buttons slot="start" >
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button id="menu"></ion-menu-button>
           <ion-back-button icon="arrow-forward-outline"></ion-back-button>
         </ion-buttons>
 
       </ion-toolbar>
 
-    <ion-list-header dir="ltr" class="listHeader">
+    <ion-list-header dir="ltr" class="list-header">
       <ion-button (click)="saveList()">סיימתי לבחור</ion-button>
       <ion-button (click)="presentAlertPromptNewProduct()">מוצר חדש
         <ion-icon name="add-sharp"></ion-icon>
       </ion-button>
     </ion-list-header>
 
-   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="listHeader"></ion-searchbar>
+   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar>
    <ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
-   <ion-skeleton-text style="height: 1px;"></ion-skeleton-text>
-
   <ion-content>
   <div>
   <ion-list>
