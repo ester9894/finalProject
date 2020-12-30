@@ -212,8 +212,6 @@ namespace BL
                 }
 
             }
-
-
         }
 
         private static double GetAvgBuy(List<ProductToList> products, Frequency frequency)
