@@ -51,12 +51,13 @@ namespace BL
                     return null;
                 long accountId = account.AccountId;
                 if (db.UsersAccounts.FirstOrDefault(a => a.UserId == userId && a.AccountId == accountId)!= null)
-                    return CONVERTERS.UserAccountConverter.ConvertUsersAccountToDTO( db.UsersAccounts.FirstOrDefault(a => a.UserId == userId && a.AccountId == accountId));
+                    return CONVERTERS.UserAccountConverter.ConvertUsersAccountToDTO(db.UsersAccounts.FirstOrDefault
+                        (a => a.UserId == userId && a.AccountId == accountId));
                 else
                     return null;
             }
-
         }
+
         /// <summary>
         /// פונקציה המחזירה את חשבונותיו של משתמש מסויים
         /// </summary>
@@ -106,7 +107,7 @@ namespace BL
             {
                 db.UsersAccounts.Add(CONVERTERS.UserAccountConverter.ConvertUsersAccountToDAL(new UsersAccountDTO() { 
                 AccountId=accountId,
-               UserId=userId }));
+                UserId=userId }));
                 db.SaveChanges();
             }
 
@@ -117,19 +118,15 @@ namespace BL
         /// <param name="password"></param>
         /// <param name="accountName"></param>
         /// <returns></returns>
-        public static long CheckPass(string password, string accountName)
+        public static long CheckPassOfAccount(string password, string accountName)
         {
-            string pass="", accountN="";
             long accountId;
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                if(db.Accounts.Any(a => a.Password.Equals(password)))
-                     pass = db.Accounts.FirstOrDefault(a => a.Password.Equals(password)).Password;
-                if(db.Accounts.Any(a => a.AccountName.Equals(accountName)))
-                    accountN=db.Accounts.FirstOrDefault(a=>a.AccountName.Equals(accountName)).AccountName;
-                if (db.Accounts.Any(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)))
+                  if (db.Accounts.Any(a => a.Password.Equals(password) && a.AccountName.Equals(accountName)))
                 {
-                    accountId = db.Accounts.Where(a => a.Password.Equals(pass) && a.AccountName.Equals(accountN)).Select(a => a.AccountId).ToList()[0];
+                    accountId = db.Accounts.Where(a => a.Password.Equals(password) && 
+                    a.AccountName.Equals(accountName)).Select(a => a.AccountId).ToList()[0];
                     return accountId;
                 }
                 return 0;

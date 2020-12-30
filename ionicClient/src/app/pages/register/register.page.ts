@@ -54,7 +54,7 @@ export class RegisterPage implements OnInit {
   async presentAlertNewOrJoin() {
     let alert = this.alertCtrl.create({
       //title: 'Confirm purchase',
-      message: 'מה אתה רוצה לעשות?',
+      message: 'מה ברצונך לעשות?',
       buttons: [
         {
           text: 'פתיחת חשבון חדש',

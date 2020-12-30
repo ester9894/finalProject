@@ -12,17 +12,16 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductToList
+    public partial class Alert
     {
-        public long ProductToListId { get; set; }
-        public long ProductId { get; set; }
-        public long ListId { get; set; }
-        public Nullable<long> BuyerId { get; set; }
-        public Nullable<System.DateTime> DateOfBuy { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public long AlertId { get; set; }
+        public long days { get; set; }
+        public System.DateTime Date { get; set; }
+        public bool IsActivated { get; set; }
+        public long FollowUpListId { get; set; }
+        public Nullable<long> ProductId { get; set; }
     
-        public virtual List List { get; set; }
+        public virtual FollowUpList FollowUpList { get; set; }
         public virtual Product Product { get; set; }
-        public virtual User User { get; set; }
     }
 }

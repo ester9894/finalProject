@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class FollowUpList
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FollowUpList()
+        {
+            this.Alerts = new HashSet<Alert>();
+        }
+    
         public long FollowUpListId { get; set; }
         public long ProductId { get; set; }
         public Nullable<int> Amount { get; set; }
@@ -23,5 +29,7 @@ namespace DAL
         public virtual Account Account { get; set; }
         public virtual Frequency Frequency { get; set; }
         public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alert> Alerts { get; set; }
     }
 }

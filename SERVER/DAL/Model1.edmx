@@ -22,6 +22,17 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ManagerId" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="AlertId" />
+          </Key>
+          <Property Name="AlertId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="days" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="FollowUpListId" Type="bigint" Nullable="false" />
+          <Property Name="ProductId" Type="bigint" />
+        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -76,9 +87,9 @@
         </EntityType>
         <EntityType Name="ProductToList">
           <Key>
-            <PropertyRef Name="ProductToListId " />
+            <PropertyRef Name="ProductToListId" />
           </Key>
-          <Property Name="ProductToListId " Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductToListId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="bigint" Nullable="false" />
           <Property Name="ListId" Type="bigint" Nullable="false" />
           <Property Name="BuyerId" Type="bigint" />
@@ -144,6 +155,30 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alert__FollowUpL__74AE54BC">
+          <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FollowUpList">
+              <PropertyRef Name="FollowUpListId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="FollowUpListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alert__ProductId__75A278F5">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -306,6 +341,7 @@
         <EntityContainer Name="ProjectDBModelStoreContainer">
           <EntitySet Name="AccountProducts" EntityType="Self.AccountProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FollowUpList" EntityType="Self.FollowUpList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Frequency" EntityType="Self.Frequency" Schema="dbo" store:Type="Tables" />
@@ -327,6 +363,14 @@
           <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="Self.FK__Accounts__Manage__36B12243">
             <End Role="Users" EntitySet="Users" />
             <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alert__FollowUpL__74AE54BC" Association="Self.FK__Alert__FollowUpL__74AE54BC">
+            <End Role="FollowUpList" EntitySet="FollowUpList" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alert__ProductId__75A278F5" Association="Self.FK__Alert__ProductId__75A278F5">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Alert" EntitySet="Alert" />
           </AssociationSet>
           <AssociationSet Name="FK__FollowUpL__Accou__5165187F" Association="Self.FK__FollowUpL__Accou__5165187F">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -439,6 +483,7 @@
           <NavigationProperty Name="ProductsToTypeLists" Relationship="Self.FK__ProductsT__Produ__3C69FB99" FromRole="Products" ToRole="ProductsToTypeList" />
           <NavigationProperty Name="Accounts" Relationship="Self.AccountProducts" FromRole="Products" ToRole="Accounts" />
           <NavigationProperty Name="FollowUpLists" Relationship="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" FromRole="Product" ToRole="FollowUpList" />
+          <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__ProductId__75A278F5" FromRole="Product" ToRole="Alert" />
           <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Produ__3E52440B" FromRole="Product" ToRole="ProductToList" />
         </EntityType>
         <EntityType Name="ProductsToTypeList">
@@ -645,6 +690,15 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="FollowUpList" EntitySet="FollowUpLists" />
           </AssociationSet>
+          <EntitySet Name="Alerts" EntityType="ProjectDBModel.Alert" />
+          <AssociationSet Name="FK__Alert__FollowUpL__74AE54BC" Association="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC">
+            <End Role="FollowUpList" EntitySet="FollowUpLists" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alert__ProductId__75A278F5" Association="ProjectDBModel.FK__Alert__ProductId__75A278F5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
           <EntitySet Name="ProductToLists" EntityType="ProjectDBModel.ProductToList" />
           <AssociationSet Name="FK__ProductTo__ListI__3F466844" Association="ProjectDBModel.FK__ProductTo__ListI__3F466844">
             <End Role="List" EntitySet="Lists" />
@@ -671,6 +725,7 @@
           <NavigationProperty Name="Account" Relationship="ProjectDBModel.FK__FollowUpL__Accou__5165187F" FromRole="FollowUpList" ToRole="Account" />
           <NavigationProperty Name="Frequency" Relationship="ProjectDBModel.FK__FollowUpL__Frequ__5070F446" FromRole="FollowUpList" ToRole="Frequency" />
           <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" FromRole="FollowUpList" ToRole="Product" />
+          <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC" FromRole="FollowUpList" ToRole="Alert" />
         </EntityType>
         <Association Name="FK__FollowUpL__Accou__5165187F">
           <End Type="ProjectDBModel.Account" Role="Account" Multiplicity="1" />
@@ -708,11 +763,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="AlertId" />
+          </Key>
+          <Property Name="AlertId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="days" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <Property Name="FollowUpListId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int64" />
+          <NavigationProperty Name="FollowUpList" Relationship="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC" FromRole="Alert" ToRole="FollowUpList" />
+          <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__Alert__ProductId__75A278F5" FromRole="Alert" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Alert__FollowUpL__74AE54BC">
+          <End Type="ProjectDBModel.FollowUpList" Role="FollowUpList" Multiplicity="1" />
+          <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FollowUpList">
+              <PropertyRef Name="FollowUpListId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="FollowUpListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alert__ProductId__75A278F5">
+          <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="ProductToList">
           <Key>
-            <PropertyRef Name="ProductToListId_" />
+            <PropertyRef Name="ProductToListId" />
           </Key>
-          <Property Name="ProductToListId_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductToListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int64" Nullable="false" />
           <Property Name="ListId" Type="Int64" Nullable="false" />
           <Property Name="BuyerId" Type="Int64" />
@@ -868,6 +960,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Alerts">
+            <EntityTypeMapping TypeName="ProjectDBModel.Alert">
+              <MappingFragment StoreEntitySet="Alert">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="days" ColumnName="days" />
+                <ScalarProperty Name="AlertId" ColumnName="AlertId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductToLists">
             <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
               <MappingFragment StoreEntitySet="ProductToList">
@@ -876,7 +980,7 @@
                 <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
+                <ScalarProperty Name="ProductToListId" ColumnName="ProductToListId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
