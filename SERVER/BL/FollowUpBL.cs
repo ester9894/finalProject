@@ -115,8 +115,12 @@ namespace BL
                List<ProductToList> lastBuys= db.ProductToLists.
                     Where(p =>p.DateOfBuy!=null&& p.ProductId == follow.ProductId && p.List.TypesList.AccountId == follow.AccountId).
                     OrderByDescending(p => p.DateOfBuy).ToList();
-                var daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
-                var daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
+                if(follow.Frequency != null)
+                {
+                    var daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
+                    var daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
+                }
+
                 var rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
                 if ((follow.Frequency!=null&&lastBuys.Count>=3&&rangeDates >= daysbefore && rangeDates <= daysafter) ||
                     lastBuys.Count < 3 )
