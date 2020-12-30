@@ -10,6 +10,7 @@ namespace DTO
     {
         public int UserId { get; set; }
         public int TypeListId { get; set; }
+        public int ListId { get; set; }
         public ProductToListDTO[] Products { get; set; }
     }
 }

@@ -23,7 +23,7 @@ activeLists : List[]
 
   goToBuyList(list: List)
   {
-    this.router.navigate(['buy-list', { "endDate":list.EndDate, "typeListId": list.TypeListId ,"typeListName": list.TypeListName}]);
+    this.router.navigate(['buy-list', { "endDate":list.EndDate, "typeListId": list.TypeListId ,"typeListName": list.TypeListName, "listId": list.ListId}]);
 
   }
 

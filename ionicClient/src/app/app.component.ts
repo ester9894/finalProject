@@ -119,7 +119,6 @@ export class AppComponent implements OnInit {
           [
             {
               text: 'הוספת חשבון חדש',
-              cssClass: 'secondary',
               handler: () => {
                 this.router.navigate(['add-account', { "userName": this.user.UserName }]);
 
@@ -127,6 +126,7 @@ export class AppComponent implements OnInit {
             },
             {
               text: 'הצטרפות לחשבון קיים',
+              cssClass: 'secondary',
               handler: (alertData) => {
                 this.router.navigateByUrl('join');
 
@@ -134,7 +134,6 @@ export class AppComponent implements OnInit {
             },
             {
               text: 'החלף משתמש',
-              cssClass:"button",
               handler: (alertData) => {
                 localStorage.clear();
                 this.router.navigateByUrl('main');

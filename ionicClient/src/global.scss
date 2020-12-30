@@ -25,18 +25,69 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+
 ion-content{
     --background: #fff url('/assets/images/fullLogoOpacity.jpg') no-repeat center 290px;
 }
-.listHeader{
-    background-color:rgb(17, 19, 35);
+::-webkit-scrollbar-track
+{
+	--webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.BackgroundGrey{
+   // background-color:rgb(17, 19, 35);
+   background-color: rgb(228, 228, 228)
   }
+.title{
+font-size: 16px !important;
+font-weight: bold !important
+  }
+.list-header{
+    background-color: white;  
+  }
+#menu
+{
+    color: rgb(253, 186, 14) !important
+}
   .button{
- //   color:rgb(253, 186, 14)
+   // color:rgb(253, 186, 14)
    // color:rgb(6, 218, 174)
     color:rgb(166, 100, 253)
+   // color:rgb(228, 228, 228)
+}
+
+  .alert-title.sc-ion-alert-md {
+      color: var(--ion-text-color,rgb(253, 186, 14));
+      font-size: 20px;
+      font-weight: 500;
+  }
+
+.alert-radio-label{
+    color: var(--ion-text-color,rgb(166, 100, 253));
+ }
+
+.sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+    color: rgb(166, 100, 253) !important;
+}
+
+.sc-ion-alert-md {
+color: rgb(166, 100, 253);
+}
+.alert-button-inner.sc-ion-alert-md {
+  justify-content: flex-start;
 
 }
-  .text{
-color:rgb(253, 186, 14) turquoise
-  }
+
+.alert-radio-inner{
+background-color:  rgb(253, 186, 14) !important;
+}
+
+.alert-radio-icon {
+    border-color:  rgb(253, 186, 14) !important ;  
+}
+.sc-ion-alert-md{
+    border:  rgb(253, 186, 14);
+}
+

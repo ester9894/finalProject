@@ -1,20 +1,22 @@
 
-<ion-app>
-  <ion-split-pane contentId="main-content"> 
-    <ion-menu *ngIf="IsUserLogedIn()" contentId="main-content">
+<ion-app  >
+  <ion-split-pane contentId="main-content" > 
+    <ion-menu *ngIf="IsUserLogedIn()" contentId="main-content" id="menu">
       <ion-content >
         <ion-list id="inbox-list">
-          <ion-list-header>{{user.FirstName}}</ion-list-header>
-          <ion-note>{{user.Email}}</ion-note>
+          <ion-card style="box-shadow: none;">
+          <ion-card-title style="color:rgb(166, 100, 253)" >{{user.FirstName}} </ion-card-title>
+          <ion-card-subtitle>{{account.AccountName}}</ion-card-subtitle>
+          </ion-card>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+            <ion-item  (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon style="color:rgb(253, 186, 14)" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label >{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list> 
-        <ion-item button  *ngIf="IsUserLogedIn()" (click)="showAccounts()">
-          <ion-icon name="people-circle-outline"></ion-icon>
+        <ion-item *ngIf="IsUserLogedIn()" (click)="showAccounts()">
+          <ion-icon style="color:rgb(253, 186, 14)" name="people-circle-outline"></ion-icon>
           <ion-label>החשבונות שלי</ion-label>
         </ion-item>
     </ion-content>
