@@ -25,7 +25,7 @@ namespace BL
                     var follow = db.FollowUpLists.Include(p => p.Frequency).FirstOrDefault(f => f.ProductId == prod.ProductId);
                     if (follow!=null)
                     {
-                        BL.FollowUpBL.SetFrequency(follow);
+                        BL.FollowUpBL.SetFrequency(follow);    
                     }
                 }
 
