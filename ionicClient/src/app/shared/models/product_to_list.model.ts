@@ -4,4 +4,5 @@ export class ProductToList {
     ListId: number
     BuyerId: number
     DateOfBuy: Date
+    CategoryName: string
 }

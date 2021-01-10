@@ -112,12 +112,20 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
+                int daysbefore=0, daysafter=0;
+                double rangeDates = 0;
                 List<ProductToList> lastBuys = db.ProductToLists.
                      Where(p => p.DateOfBuy != null && p.ProductId == follow.ProductId && p.List.TypesList.AccountId == follow.AccountId).
                      OrderByDescending(p => p.DateOfBuy).ToList();
-                var daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
-                var daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
-                var rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
+                if(follow.Frequency!=null)
+                {
+                     daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
+                     daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
+                }
+                if(lastBuys.Count>=2)
+                {
+                    rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;
+                }
                 if ((follow.Frequency != null && lastBuys.Count >= 3 && rangeDates >= daysbefore && rangeDates <= daysafter) ||
                     lastBuys.Count < 3)
                 {

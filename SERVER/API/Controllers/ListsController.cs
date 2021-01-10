@@ -75,5 +75,11 @@ namespace API.Controllers
             return Ok(BL.ListsBL.GetActiveLists(accountId));
         }
 
+        [Route("GetProductsOfBuyList/{listId}")]
+        [HttpGet]
+        public IHttpActionResult GetProductsOfBuyList(long listId)
+        {
+            return Ok(BL.ListsBL.GetProductsOfBuyList(listId));
+        }
     }
 }

@@ -37,8 +37,7 @@ export class CreateListPage implements OnInit
 
   ngOnInit() 
   {
-    this.idAccount =+ localStorage.getItem('accountId')
-    console.log(this.idAccount )     
+    this.idAccount =+ localStorage.getItem('accountId') 
   }
 
   goProductsList()
@@ -51,6 +50,7 @@ export class CreateListPage implements OnInit
     this.presentAlertPromptCategory()
   }
 
+  // alert for save new list
   async presentAlertPromptCategory() 
   {
      var alert = await this.alertController.create(
@@ -82,7 +82,7 @@ export class CreateListPage implements OnInit
    await alert.present();
  }
 
-
+// get products details by their id that came from products page
   getProductsById()
   {
     this.productService.getProductsByIdProduct(this.productsList).subscribe((res) => 

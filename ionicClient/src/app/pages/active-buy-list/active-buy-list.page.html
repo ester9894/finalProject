@@ -1,8 +1,16 @@
-<ion-note dir="ltr" class="BackgroundGrey" >
-  <img src="/assets/images/LogoDarkWR.png" width="150px" height="50px">
-</ion-note>
+<ion-header >
+  <ion-toolbar dir="ltr" class="BackgroundGrey" >
+    <ion-buttons slot="end" >
+      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="30px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 <ion-toolbar>
-    <ion-title class="title">רשימות שעדיין לא הושלמה קנייתם</ion-title>
+    <ion-title class="title">רשימות פעילות</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button id="menu"></ion-menu-button>
     </ion-buttons>
@@ -10,10 +18,12 @@
   </ion-toolbar>
 
 <ion-content>
+  <ion-label class="list-header" style="font-size: 12px; color: darkgrey;"> לחץ על רשימה מסוימת כדי להמשיך בקנייה</ion-label>
   <ion-list *ngFor="let list of activeLists">
     <ion-item button (click)="goToBuyList(list)">
-        <ion-label>{{list.TypeListName}}</ion-label>
-        <ion-label>{{list.EndDate}}</ion-label>
+      <ion-icon name="checkmark-done-outline" style="color: rgb(166, 100, 253);"></ion-icon>
+      <ion-label>{{list.TypeListName}}</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="list.EndDate"></ion-datetime>
     </ion-item>
   </ion-list>
 </ion-content>

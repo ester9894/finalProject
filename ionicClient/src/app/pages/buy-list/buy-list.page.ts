@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { type } from 'os';
 import { buyList } from 'src/app/shared/models/buyList.model';
@@ -19,15 +19,17 @@ import { ListsService } from 'src/app/shared/services/lists.service';
 export class BuyListPage implements OnInit {
   userId= + localStorage.getItem('userId')
   listDetails: TypeList = new TypeList()
-  productsList = [];
-  arrProductsBuy = [];
-  followProductsList =[]
+  productsList = []; // products of this buy list
+  arrProductsBuy = [];// products which are bought
+  followProductsList =[]// follow list of account
   buyList: buyList = new buyList()
   list:List
-  constructor(private listsService: ListsService, private followUpService: FollowUpService, private route: ActivatedRoute, private alertController: AlertController) 
+  mapProductsByCategory = new Map() 
+  constructor(private listsService: ListsService, private followUpService: FollowUpService, private route: ActivatedRoute, private alertController: AlertController, private router: Router) 
   {
+    // restart data from previous page
     this.route.params.subscribe(params => 
-      {
+      { 
         this.listDetails.AccountId =+ localStorage.getItem('accountId')
         this.listDetails.TypeListId= params['typeListId']; 
         this.listDetails.TypeListName = params['typeListName']; 
@@ -55,15 +57,15 @@ export class BuyListPage implements OnInit {
   }  
   getAllProducts()
   {
-    this.listsService.GetAllProductsByTypeId(this.listDetails.TypeListId).subscribe((list) => {
-      this.productsList = list;
+    this.listsService.GetAllActiveProductOfList(this.buyList.ListId).subscribe((list) => {
+      this.productsList = list
       console.log(this.productsList)
     })
   }
 
+// add all selected products to array and if there are selected products, update them on DB
   finishShopping()
   {
-    // get name Categories
     this.productsList.forEach(product => 
     { 
         if(product.isChecked == true)
@@ -78,6 +80,7 @@ export class BuyListPage implements OnInit {
       this.listsService.updateBuyList(this.buyList).subscribe(res=>
         {
           this.showMessage("הקניה בוצעה בהצלחה")
+          this.router.navigate(['home-page']);
         });
     }
     else
@@ -86,6 +89,7 @@ export class BuyListPage implements OnInit {
     }  
   }
 
+  // alert message about shopping status
   async showMessage(mess: string)
   {
     const alert = await this.alertController.create({
@@ -96,38 +100,34 @@ export class BuyListPage implements OnInit {
     await alert.present();
   }
 
+  // alert check amount of follow product which select
   async showAlertSelectAmount(product: ProductsToTypeList)
   {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       message: "כמה קנית מהמוצר הזה?",
-      inputs: 
-      [{
-          type:"number",
-          placeholder: 'כמות',
-          min: 1,
-          name:'amount' 
-      }]
+      inputs: [{ 
+                type:"number",
+                placeholder: 'כמות',
+                min: 1,
+                name:'amount' 
+              }]
       ,
       buttons: [{
-        text: 'סגור',
-        handler: (alertData) => 
-        {
-          product.Amount = alertData.amount
-        }
-      }]
-      
+                text: 'המשך',
+                handler: (alertData) => { product.Amount = alertData.amount }
+               }]   
     });
     await alert.present();
   }
 
+// if this selected product is followed check amount of buy
   checkIfFollowProduct(product: any)
   {
     if(!product.isChecked)
       for (let arr of this.followProductsList) {
         arr.forEach(pro => { if(pro.ProductId == product.ProductId) {this.showAlertSelectAmount(product)}
       });
-     
    }
   }
 }
