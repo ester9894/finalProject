@@ -34,7 +34,9 @@ namespace BL.CONVERTERS
               BuyerId=p.BuyerId,
               DateOfBuy=p.DateOfBuy,
               Amount=p.Amount,
-              ProductName=p.Product.ProductName
+              ProductName=p.Product.ProductName,
+              CategotyName = p.Product.Category.CategoryName
+              
             };
         }
 

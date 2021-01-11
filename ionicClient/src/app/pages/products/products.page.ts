@@ -18,7 +18,6 @@ export class ProductsPage implements OnInit {
   o = new Object() // contain all products from database include thair categories
   arrKind = new Array()// categories products
   arrProducts = new Array() // all products
-  arrProducts1 = new Array()// copy all products
   search: string // value of searchbar
   selectedsArray= [] // list of all categories that contain also selected products (matriza)
   allSelectedProducts = []// contain all products are selected
@@ -46,8 +45,7 @@ export class ProductsPage implements OnInit {
         if(params['productsInList'] != undefined)
       {
         this.allSelectedProducts =(params['productsInList'].split(',')).map(x=>+x);
-      }
-          
+      }        
     });
   }
   
@@ -55,51 +53,52 @@ export class ProductsPage implements OnInit {
   {
     this.idAccount =+ localStorage.getItem('accountId')
     console.log(this.idAccount)  
-    // create arr of categories and arr of all products
-    this.productService.getAllProducts(this.idAccount).subscribe(res => 
-    {
-     // console.log(res);
-      this.o = Array.of(res)
-      console.log(this.o);
-      this.selectedItemsLength = this.selectedsArray.length
-      Object.keys(res).forEach(element => 
-      {
-        // console.log(element)
-        this.arrKind.push(element)
-        console.log(this.arrKind)
-        if(this.selectedItemsLength == 0)
-          this.selectedsArray.push([])
-      });
-      this.selectedItemsLength = this.selectedsArray.length 
-
-      Object.values(res).forEach(element => 
-      {
-        // console.log(element)
-        this.arrProducts.push(element)
-      });
-         console.log(this.arrProducts)
-    });
-    this.arrProducts1 = this.arrProducts // copy for searchbar
-
+    this.getAllProducts()
     if(this.isPageForUpdateFollowList)
-      this.followUpService.getSortedFolowList(this.idAccount).subscribe(res=>
-      {
-        this.selectedsArray=res;
-        console.log(res)
-      })
+      this.getSortedFolowList()
     else
-    {
-      this.selectedsArray=[]
-      this.productService.getProductsByIdProduct(this.allSelectedProducts).subscribe((res) => 
+      this.getProductsFromCreateList() 
+  }
+
+// get all products of account from DB
+  getAllProducts()
+  { 
+    this.productService.getAllProducts(this.idAccount).subscribe(res => 
       {
-        Object.keys(res).forEach( key => { 
-         this.map.set(key, res[key])
-         let i = 0
-        for (i = 0; i < this.arrKind.length && this.arrKind[i] != key ; i++);
-        this.selectedsArray[i].push(this.map.get(key))
-        } );
+        this.o = Array.of(res)
+        this.selectedItemsLength = this.selectedsArray.length
+        Object.keys(res).forEach(category => {this.arrKind.push(category)//arrKind
+          if(this.selectedItemsLength == 0)
+            this.selectedsArray.push([])
+        });
+        this.selectedItemsLength = this.selectedsArray.length 
+        Object.values(res).forEach(element => {this.arrProducts.push(element)});// arrProducts
       });
-    }
+  }
+
+  // if enter from followUp page, bring follow products from DB
+  getSortedFolowList()
+  {
+    this.followUpService.getSortedFolowList(this.idAccount).subscribe(res=> { this.selectedsArray=res;})
+  }
+
+  // if enter from createList page, bring already selected products from create page
+  getProductsFromCreateList()
+  {
+     this.selectedsArray=[]
+    this.productService.getProductsByIdProduct(this.allSelectedProducts).subscribe((res) => 
+    {
+      Object.keys(res).forEach( key => { 
+       this.map.set(key, res[key])
+       console.log(this.map)
+      for (let i = 0; i < this.arrKind.length && this.arrKind[i]!= key; i++) 
+      {
+        if(this.map.get(this.arrKind[i]))
+          this.selectedsArray[i].push(this.map.get(this.arrKind[i]))
+          console.log(this.selectedsArray)
+      }
+    });
+    } );
   }
 
   selectText(index)

@@ -1,6 +1,14 @@
-<ion-note dir="ltr" class="BackgroundGrey" >
-  <img src="/assets/images/LogoDarkWR.png" width="150px" height="50px">
-</ion-note>
+<ion-header >
+  <ion-toolbar dir="ltr" >
+    <ion-buttons slot="end" >
+      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="30px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
   <ion-toolbar>
     <ion-title class="title">{{listDetails.TypeListName}}</ion-title>
     <ion-buttons slot="start">
@@ -14,7 +22,7 @@
     <ion-label>סיימתי קניה</ion-label>
   </ion-button>
 </ion-list-header>
-<ion-label class="listHeader" style="opacity: 0.5;"> לתשומת לבך למוצרים הנמצאים תחת מעקב תתבקש להקיש כמות </ion-label>
+<ion-label class="list-header" style="font-size: 11px; height: 18px; color: darkgrey;"> לתשומת לבך למוצרים הנמצאים תחת מעקב תתבקש/י להקיש כמות </ion-label>
 <ion-content>
     <ion-item *ngFor="let product of productsList">
         <ion-checkbox checked slot="start" [(ngModel)]="product.isChecked" (click)="checkIfFollowProduct(product)" ></ion-checkbox> 

@@ -1,19 +1,22 @@
-<ion-header>
-  <ion-note dir="ltr">
-    <img src="/assets/images/fullLogo.png" width="150px" height="50px" >
-  </ion-note>
-  <ion-toolbar>
-    <ion-title></ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<!-- <ion-note dir="ltr" class="BackgroundGrey" >
+  <img src="/assets/images/LogoDarkWR.png" width="150px" height="50px">
+  <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+</ion-note> -->
+<ion-note dir="ltr" class="BackgroundGrey">
+  <ion-row style="height: 25px;"></ion-row>
+  <ion-row>
+    <ion-label style="width: 9px;"></ion-label>
+  <img src="/assets/images/LogoDarkWR.png" width="30px"></ion-row>
+  <ion-row style="height: 9px;"></ion-row>
+</ion-note>
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button id="menu"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
 <ion-content>
-  <div padding>
-    <ion-button size="large"  expand="block" (click)="login()">כניסה</ion-button>
-  </div>
+    <ion-button class="submit"  expand="block" (click)="login()">כניסה</ion-button>
+    <ion-button class="submit"expand="block" (click)="register()">הרשמה</ion-button>
 
-  <div padding>
-    <ion-button size="large" expand="block" (click)="register()">הרשמה</ion-button>
-  </div>
 
 </ion-content>

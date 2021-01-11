@@ -5,6 +5,7 @@ import { Products } from 'src/app/shared/models/products.model';
 import { ProductsToTypeList } from 'src/app/shared/models/products_to_type_list.model';
 import { ListsService } from 'src/app/shared/services/lists.service';
 import { AlertController } from '@ionic/angular';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-show-list',
@@ -20,6 +21,7 @@ export class ShowListPage implements OnInit {
   addProductsToList: boolean = false
   endDate: Date;
   list:List = new List()
+  isTouched:boolean = false
   constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService, public alertController: AlertController) { }
 
 
@@ -28,23 +30,17 @@ export class ShowListPage implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.addProductsToList = JSON.parse(params.get('status'))
       console.log(this.addProductsToList);
-
-      if (this.addProductsToList == true) {
-
-        console.log(this.addProductsToList);
-
+      if (this.addProductsToList == true) 
+      {
         this.newProducts = JSON.parse(params.get('allSelectedProducts'))
         console.log('המוצרים החדשים ' + this.newProducts);
-
         this.addNewProductsToList(+params.get("typeListId"));
-        this.router.navigate(['show-list', { "status": "false", "typeListId": +params.get("typeListId"), "typeListName": params.get("typeListName") }])
+   //     this.router.navigate(['show-list', { "status": "false", "typeListId": +params.get("typeListId"), "typeListName": params.get("typeListName") }])
       }
       this.typeListId = +params.get("typeListId")
       this.typeListName = params.get("typeListName")
-
       this.getAllProducts();
     })
-
   }
 
   getAllProducts() {
@@ -68,11 +64,12 @@ export class ShowListPage implements OnInit {
     this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
       this.getAllProducts();
     })
-
-    this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
-
+  //  this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
+  this.addProductsToList = false
   }
-  addProducts() {
+
+  addProducts() 
+  {
     this.addProductsToList = true;
     this.router.navigate(['products', { "addProducts": true, "typeListId": this.typeListId, "typeListName": this.typeListName }]);
   }
@@ -104,13 +101,12 @@ export class ShowListPage implements OnInit {
     this.presentAlertToBuy();
   }
 
-
   async presentAlertToBuy() {
     var alert = await this.alertController.create(
       {
         cssClass: 'my-custom-class',
         header: 'הכנס תאריך לסיום הקניה',
-        inputs: [{ type: 'date', name: 'endDate' }],
+        inputs: [{ type: 'date', name: 'endDate'}],
         buttons:
           [
             {
@@ -134,5 +130,9 @@ export class ShowListPage implements OnInit {
           ]
       });
     await alert.present();
+  }
+  touched()
+  {
+      this.isTouched = true
   }
 }

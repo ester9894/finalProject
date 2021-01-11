@@ -32,8 +32,7 @@ export class ListsService
   }
 
   updateList(productsList: Array<ProductsToTypeList>, typeListId: number): Observable<boolean> {
-    console.log(productsList,typeListId);
-    
+    console.log(productsList,typeListId); 
     return this.http.post<boolean>(environment.url + `lists/updateList/${typeListId}`,productsList)
   }
 
@@ -59,5 +58,7 @@ export class ListsService
   {
     return this.http.get<List[]>(environment.url + `/lists/GetAllActiveLists/${accountId}`)
   }
-
+  GetAllActiveProductOfList(listId: Number): Observable<ProductToList[]> {
+    return this.http.get<ProductToList[]>(environment.url + `/lists/GetProductsOfBuyList/${listId}`)
+  }
 }

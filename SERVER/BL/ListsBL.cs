@@ -11,7 +11,7 @@ namespace BL
     public class ListsBL
     {
         public static long AddList(ListDTO list)
-        {
+        {// פונקציה המוסיפה קנייה חדשה למערכת ומחזירה את הרשימה 
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                 list.StartDate = DateTime.Now;
@@ -21,7 +21,7 @@ namespace BL
                       Select(pl => new ProductToList { ProductId = pl.ProductId }).ToList();
                 products.ForEach(p => newList.ProductToLists.Add(p));    
                 db.SaveChanges();
-                return Convert.ToInt64(db.Lists.OrderByDescending(product => product.StartDate).Take(1).Select(p=>p.ListId));
+                return db.Lists.OrderByDescending(product => product.StartDate).Take(1).ToList()[0].ListId;
             }
         }
 
@@ -29,7 +29,7 @@ namespace BL
         /// פונקציה המחזירה את רשימת המוצרים שעוד לא נקנו לקניה מסויימת
         /// </summary>
         /// <param name="listId"></param>
-        public static List<ProductToListDTO> ProductsOfBuyList(long listId)
+        public static List<ProductToListDTO> GetProductsOfBuyList(long listId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
@@ -39,11 +39,15 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// פונקציה המחזירה את כל הרשימות שעוד לא הושלמו קנייתם
+        /// </summary>
+        /// <param name="accountId"></param>
         public static List<ListDTO> GetActiveLists(int accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate < DateTime.Now).ToList());
+              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate > DateTime.Now && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
             }
         }
     }

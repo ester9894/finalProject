@@ -1,6 +1,6 @@
 
-<ion-app  >
-  <ion-split-pane contentId="main-content" > 
+<ion-app >
+  <ion-split-pane contentId="main-content" >
     <ion-menu *ngIf="IsUserLogedIn()" contentId="main-content" id="menu">
       <ion-content >
         <ion-list id="inbox-list">
@@ -21,7 +21,6 @@
         </ion-item>
     </ion-content>
     </ion-menu>
-
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane> 
   <!-- <ion-button *ngIf="IsUserLogedIn()" class="circle" size="small" type="button" (click)="showAccounts()">{{accountName}}</ion-button> -->

@@ -1,27 +1,33 @@
-<ion-note dir="ltr" class="BackgroundGrey" >
-  <img src="/assets/images/LogoDarkWR.png" width="150px" height="50px">
-</ion-note>
-      <ion-toolbar>
-        <ion-title class="title">רשימת המוצרים</ion-title>
-        <ion-buttons slot="start" >
-          <ion-menu-button id="menu"></ion-menu-button>
-          <ion-back-button icon="arrow-forward-outline"></ion-back-button>
-        </ion-buttons>
-
-      </ion-toolbar>
-
-    <ion-list-header dir="ltr" class="list-header">
-      <ion-button (click)="saveList()">סיימתי לבחור</ion-button>
-      <ion-button (click)="presentAlertPromptNewProduct()">מוצר חדש
-        <ion-icon name="add-sharp"></ion-icon>
-      </ion-button>
-    </ion-list-header>
-
-   <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar>
-   <ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
-  <ion-content>
-  <div>
-  <ion-list>
+<ion-header >
+  <ion-toolbar dir="ltr" class="BackgroundGrey" >
+    <ion-buttons slot="end" >
+      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="30px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar>
+  <ion-title class="title">רשימת המוצרים</ion-title>
+   <ion-buttons slot="start" >
+      <ion-menu-button id="menu"></ion-menu-button>
+    </ion-buttons>
+</ion-toolbar>
+<ion-list-header dir="ltr" class="list-header" >
+  <ion-button (click)="saveList()">סיימתי לבחור
+    <ion-icon name="bookmark-outline"></ion-icon>
+  </ion-button>
+  <ion-button (click)="presentAlertPromptNewProduct()" >מוצר חדש
+    <ion-icon name="add-sharp"></ion-icon>
+  </ion-button>
+</ion-list-header>
+<ion-toolbar>
+<ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar>
+<ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
+</ion-toolbar>
+<ion-content>
    <ion-item  *ngFor="let item of arrKind; let j=index">
     <ion-label>{{item}}</ion-label>
     <ion-select  multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]"  [selectedText]="selectText(j)" [compareWith]="compareById">
@@ -32,6 +38,5 @@
      </div>
     </ion-select> 
    </ion-item> 
-  </ion-list>
-  </div>
 </ion-content>
+

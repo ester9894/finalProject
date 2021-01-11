@@ -15,16 +15,21 @@ activeLists : List[]
 
   ngOnInit() 
   {
+    this.GetAllActiveLists()
+  }
+
+// get Active lists for account
+  GetAllActiveLists()
+  {
     this.listService.GetAllActiveLists(this.accountId).subscribe((lists) => 
     {
-      this.activeLists = lists
+      this.activeLists = lists.slice().sort((a,b) =>new Date(a.EndDate).valueOf()-new Date(b.EndDate).valueOf())
     })
-  }
+  } 
 
   goToBuyList(list: List)
   {
     this.router.navigate(['buy-list', { "endDate":list.EndDate, "typeListId": list.TypeListId ,"typeListName": list.TypeListName, "listId": list.ListId}]);
-
   }
 
 }
