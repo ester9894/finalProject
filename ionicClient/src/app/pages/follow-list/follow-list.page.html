@@ -1,4 +1,4 @@
-<ion-header >
+<!-- <ion-header >
   <ion-toolbar dir="ltr" class="BackgroundGrey" >
     <ion-buttons slot="end" >
       <ion-back-button icon="arrow-forward-outline"></ion-back-button>
@@ -8,7 +8,7 @@
       <img src="/assets/images/LogoDarkWR.png" width="30px">
     </ion-row>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
   <ion-toolbar>
     <ion-title class="title" >רשימת המעקב שלך</ion-title>
     <ion-buttons slot="start" >
@@ -44,7 +44,7 @@
       <ion-list *ngFor="let item of map.get(kind)">
         <ion-toolbar>
           <ion-item lines="none">
-            <ion-item *ngIf="showCheckbox">
+            <ion-item *ngIf="showCheckbox"  lines="none">
               <ion-checkbox checked slot="start" [(ngModel)]="item.isChecked" ></ion-checkbox> 
             </ion-item >
             <ion-label>{{item.ProductName}}</ion-label>

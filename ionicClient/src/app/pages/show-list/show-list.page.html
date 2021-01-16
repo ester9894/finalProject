@@ -12,19 +12,21 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button id="menu"></ion-menu-button>
-      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
     </ion-buttons>
     <ion-title class="title">{{typeListName}}</ion-title>
   </ion-toolbar>
 
+  <ion-toolbar>
+    <ion-list-header>
+      <ion-buttons dir="ltr">
+        <ion-button *ngIf="isTouched == true" (click)="updateList()">שמור</ion-button>
+        <ion-button (click)="addProducts()">הוסף מוצרים</ion-button>
+        <ion-button  (click)="toBuy()">התחל קניה <img src="/assets/images/shopping.jpg" width="50px"></ion-button>
+      </ion-buttons>
+    </ion-list-header>
+  </ion-toolbar>
 
 <ion-content>
-  <ion-buttons dir="ltr">
-    <ion-button *ngIf="isTouched == true" (click)="updateList()">שמור</ion-button>
-    <ion-button (click)="addProducts()">הוסף מוצרים</ion-button>
-    <ion-button  (click)="toBuy()">התחל קניה <img src="/assets/images/shopping.jpg" width="50px"></ion-button>
-  </ion-buttons>
-
   <ion-grid >
     <ion-item *ngFor="let item of productsList">
       <ion-row >
@@ -32,7 +34,7 @@
           <ion-label class="product_name">{{item.ProductName}}</ion-label>
         </ion-col>
         <ion-col size="3" class="number">
-          <ion-input type="number" name="amount" [(ngModel)]="item.Amount" (ionChange)="touched()" min="1"></ion-input>
+          <ion-input type="number" name="amount" [(ngModel)]="item.Amount"  (click)="touched()" min="1"></ion-input>
         </ion-col>
         <ion-col size="2" class="del">
           <ion-icon name="trash-outline" (click)="removeProduct(item.TypeListId, item.ProductId)"></ion-icon>

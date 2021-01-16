@@ -10,7 +10,7 @@ import { ProductToList } from 'src/app/shared/models/product_to_list.model';
 import { TypeList } from 'src/app/shared/models/type_list.model';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 import { ListsService } from 'src/app/shared/services/lists.service';
-
+import { GroupByPipe } from 'src/app/group-by.pipe';
 @Component({
   selector: 'app-buy-list',
   templateUrl: './buy-list.page.html',
@@ -24,7 +24,8 @@ export class BuyListPage implements OnInit {
   followProductsList =[]// follow list of account
   buyList: buyList = new buyList()
   list:List
-  mapProductsByCategory = new Map() 
+  groupByCategory = []// productsList groupby categories
+  categories : any// arr of products category
   constructor(private listsService: ListsService, private followUpService: FollowUpService, private route: ActivatedRoute, private alertController: AlertController, private router: Router) 
   {
     // restart data from previous page
@@ -35,10 +36,6 @@ export class BuyListPage implements OnInit {
         this.listDetails.TypeListName = params['typeListName']; 
         this.buyList.ListId=params['listId'];
         this.listDetails.AccountId =+ localStorage.getItem('accountId')
-        // this.list=params['list']
-        // this.listDetails.TypeListId = this.list.TypeListId
-        // this.listDetails.TypeListName=this.list.TypeListName
-        // this.buyList.ListId=this.list.ListId  
       });
   }
 
@@ -60,6 +57,12 @@ export class BuyListPage implements OnInit {
     this.listsService.GetAllActiveProductOfList(this.buyList.ListId).subscribe((list) => {
       this.productsList = list
       console.log(this.productsList)
+      this.categories = this.productsList.map(item => item.CategotyName); //מערך של קטגוריות המוצרים שברשימה
+      this.categories = this.categories.filter(function(elem, index, self) {return index === self.indexOf(elem);})// מסנן את המערך שלא יהיו כפילויות
+      this.groupByCategory = [];
+      this.categories.forEach(category => 
+      this.groupByCategory.push({'CategoryName': category, 'values': this.productsList.filter(i => i.CategotyName == category)}))
+      this.productsList = [].concat.apply([], this.groupByCategory.map(f=> f.values));
     })
   }
 

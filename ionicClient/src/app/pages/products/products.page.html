@@ -24,9 +24,9 @@
   </ion-button>
 </ion-list-header>
 <ion-toolbar>
-<ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar>
+<ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar></ion-toolbar>
 <ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
-</ion-toolbar>
+
 <ion-content>
    <ion-item  *ngFor="let item of arrKind; let j=index">
     <ion-label>{{item}}</ion-label>

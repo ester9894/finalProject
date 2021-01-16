@@ -22,7 +22,7 @@ export class CreateListPage implements OnInit
   idAccount: Number;
   list= new ListForChange()
   arrProductsInList: Products[] = []
-  constructor(private _location: Location, private router: Router, private route:ActivatedRoute,private listService:ListsService, private productService:ProductsService, private alertController: AlertController) 
+  constructor(private location: Location, private router: Router, private route:ActivatedRoute,private listService:ListsService, private productService:ProductsService, private alertController: AlertController) 
   {
     this.route.params.subscribe(params => 
       {
@@ -42,6 +42,10 @@ export class CreateListPage implements OnInit
 
   goProductsList()
   {
+    console.log(this.productsList)
+    if(this.productsList.length> 0)
+    this.router.navigate(['products',{"productsInList": this.productsList}])
+    else
      this.router.navigate(['products',{"productsInList": this.productsList}])
   }
 

@@ -6,6 +6,7 @@ import { ProductsToTypeList } from 'src/app/shared/models/products_to_type_list.
 import { ListsService } from 'src/app/shared/services/lists.service';
 import { AlertController } from '@ionic/angular';
 import { getLocaleDateFormat } from '@angular/common';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-show-list',
@@ -22,30 +23,31 @@ export class ShowListPage implements OnInit {
   endDate: Date;
   list:List = new List()
   isTouched:boolean = false
+ isSaveChanges: boolean = false
+ 
+
   constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService, public alertController: AlertController) { }
-
-
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.addProductsToList = JSON.parse(params.get('status'))
-      console.log(this.addProductsToList);
+      this.typeListId = +params.get("typeListId")
+      console.log(this.typeListId)
+      this.typeListName = params.get("typeListName")
+      this.getAllProducts()
       if (this.addProductsToList == true) 
       {
         this.newProducts = JSON.parse(params.get('allSelectedProducts'))
-        console.log('המוצרים החדשים ' + this.newProducts);
-        this.addNewProductsToList(+params.get("typeListId"));
-   //     this.router.navigate(['show-list', { "status": "false", "typeListId": +params.get("typeListId"), "typeListName": params.get("typeListName") }])
+        console.log(this.newProducts);
+        this.addNewProductsToList(this.typeListId);
       }
-      this.typeListId = +params.get("typeListId")
-      this.typeListName = params.get("typeListName")
-      this.getAllProducts();
     })
   }
 
   getAllProducts() {
     this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
-      this.productsList = list;
+      this.productsList = list;// המוצרים שנמצאים בדטה בייס
+      
       console.log(this.productsList);
       console.log(this.typeListName);
     })
@@ -53,19 +55,20 @@ export class ShowListPage implements OnInit {
 
   addNewProductsToList(typeListId: number) {
     this.listsService.addNewProductsToList(this.newProducts, typeListId).subscribe((res) => {
-      //alert("המוצרים נוספו בהצלחה")
+      //alert("המוצרים נוספו בהצלחה")       
+           var arr = this.productsList.filter(item=>{ return !this.newProducts.includes(item.ProductId); });// כל המוצרים שנמצאים במערך אחד ולא נמצאים במערך השני
+           arr.forEach(element => { this.removeProduct(this.typeListId, element.ProductId) });
       this.getAllProducts();
     })
   }
 
 
-  updateList() {
-
-    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {
-      this.getAllProducts();
-    })
-  //  this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
-  this.addProductsToList = false
+  updateList() 
+  {
+    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {this.getAllProducts();})
+    this.addProductsToList = false
+    this.isSaveChanges =true
+    this.isTouched = false
   }
 
   addProducts() 
@@ -73,23 +76,19 @@ export class ShowListPage implements OnInit {
     this.addProductsToList = true;
     this.router.navigate(['products', { "addProducts": true, "typeListId": this.typeListId, "typeListName": this.typeListName }]);
   }
-
-  back() {
-    this.router.navigateByUrl('types-list')
-  }
-
-  removeProduct(TypeListId: number, ProductId: number) {
+  
+  removeProduct(TypeListId: number, ProductId: number) 
+  {
     this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
       this.getAllProducts();
       this.presentAlert();
     })
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
-
   }
 
-  async presentAlert() {
+  async presentAlert() 
+  {
     let alert = this.alertController.create({
-      //title: 'Low battery',
       message: 'המוצר הוסר בהצלחה',
       buttons: ['הבנתי']
     });
@@ -97,9 +96,8 @@ export class ShowListPage implements OnInit {
   }
 
 
-  toBuy() {
-    this.presentAlertToBuy();
-  }
+  toBuy() 
+  { this.presentAlertToBuy();}
 
   async presentAlertToBuy() {
     var alert = await this.alertController.create(
@@ -131,8 +129,24 @@ export class ShowListPage implements OnInit {
       });
     await alert.present();
   }
+  // כאשר אדם עורך את הרשימה שיוצג לו כפתור שמור עריכה וכאשר לוחץ על שמור רשימה יעלם הכפתור  
   touched()
-  {
-      this.isTouched = true
+  { 
+    if(this.isTouched == true && this.isSaveChanges == true)
+    {
+      this.isTouched = false
+      this.isSaveChanges =false 
+    }
+    else
+      if(this.isTouched == false && this.isSaveChanges == true)
+      {
+       this.isTouched = true
+       this.isSaveChanges =false 
+      }
+      else
+        if((this.isTouched == true && this.isSaveChanges == false) || ((this.isTouched == false && this.isSaveChanges == false)))
+        {
+          this.isTouched = true
+        }
   }
 }
