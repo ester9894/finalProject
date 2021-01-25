@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
       title: 'הרשימות שלי',
       url: '/types-list',
       icon: 'list'
+
     },
     {
       title: 'רשימות פעילות',

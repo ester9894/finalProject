@@ -105,10 +105,15 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                db.UsersAccounts.Add(CONVERTERS.UserAccountConverter.ConvertUsersAccountToDAL(new UsersAccountDTO() { 
-                AccountId=accountId,
-                UserId=userId }));
-                db.SaveChanges();
+                if(db.UsersAccounts.FirstOrDefault(a=>a.UserId == userId && a.AccountId == accountId) == null)
+                {
+                    db.UsersAccounts.Add(CONVERTERS.UserAccountConverter.ConvertUsersAccountToDAL(new UsersAccountDTO()
+                    {
+                        AccountId = accountId,
+                        UserId = userId
+                    }));
+                    db.SaveChanges();
+                }
             }
 
         }

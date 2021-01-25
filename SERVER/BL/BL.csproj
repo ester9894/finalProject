@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AccountsBL.cs" />
     <Compile Include="CONVERTERS\AccountConverter.cs" />
+    <Compile Include="CONVERTERS\AlertConverter.cs" />
     <Compile Include="CONVERTERS\CategoryConverter.cs" />
     <Compile Include="CONVERTERS\FollowUpListConverter.cs" />
     <Compile Include="CONVERTERS\FrequencyConverter.cs" />

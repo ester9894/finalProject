@@ -40,5 +40,21 @@ namespace API.Controllers
             BL.FollowUpBL.removeProductsFromFollowUp(idSelectedProducts, accountId);
             return Ok(true);
         }
+
+        [Route("createAlerts")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpPost]
+        public IHttpActionResult CreateAlerts([FromBody] int accountId)
+        {
+            BL.FollowUpBL.CreateAlertsForAccount(accountId);
+            return Ok(true);
+        }
+
+        [Route("getAlertsForAccount/{accountId}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [HttpGet]
+        public IHttpActionResult GetAlertsForAccount(int accountId)
+        {
+            return Ok(BL.FollowUpBL.GetAlertsForAccount(accountId));
+        }
+
     }
 }

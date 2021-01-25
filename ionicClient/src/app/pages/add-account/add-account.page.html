@@ -1,24 +1,29 @@
-<ion-note dir="ltr" class="BackgroundGrey">
-  <ion-row style="height: 25px;"></ion-row>
-  <ion-row>
-    <ion-label style="width: 9px;"></ion-label>
-  <img src="/assets/images/LogoDarkWR.png" width="30px"></ion-row>
-  <ion-row style="height: 9px;"></ion-row>
-</ion-note>
+<ion-header >
+  <ion-toolbar dir="ltr" class="BackgroundGrey" >
+    <ion-buttons slot="end" >
+      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="30px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 <ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-menu-button id="menu"></ion-menu-button>
-  </ion-buttons>
-</ion-toolbar>
-
+    <ion-title class="title">הוספת חשבון חדש</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
 <ion-content>
   <form #form="ngForm" (ngSubmit)="addAccount()">
     <ion-grid>
       <ion-row justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center style="color: rgb(166, 100, 253)">
-            <h3 style="color: rgb(253, 186, 14)" id="userName">  שלום {{userName}}, </h3>
-            <h3 > לסיום התהליך אנא הכנס/י פרטי חשבון </h3>
+            <h3 class="list-header" style="color: rgb(166, 100, 253); font-size: 16px;"  id="userName">  שלום {{userName}}, </h3>
+            <h3 class="list-header" style="color: rgb(166, 100, 253); font-size: 16px;" > לסיום התהליך אנא הכנס/י פרטי חשבון </h3>
           </div>
 
           <div padding>
