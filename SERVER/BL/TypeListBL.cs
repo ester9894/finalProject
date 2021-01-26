@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 namespace BL
 {
    public class TypeListBL
-   {
+   {/// <summary>
+   /// מחזירה את כל סוגי הרשימות של קוד החשבון שנשלח
+   /// </summary>
+   /// <param name="accountId"></param>
+   /// <returns></returns>
         public static List<TypeListDTO> GetAllTypesList(long accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
@@ -17,7 +21,12 @@ namespace BL
                 return CONVERTERS.TypeListConverter.ConvertTypeListListToDTO(db.TypesLists.Where(a => a.AccountId == accountId).ToList());
             }
         }
-
+        /// <summary>
+        /// שמירת סוג רשימה חדש לחשבון מסוים
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="listForChange"></param>
+        /// <returns></returns>
         public static bool SaveList(int accountId, ListForChangeDTO listForChange)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
@@ -37,7 +46,12 @@ namespace BL
                 return true;
             }
         }
-
+        /// <summary>
+        /// הוספת מוצרים לסוג רשימה
+        /// </summary>
+        /// <param name="typeList"></param>
+        /// <param name="listForChange"></param>
+        /// <returns></returns>
         public static bool addProductsForList(TypesList typeList, ListForChangeDTO listForChange)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
