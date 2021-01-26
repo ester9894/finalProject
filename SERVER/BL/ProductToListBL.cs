@@ -14,7 +14,7 @@ namespace BL
         public static void AddProductsToList(BuyListDTO buyList)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
-            {
+            {//משנה את פרטי המוצר לפי הקניה ושולח לעדכון התדירות של קנייתו
                 foreach (var pr in buyList.Products)
                 {
                     var prod = db.ProductToLists.FirstOrDefault(p => p.ListId == buyList.ListId && p.ProductId == pr.ProductId);

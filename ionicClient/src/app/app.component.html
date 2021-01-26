@@ -15,10 +15,12 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list> 
+       <ion-menu-toggle>
         <ion-item *ngIf="IsUserLogedIn()" (click)="showAccounts()">
           <ion-icon style="color:rgb(253, 186, 14)" name="people-circle-outline"></ion-icon>
           <ion-label>החשבונות שלי</ion-label>
         </ion-item>
+      </ion-menu-toggle>
     </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

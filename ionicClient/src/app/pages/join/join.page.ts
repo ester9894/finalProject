@@ -21,8 +21,9 @@ export class JoinPage implements OnInit {
 
       if (accountId != 0) {
         localStorage.setItem('accountId', accountId.toString())
+        localStorage.setItem('lastDate', JSON.stringify(Date.now()))
         this.accountService.addUserAccount(+localStorage.getItem('userId'), +localStorage.getItem('accountId')).subscribe(() => {
-          this.router.navigate(['home-page']);
+          this.router.navigate(['home-page', {'status': true}]);
         });
       }
       else

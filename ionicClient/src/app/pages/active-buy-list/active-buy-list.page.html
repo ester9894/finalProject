@@ -23,7 +23,8 @@
     <ion-item button (click)="goToBuyList(list)">
       <ion-icon name="checkmark-done-outline" style="color: rgb(166, 100, 253);"></ion-icon>
       <ion-label>{{list.TypeListName}}</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="list.EndDate"></ion-datetime>
+      <!-- <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="list.EndDate"></ion-datetime> -->
+      <ion-label>{{ list.EndDate | date: "dd/MM/yyyy" }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

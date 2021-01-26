@@ -16,21 +16,20 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   constructor(private accountService: AccountsService, private router: Router, private alertCtrl: AlertController) { }
 
-  ngOnInit() {
-    
-  }
-  checkLogin() {
+  ngOnInit() {}
+
+  checkLogin() 
+  {
     this.accountService.checkLogin(this.userLogin).subscribe((userAccount) => {
       localStorage.setItem('userId', userAccount.UserId.toString())
       localStorage.setItem('accountId', userAccount.AccountId.toString())
-
+      localStorage.setItem('lastDate',JSON.stringify(Date.now()))
       this.router.navigateByUrl('home-page');
-
     }, err => this.presentAlert());
-
   }
 
-  async presentAlert() {
+  async presentAlert() 
+  {
     let alert = this.alertCtrl.create({
       //title: 'Low battery',
       message: 'פרטי המשתמש שגויים',
@@ -39,6 +38,4 @@ export class LoginPage implements OnInit {
     (await alert).present();
   }
 
-
- 
 }

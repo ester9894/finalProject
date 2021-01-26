@@ -1,40 +1,37 @@
-<ion-note dir="ltr" class="BackgroundGrey">
-  <ion-row style="height: 25px;"></ion-row>
-  <ion-row>
-    <ion-label style="width: 9px;"></ion-label>
-    <img src="/assets/images/LogoDarkWR.png" width="50px">
-  </ion-row>
-  <ion-row style="height: 9px;"></ion-row>
-</ion-note>
-
-<ion-content color="light" style="text-align-last: right;">
-  <form #form="ngForm" (ngSubmit)="register()">
+<ion-header >
+  <ion-toolbar dir="ltr" class="BackgroundGrey" >
+    <ion-buttons slot="end" >
+      <ion-back-button icon="arrow-forward-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="30px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="text-align-last: right;">
+  <form  #form="ngForm" (ngSubmit)="register()" >
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <h3 class="title">הכנס פרטים אישיים</h3>
+            <h3 style="color:rgb(166, 100, 253); font-size: 20px;" >הכנס פרטים אישיים</h3>
           </div>
           <div padding>
             <ion-item>
-              <ion-input name="userName" type="text" placeholder="שם משתמש" [(ngModel)]="user.UserName" required>
-              </ion-input>
+              <ion-input  name="userName" type="text" placeholder="שם משתמש" [(ngModel)]="user.UserName" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="firstName" type="text" placeholder="שם פרטי" [(ngModel)]="user.FirstName" required>
-              </ion-input>
+              <ion-input  name="firstName" type="text" placeholder="שם פרטי" [(ngModel)]="user.FirstName" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="lastName" type="text" placeholder="שם משפחה" [(ngModel)]="user.LastName" required>
-              </ion-input>
+              <ion-input  name="lastName" type="text" placeholder="שם משפחה" [(ngModel)]="user.LastName" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="email" type="email" placeholder="your@gmail.com" [(ngModel)]="user.Email"></ion-input>
             </ion-item>
           </div>
-          <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">הוסף אותי</ion-button>
-
-          <!-- <input class="submit" type="submit" [disabled]="form.invalid" expand="block" value="הוסף אותי"> -->
+            <input style="margin-right: 100px;" class="submit" type="submit" [disabled]="form.invalid" expand="block" value="הוסף אותי">
         </ion-col>
       </ion-row>
     </ion-grid>

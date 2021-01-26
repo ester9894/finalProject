@@ -24,9 +24,14 @@
 </ion-list-header>
 <ion-label class="list-header" style="font-size: 11px; height: 18px; color: darkgrey;"> לתשומת לבך למוצרים הנמצאים תחת מעקב תתבקש/י להקיש כמות </ion-label>
 <ion-content>
-    <ion-item *ngFor="let product of productsList">
+    <ion-list *ngFor="let group of groupByCategory ">
+      <ion-icon name="checkmark-done-outline"></ion-icon>
+      <ion-text  style=" margin-right: 5px; font-weight: bold;" >{{group.CategoryName}}</ion-text>
+      <ion-skeleton-text style="height: 1px; "></ion-skeleton-text>
+      <ion-item *ngFor="let product of group.values">
         <ion-checkbox checked slot="start" [(ngModel)]="product.isChecked" (click)="checkIfFollowProduct(product)" ></ion-checkbox> 
         <ion-label>{{product.Amount}}</ion-label>
         <ion-label>{{product.ProductName}}</ion-label>
-    </ion-item>
+      </ion-item>
+    </ion-list>
 </ion-content>

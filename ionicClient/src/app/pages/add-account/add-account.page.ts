@@ -29,16 +29,14 @@ export class AddAccountPage implements OnInit {
   }
 
   addAccount() {
-    this.accountService.addAccount(this.account).subscribe((accountId) => {
-
-      if (accountId != 0) {
+    this.accountService.addAccount(this.account).subscribe((accountId) => 
+    {
+      if (accountId != 0) 
+      {
         localStorage.setItem('accountId', accountId.toString())
-
-        this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {
-
-        });
-       this.router.navigate(['products', {"isForUpdateFollowList":this.forUpdateFollowList}]);
-
+        localStorage.setItem('lastDate', JSON.stringify(Date.now()))
+        this.accountService.addUserAccount(this.account.ManagerId, accountId).subscribe((res) => {});
+        this.router.navigate(['products', {"isForUpdateFollowList":this.forUpdateFollowList}]);
       }
       else
         this.presentAlert();

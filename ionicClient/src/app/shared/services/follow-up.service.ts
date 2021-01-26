@@ -32,4 +32,12 @@ export class FollowUpService
    {
     return this.http.post<boolean>(environment.url + `followUp/removeFromList/${accountId}`, idSelectedProducts)
    }
+   creteAlerts(accountId: Number):Observable<boolean> 
+   {
+    return this.http.post<boolean>(environment.url + 'followUp/createAlerts', accountId)
+   }
+   getAlerts(accountId: Number)
+   {
+    return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/followUp/getAlertsForAccount/${accountId}`)
+   }
 }

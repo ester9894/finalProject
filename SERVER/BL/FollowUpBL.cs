@@ -114,43 +114,45 @@ namespace BL
             {
                 int daysbefore=0, daysafter=0;
                 double rangeDates = 0;
+                //lastbuys שולף את כל הפעמים שנקנה המוצר וממין מהתאריך קנייה האחרון ומטה
                 List<ProductToList> lastBuys = db.ProductToLists.
                      Where(p => p.DateOfBuy != null && p.ProductId == follow.ProductId && p.List.TypesList.AccountId == follow.AccountId).
                      OrderByDescending(p => p.DateOfBuy).ToList();
+                //אם מעודכן תדירות כבר למוצר, מחשב את הזמנים שאפשר לחרוג בקניית המוצר 
                 if(follow.Frequency!=null)
                 {
                      daysbefore = follow.Frequency.NumDays - follow.Frequency.Exception; // חריגה לפני
                      daysafter = follow.Frequency.NumDays + follow.Frequency.Exception;//חריגה אחרי
                 }
+                // אם קנה מוצר זה יותר מפעמיים אז מחשב את הפרש זמן הקנייה מהקנייה העכשוית לקניה הקודמת לה
                 if(lastBuys.Count>=2)
                 {
                     rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;
                 }
+                // אם תקין- קיימת תדירות ויש יותר וקנה את המוצר יותר מ 3 םעמים וגם קניית המוצר עכשיו היא עדיין בטווח החריגה או שבכלל אין תדירות עדיין
                 if ((follow.Frequency != null && lastBuys.Count >= 3 && rangeDates >= daysbefore && rangeDates <= daysafter) ||
                     lastBuys.Count < 3)
                 {
                     return;
                 }
+                // מחשב הפרשי קנייה של 3 הפעמים האחרונות שקנה את המוצר
                 int[] differences = new int[2];
                 for (int i = 0; i < 2; i++)
                 {
                     differences[i] = (int)(lastBuys[i].DateOfBuy - lastBuys[i + 1].DateOfBuy).Value.TotalDays;//הפרש בין התאריכים האחרונים
                 }
-
+                // בודק אם ההפרשים נמצאים באחד מהטווחים הנתונים כבר
                 foreach (var frequency in db.Frequencies)
                 {
                     int i = 0;
-                   // daysbefore = frequency.NumDays - frequency.Exception; // חריגה לפני
-                   // daysafter = frequency.NumDays + frequency.Exception; //חריגה אחרי
                     for (; i < 2; i++)
                     {
                         if(! (IsNumberInFreequencyRange(differences[i], frequency)))
-                       // if (!(differences[i] >= daysbefore && differences[i] <= daysafter))
                             break;
                     }
                     if (i < 2)
                         continue;
-
+                    // אם כל ההפרשים מקיימים את אחד מהטווחים מעדכן את התדירות למוצר זה
                     db.FollowUpLists.FirstOrDefault(f => f.FollowUpListId == follow.FollowUpListId).FrequencyId = frequency.FrequencyId;
                     db.SaveChanges();
                     break;
@@ -167,7 +169,7 @@ namespace BL
                 //  var followList =  db.FollowUpLists.Where(a => a.AccountId == accountId).ToList();
                 foreach (var follow in account.FollowUpLists.ToList())//עובר על המוצרים למעקב של חשבון זה
                 {
-                    if (follow.FrequencyId == 0)//אם אין לו תדירות לא בודק אותו
+                    if (follow.FrequencyId == null)//אם אין לו תדירות לא בודק אותו
                         continue;
                     var lastBuy = productList.FirstOrDefault(p => p.ProductId == follow.ProductId);//קניה אחרונה של המוצר הנוכחי
                     int days = (int)(DateTime.Today - lastBuy.DateOfBuy).Value.TotalDays;//הימים שעברו מאז הקניה האחרונה
@@ -176,13 +178,8 @@ namespace BL
                     double dayAvg = avg / follow.Frequency.NumDays;
                     if (lastBuy.Amount / days >= dayAvg)//אם הוא קנה בקניה האחרונה מעל הממוצע לא מתריע אותו
                         continue;
-
-
                         //if (follow.Frequency.NumDays > days)
                         //continue;
-
-                   
-
                     var alert = db.Alerts.FirstOrDefault(a => a.FollowUpListId == follow.FollowUpListId);//מחפש התראה על המוצר הנוכחי
                     if (alert == null)//DB אם אין לו התראה ב  
                     {
@@ -248,5 +245,13 @@ namespace BL
             return num >= daysbefore && num <= daysafter;
         }
 
+        //מחזיר את רשימת המוצרים לחשבון שצריך להתריע עליהם
+        public static List<AlertDTO> GetAlertsForAccount(int accountId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                return db.Alerts.Where(p => p.FollowUpList.AccountId == accountId && p.IsActivated == true).ToList().Select(p=>CONVERTERS.AlertConverter.ConvertAlertToDTO(p)).ToList();
+            }
+        }
     }
 }

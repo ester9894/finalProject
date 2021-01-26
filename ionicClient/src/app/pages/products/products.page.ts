@@ -33,7 +33,7 @@ export class ProductsPage implements OnInit {
   typeListId: number;
   typeListName: string;
   selectedItemsLength: Number
-
+  selectedArrayId: Number[] =[]
   constructor(private _location: Location, private productService: ProductsService, private followUpService: FollowUpService, private listService: ListsService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
       this.route.params.subscribe(params => 
@@ -56,8 +56,8 @@ export class ProductsPage implements OnInit {
     this.getAllProducts()
     if(this.isPageForUpdateFollowList)
       this.getSortedFolowList()
-    else
-      this.getProductsFromCreateList() 
+    if(this.addProductsToList)
+      this.GetAllProductsByTypeId()   
   }
 
 // get all products of account from DB
@@ -72,6 +72,8 @@ export class ProductsPage implements OnInit {
             this.selectedsArray.push([])
         });
         this.selectedItemsLength = this.selectedsArray.length 
+        if(this.allSelectedProducts.length>0)
+        this.setSelectedArray(this.allSelectedProducts.map(p=>p))    
         Object.values(res).forEach(element => {this.arrProducts.push(element)});// arrProducts
       });
   }
@@ -79,26 +81,37 @@ export class ProductsPage implements OnInit {
   // if enter from followUp page, bring follow products from DB
   getSortedFolowList()
   {
-    this.followUpService.getSortedFolowList(this.idAccount).subscribe(res=> { this.selectedsArray=res;})
+    this.followUpService.getSortedFolowList(this.idAccount).subscribe(res=> { this.selectedsArray=res; console.log(this.selectedsArray)})
   }
 
   // if enter from createList page, bring already selected products from create page
   getProductsFromCreateList()
   {
-     this.selectedsArray=[]
-    this.productService.getProductsByIdProduct(this.allSelectedProducts).subscribe((res) => 
-    {
-      Object.keys(res).forEach( key => { 
-       this.map.set(key, res[key])
-       console.log(this.map)
-      for (let i = 0; i < this.arrKind.length && this.arrKind[i]!= key; i++) 
+      this.setSelectedArray(this.allSelectedProducts.map(p=>p))    
+  }
+
+  GetAllProductsByTypeId()
+  {
+    this.listService.GetAllProductsByTypeId(this.typeListId).subscribe(res=> 
       {
-        if(this.map.get(this.arrKind[i]))
-          this.selectedsArray[i].push(this.map.get(this.arrKind[i]))
-          console.log(this.selectedsArray)
-      }
-    });
-    } );
+        this.setSelectedArray(res.map(p=>p.ProductId))
+      })
+  }
+  setSelectedArray(res:number[])
+  {
+    this.productService.getProductsByIdProduct(res).subscribe(products=>{ 
+      this.selectedsArray = []
+      console.log(products)
+      console.log(Object.values(products))
+       for (let i = 0; i < this.arrKind.length; i++) 
+       {
+          if(Object.values(products).find(group=> group[0].CategoryName == this.arrKind[i]))
+            this.selectedsArray.push(Object.values(products).find(group=> group[0].CategoryName == this.arrKind[i]))
+            else
+            this.selectedsArray.push([])
+       }
+       console.log(this.selectedsArray)
+     })
   }
 
   selectText(index)
@@ -245,6 +258,7 @@ addForSaveList(product: Products)// מעדכן את המוצר שנבחר מתי
             this.showAlert("המוצר נוסף")
             break
           }
+        
     }
     this.currentItems = []
 }
@@ -270,10 +284,22 @@ async showAlert(message: string)
           { 
             if(!this.allSelectedProducts.find(item=> item == pr.ProductId))
                 this.allSelectedProducts.push(pr.ProductId) 
+                console.log(this.allSelectedProducts)
           }); // push products the costumer is choose to array 
       }
     }
     console.log(this.allSelectedProducts)
+    Object(this.selectedsArray).forEach(arrProducts => {
+      this.selectedArrayId.push(...arrProducts.map(element =>  element=element.ProductId ));
+  });
+  console.log("selectedrrayId: "+this.selectedArrayId )
+  const arr= this.allSelectedProducts.filter(idProduct=>{ return !this.selectedArrayId.includes(idProduct)}) 
+  console.log("in array1 and not array 2"+ arr)
+  console.log("allselectedProducts: "+this.allSelectedProducts)
+  arr.forEach(element => {
+  this.allSelectedProducts.splice(this.allSelectedProducts.indexOf[element],1)});
+  console.log("allselectedProducts after: "+this.allSelectedProducts)
+
     // send for adding
     this.productService.addPersonalItems(this.newProducts,this.idAccount).subscribe((newProducts)=>
     {        
@@ -282,7 +308,7 @@ async showAlert(message: string)
       if(this.isPageForUpdateFollowList)
       {
        this.followUpService.saveList(this.allSelectedProducts, this.idAccount).
-       subscribe((res) => { this.router.navigate(['follow-list']);});
+       subscribe((res) => { this.router.navigateByUrl('follow-list');});
       }
       else if(this.addProductsToList)
          {

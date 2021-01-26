@@ -6,7 +6,7 @@ import { TIMEOUT } from 'dns';
 import { Key } from 'protractor';
 import { followUpList } from 'src/app/shared/models/follow_up_list.model';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
-
+import {Location, PlatformLocation} from '@angular/common'
 @Component({
   selector: 'app-follow-list',
   templateUrl: './follow-list.page.html',
@@ -22,7 +22,9 @@ itemsForRemoveArray = []; // items for remove from followlist
 forUdateFollowList: boolean = true
 anyProductSellected:boolean=false;
 
-  constructor(private followListService:FollowUpService, private router: Router, private alertController: AlertController) { }
+  constructor(private location: Location, private followListService:FollowUpService, private router: Router, private alertController: AlertController) 
+  {
+  }
 
   ngOnInit() 
   {
