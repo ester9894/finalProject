@@ -5,13 +5,14 @@
   <ion-row style="height: 25px;"></ion-row>
   <ion-row>
     <ion-label style="width: 9px;"></ion-label>
-  <img src="/assets/images/LogoDarkWR.png" width="30px"></ion-row>
+    <img src="/assets/images/LogoDarkWR.png" width="50px">
+  </ion-row>
   <ion-row style="height: 9px;"></ion-row>
 </ion-note>
 <ion-toolbar>
-  <ion-buttons slot="start">
+  <!-- <ion-buttons slot="start">
     <ion-menu-button id="menu"></ion-menu-button>
-  </ion-buttons>
+  </ion-buttons> -->
 </ion-toolbar>
 
 
@@ -21,21 +22,25 @@
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <h3 style="font-size: 16px !important; font-weight: bold !important">להצטרפות לחשבון קיים הכנס את הפרטים שקיבלת ממנהל החשבון</h3>
+            <h3 style="font-size: 16px !important; font-weight: bold !important; color: rgb(166, 100, 253)">להצטרפות
+              לחשבון קיים הכנס את הפרטים שקיבלת ממנהל החשבון</h3>
           </div>
           <div padding>
             <ion-item>
-              <ion-input #accountName placeholder="הכנס שם חשבון"></ion-input>
+              <ion-input #accountName type="text" placeholder="הכנס שם חשבון" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input #pass placeholder="הכנס סיסמא"></ion-input>
+              <ion-input #pass type="password" placeholder="הכנס סיסמא" required></ion-input>
             </ion-item>
           </div>
-          <div style="text-align: center !important;">
-            <input class="submit" type="submit"  [disabled]="form.invalid" expand="block" value="הוסף אותי">
-          </div>
+
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div style="text-align: center !important;">
+      <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">צור חשבון</ion-button>
+
+      <!-- <input class="submit" type="submit"  [disabled]="form.invalid" expand="block" value="הוסף אותי"> -->
+    </div>
   </form>
 </ion-content>
