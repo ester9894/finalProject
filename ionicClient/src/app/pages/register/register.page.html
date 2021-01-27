@@ -5,10 +5,12 @@
     </ion-buttons>
     <ion-row>
       <ion-label style="width: 9px;"></ion-label> 
-      <img src="/assets/images/LogoDarkWR.png" width="30px">
+      <img src="/assets/images/LogoDarkWR.png" width="50px">
     </ion-row>
   </ion-toolbar>
 </ion-header>
+
+
 <ion-content style="text-align-last: right;">
   <form  #form="ngForm" (ngSubmit)="register()" >
     <ion-grid>
@@ -31,8 +33,15 @@
               <ion-input name="email" type="email" placeholder="your@gmail.com" [(ngModel)]="user.Email"></ion-input>
             </ion-item>
           </div>
-            <input style="margin-right: 100px;" class="submit" type="submit" [disabled]="form.invalid" expand="block" value="הוסף אותי">
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">הוסף אותי</ion-button>
+          </div>
+          <!-- <input style="margin-right: 100px;" class="submit" type="submit" [disabled]="form.invalid" expand="block" value="הוסף אותי"> -->
         </ion-col>
+
+        
+
+
       </ion-row>
     </ion-grid>
   </form>

@@ -5,13 +5,13 @@
     </ion-buttons>
     <ion-row>
       <ion-label style="width: 9px;"></ion-label> 
-      <img src="/assets/images/LogoDarkWR.png" width="30px">
+      <img src="/assets/images/LogoDarkWR.png" width="50px">
     </ion-row>
   </ion-toolbar>
 </ion-header>
-<ion-toolbar>
+<!-- <ion-toolbar>
     <ion-title class="title">כניסה</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 
 <ion-content color="light" style="text-align-last: right;">
   <form #form="ngForm" (ngSubmit)="checkLogin()">
@@ -19,7 +19,7 @@
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <h3>שמחים לראות אותך!!</h3>
+            <h2 style="color:rgb(166, 100, 253); ">שמחים לראות אותך!!</h2>
           </div>
           <div padding>
             <ion-item>
@@ -33,6 +33,7 @@
           </div>
 
           <div padding>
+            
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">כניסה</ion-button>
           </div>
 
