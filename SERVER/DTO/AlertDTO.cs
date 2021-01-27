@@ -14,5 +14,6 @@ namespace DTO
         public bool IsActivated { get; set; }
         public long FollowUpListId { get; set; }
         public Nullable<long> ProductId { get; set; }
+
     }
 }
