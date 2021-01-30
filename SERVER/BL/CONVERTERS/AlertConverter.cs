@@ -32,7 +32,8 @@ namespace BL.CONVERTERS
                 days = a.days,
                 FollowUpListId = a.FollowUpListId,
                 IsActivated = a.IsActivated,
-                ProductId = a.ProductId
+                ProductId = a.ProductId,
+                ProductName = a.Product.ProductName
             };
         }
     }

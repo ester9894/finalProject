@@ -41,7 +41,9 @@ namespace API.Controllers
             return Ok(true);
         }
 
-        [Route("createAlerts")]// ניתוב לפונקציה  המקבלת פרמטר
+        //----ALERTS-----
+
+        [Route("createAlerts")]// יצירת התראות
         [HttpPost]
         public IHttpActionResult CreateAlerts([FromBody] int accountId)
         {
@@ -49,12 +51,19 @@ namespace API.Controllers
             return Ok(true);
         }
 
-        [Route("getAlertsForAccount/{accountId}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [Route("getAlertsForAccount/{accountId}")]// קבלת התראות של החשבון
         [HttpGet]
         public IHttpActionResult GetAlertsForAccount(int accountId)
         {
             return Ok(BL.FollowUpBL.GetAlertsForAccount(accountId));
         }
 
+        [Route("CancelAlertOfProduct")]// ביטול התראה
+        [HttpPost]
+        public IHttpActionResult CancelAlertOfProduct([FromBody] AlertDTO alert)
+        {
+            BL.FollowUpBL.CancelAlertOfProduct(alert);
+            return Ok(true);
+        }
     }
 }

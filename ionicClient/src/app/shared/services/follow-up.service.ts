@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Alert } from '../models/alert.model';
 import { followUpList } from '../models/follow_up_list.model';
 import { Products } from '../models/products.model';
 
@@ -36,8 +37,12 @@ export class FollowUpService
    {
     return this.http.post<boolean>(environment.url + 'followUp/createAlerts', accountId)
    }
-   getAlerts(accountId: Number)
+   getAlerts(accountId: Number):Observable<Alert[]> 
    {
-    return this.http.get<{ [id: string]: followUpList[] }>(environment.url + `/followUp/getAlertsForAccount/${accountId}`)
+    return this.http.get<Alert[]>(environment.url + `/followUp/getAlertsForAccount/${accountId}`)
+   }
+   CancelAlertOfProduct(alert:Alert):Observable<boolean>
+   {
+     return this.http.post<boolean>(environment.url + '/followUp/CancelAlertOfProduct', alert)
    }
 }

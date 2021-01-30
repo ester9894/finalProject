@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Alert } from 'src/app/shared/models/alert.model';
 import { FollowUpService } from 'src/app/shared/services/follow-up.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class HomePagePage implements OnInit {
   accountId: number
   userId: number
   lastEnterDate: Date
+  alerts: Alert[]
   constructor(private followUpService: FollowUpService, private route: ActivatedRoute) { 
     this.route.paramMap.subscribe(params => {
       if(localStorage.getItem('status') == "true")
@@ -30,6 +32,15 @@ export class HomePagePage implements OnInit {
     if(new Date(Date.now()).valueOf() - new Date(this.lastEnterDate.valueOf()).valueOf() / (1000 * 3600 * 24) > 1)
       { this.followUpService.creteAlerts(this.accountId).subscribe(res=> console.log(res)) }
       // מביא את רשימת ההתראות
-    this.followUpService.getAlerts(this.accountId).subscribe(res=> console.log(res))
+    this.followUpService.getAlerts(this.accountId).subscribe(res=> {
+      console.log(res)
+      this.alerts = res
+    })
   }
+
+  CancelAlert(alert: Alert)
+  {
+    this.followUpService.CancelAlertOfProduct(alert).subscribe(res=>console.log(res))
+  }
+  
 }

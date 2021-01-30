@@ -6,4 +6,5 @@ Date: Date
 IsActivated :Date
 FollowUpListId: Number
 ProductId : Number
+ProductName: string
 }
