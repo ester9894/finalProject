@@ -154,9 +154,10 @@ namespace BL
                         continue;
                     // אם כל ההפרשים מקיימים את אחד מהטווחים מעדכן את התדירות למוצר זה
                     db.FollowUpLists.FirstOrDefault(f => f.FollowUpListId == follow.FollowUpListId).FrequencyId = frequency.FrequencyId;
-                    db.SaveChanges();
+                    //frequency.FrequencyId;
                     break;
                 }
+                db.SaveChanges();
             }
         }
 
@@ -176,6 +177,7 @@ namespace BL
                     var specificProduct = productList.Where(p => p.ProductId == follow.ProductId).ToList();
                     double avg = GetAvgBuy(specificProduct, follow.Frequency);// מציאת ממוצע הקניות לפי התדירות
                     double dayAvg = avg / follow.Frequency.NumDays;
+                    if(days>0)
                     if (lastBuy.Amount / days >= dayAvg)//אם הוא קנה בקניה האחרונה מעל הממוצע לא מתריע אותו
                         continue;
                         //if (follow.Frequency.NumDays > days)
@@ -253,5 +255,16 @@ namespace BL
                 return db.Alerts.Where(p => p.FollowUpList.AccountId == accountId && p.IsActivated == true).ToList().Select(p=>CONVERTERS.AlertConverter.ConvertAlertToDTO(p)).ToList();
             }
         }
+        public static void CancelAlertOfProduct(AlertDTO alert)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                 Alert alert1 = new Alert();
+                 alert1 = db.Alerts.FirstOrDefault(a => a.AlertId == alert.AlertId);
+                 db.Alerts.Remove(alert1);
+                 db.SaveChanges();
+            }
+        }
+        
     }
 }
