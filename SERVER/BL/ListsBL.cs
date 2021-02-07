@@ -47,7 +47,11 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate > DateTime.Now && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
+               var t = db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Now && list.ProductToLists.Count(p => p.DateOfBuy == null) > 0);
+         //      List<List> t1 = db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Now).ToList();
+        //        List<List> t2 = db.Lists.Where(list => list.TypesList.AccountId == accountId && list.ProductToLists.Count(p => p.DateOfBuy == null) > 0).ToList();
+                List<ListDTO> ttt= CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Now && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
+              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Now && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
             }
         }
     }
