@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 export class MainPage implements OnInit {
 
   constructor(private router: Router) { }
-
   ngOnInit() {
     if (localStorage.getItem('userId') != null)
       this.router.navigateByUrl('home-page')
+     
   }
 
 

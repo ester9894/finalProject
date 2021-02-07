@@ -174,10 +174,11 @@ namespace BL
                         continue;
                     var lastBuy = productList.FirstOrDefault(p => p.ProductId == follow.ProductId);//קניה אחרונה של המוצר הנוכחי
                     int days = (int)(DateTime.Today - lastBuy.DateOfBuy).Value.TotalDays;//הימים שעברו מאז הקניה האחרונה
-                    var specificProduct = productList.Where(p => p.ProductId == follow.ProductId).ToList();
+                    var specificProduct = productList.Where(p => p.ProductId == follow.ProductId).ToList();//לברר מה זה!!!!!!!!!
                     double avg = GetAvgBuy(specificProduct, follow.Frequency);// מציאת ממוצע הקניות לפי התדירות
                     double dayAvg = avg / follow.Frequency.NumDays;
-                    if(days>0)
+                    if (days == 0)//אני הוספתי את זה!!!!!!!
+                        continue;
                     if (lastBuy.Amount / days >= dayAvg)//אם הוא קנה בקניה האחרונה מעל הממוצע לא מתריע אותו
                         continue;
                         //if (follow.Frequency.NumDays > days)
@@ -188,7 +189,7 @@ namespace BL
                         db.Alerts.Add(//יוצר לו התראה
                             new Alert
                             {
-                                Date = DateTime.Today,
+                                Date = DateTime.Now,
                                 FollowUpListId = follow.FollowUpListId,
                                 IsActivated = true,
                                 days = days,
@@ -251,6 +252,7 @@ namespace BL
         public static List<AlertDTO> GetAlertsForAccount(int accountId)
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
+
             {
                 return db.Alerts.Where(p => p.FollowUpList.AccountId == accountId && p.IsActivated == true).ToList().Select(p=>CONVERTERS.AlertConverter.ConvertAlertToDTO(p)).ToList();
             }
@@ -259,10 +261,11 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-                 Alert alert1 = new Alert();
-                 alert1 = db.Alerts.FirstOrDefault(a => a.AlertId == alert.AlertId);
-                 db.Alerts.Remove(alert1);
-                 db.SaveChanges();
+                  Alert alert1 = new Alert();
+                  alert1 = db.Alerts.FirstOrDefault(a => a.AlertId == alert.AlertId);
+                alert1.IsActivated = false;
+            //    db.alerts.remove(alert1);
+                   db.SaveChanges();
             }
         }
         

@@ -77,7 +77,7 @@ loadChildren: () => import('./pages/active-buy-list/active-buy-list.module').the
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]
 })
