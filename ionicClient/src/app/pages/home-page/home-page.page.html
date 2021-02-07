@@ -20,7 +20,7 @@
   <ion-list *ngFor="let alert of alerts">
     <ion-item>
       <ion-label>{{alert.ProductName}}</ion-label>
-      <ion-label> ימים{{alert.days}}לפני </ion-label>
+      <ion-label> לפני {{alert.days}} ימים </ion-label>
       <ion-icon name="close-outline" (click)="CancelAlert(alert)" ></ion-icon>
       <!-- <ion-button value="הסר" (click)="CancelAlert(alert)"></ion-button> -->
     </ion-item>

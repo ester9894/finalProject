@@ -28,6 +28,11 @@ anyProductSellected:boolean=false;
 
   ngOnInit() 
   {
+    this.getFollowUpList()
+    
+  }
+
+  getFollowUpList(){
     this.accountId =+localStorage.getItem('accountId') ;
     console.log(this.accountId)
     this.followListService.getListById(this.accountId).subscribe(res=>

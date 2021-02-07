@@ -21,10 +21,10 @@ export class ShowListPage implements OnInit {
   newProducts: number[]
   addProductsToList: boolean = false
   endDate: Date;
-  list:List = new List()
-  isTouched:boolean = false
- isSaveChanges: boolean = false
- 
+  list: List = new List()
+  isTouched: boolean = false
+  isSaveChanges: boolean = false
+
 
   constructor(private route: ActivatedRoute, private router: Router, private listsService: ListsService, public alertController: AlertController) { }
 
@@ -35,8 +35,7 @@ export class ShowListPage implements OnInit {
       console.log(this.typeListId)
       this.typeListName = params.get("typeListName")
       this.getAllProducts()
-      if (this.addProductsToList == true) 
-      {
+      if (this.addProductsToList == true) {
         this.newProducts = JSON.parse(params.get('allSelectedProducts'))
         console.log(this.newProducts);
         this.addNewProductsToList(this.typeListId);
@@ -47,7 +46,7 @@ export class ShowListPage implements OnInit {
   getAllProducts() {
     this.listsService.GetAllProductsByTypeId(this.typeListId).subscribe((list) => {
       this.productsList = list;// המוצרים שנמצאים בדטה בייס
-      
+
       console.log(this.productsList);
       console.log(this.typeListName);
     })
@@ -56,29 +55,26 @@ export class ShowListPage implements OnInit {
   addNewProductsToList(typeListId: number) {
     this.listsService.addNewProductsToList(this.newProducts, typeListId).subscribe((res) => {
       //alert("המוצרים נוספו בהצלחה")       
-           var arr = this.productsList.filter(item=>{ return !this.newProducts.includes(item.ProductId); });// כל המוצרים שנמצאים במערך אחד ולא נמצאים במערך השני
-           arr.forEach(element => { this.removeProduct(this.typeListId, element.ProductId) });
+      var arr = this.productsList.filter(item => { return !this.newProducts.includes(item.ProductId); });// כל המוצרים שנמצאים במערך אחד ולא נמצאים במערך השני
+      arr.forEach(element => { this.removeProduct(this.typeListId, element.ProductId) });
       this.getAllProducts();
     })
   }
 
 
-  updateList() 
-  {
-    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => {this.getAllProducts();})
+  updateList() {
+    this.listsService.updateList(this.productsList, this.typeListId).subscribe((res) => { this.getAllProducts(); })
     this.addProductsToList = false
-    this.isSaveChanges =true
+    this.isSaveChanges = true
     this.isTouched = false
   }
 
-  addProducts() 
-  {
+  addProducts() {
     this.addProductsToList = true;
     this.router.navigate(['products', { "addProducts": true, "typeListId": this.typeListId, "typeListName": this.typeListName }]);
   }
-  
-  removeProduct(TypeListId: number, ProductId: number) 
-  {
+
+  removeProduct(TypeListId: number, ProductId: number) {
     this.listsService.removeProduct(TypeListId, ProductId).subscribe((res) => {
       this.getAllProducts();
       this.presentAlert();
@@ -86,8 +82,7 @@ export class ShowListPage implements OnInit {
     this.router.navigate(['show-list', { "status": "false", "typeListId": this.typeListId, "typeListName": this.typeListName }]);
   }
 
-  async presentAlert() 
-  {
+  async presentAlert() {
     let alert = this.alertController.create({
       message: 'המוצר הוסר בהצלחה',
       buttons: ['הבנתי']
@@ -96,20 +91,22 @@ export class ShowListPage implements OnInit {
   }
 
 
-  toBuy() 
-  { this.presentAlertToBuy();}
+  toBuy() { this.presentAlertToBuy(); }
 
   async presentAlertToBuy() {
     var alert = await this.alertController.create(
       {
         cssClass: 'my-custom-class',
         header: 'הכנס תאריך לסיום הקניה',
-        inputs: [{ type: 'date', name: 'endDate'}],
+        inputs: [{ type: 'date', name: 'endDate' }],
+        // default: ,
+        // placeholder: {},
         buttons:
           [
             {
               text: 'ביטול',
               role: 'cancel',
+
               cssClass: 'secondary',
               handler: () => { console.log('Confirm Cancel'); }
             },
@@ -117,11 +114,15 @@ export class ShowListPage implements OnInit {
               text: 'שמור',
               handler: (alertData) => {
                 console.log(alertData.endDate)
-                this.endDate = alertData.endDate
-                this.list.TypeListId= this.typeListId
+                if (!alertData.endDate)
+                  this.endDate =new Date();
+                else
+                  this.endDate = alertData.endDate
+                
+                this.list.TypeListId = this.typeListId
                 this.list.EndDate = this.endDate
                 this.listsService.addList(this.list).subscribe((listId) => {
-                  this.router.navigate(['buy-list', { "endDate": this.endDate, "typeListId": this.typeListId ,"typeListName": this.typeListName, "listId":listId}]);
+                  this.router.navigate(['buy-list', { "endDate": this.endDate, "typeListId": this.typeListId, "typeListName": this.typeListName, "listId": listId }]);
                 })
               }
             }
@@ -130,22 +131,18 @@ export class ShowListPage implements OnInit {
     await alert.present();
   }
   // כאשר אדם עורך את הרשימה שיוצג לו כפתור שמור עריכה וכאשר לוחץ על שמור רשימה יעלם הכפתור  
-  touched()
-  { 
-    if(this.isTouched == true && this.isSaveChanges == true)
-    {
+  touched() {
+    if (this.isTouched == true && this.isSaveChanges == true) {
       this.isTouched = false
-      this.isSaveChanges =false 
+      this.isSaveChanges = false
     }
     else
-      if(this.isTouched == false && this.isSaveChanges == true)
-      {
-       this.isTouched = true
-       this.isSaveChanges =false 
+      if (this.isTouched == false && this.isSaveChanges == true) {
+        this.isTouched = true
+        this.isSaveChanges = false
       }
       else
-        if((this.isTouched == true && this.isSaveChanges == false) || ((this.isTouched == false && this.isSaveChanges == false)))
-        {
+        if ((this.isTouched == true && this.isSaveChanges == false) || ((this.isTouched == false && this.isSaveChanges == false))) {
           this.isTouched = true
         }
   }

@@ -23,7 +23,9 @@ export class LoginPage implements OnInit {
     this.accountService.checkLogin(this.userLogin).subscribe((userAccount) => {
       localStorage.setItem('userId', userAccount.UserId.toString())
       localStorage.setItem('accountId', userAccount.AccountId.toString())
-      localStorage.setItem('lastDate',JSON.stringify(Date.now()))
+      // if(localStorage.getItem('lastDate')==null )
+      // localStorage.setItem('lastDate',JSON.stringify(new Date(1,1,2000)))
+
       this.router.navigateByUrl('home-page');
     }, err => this.presentAlert());
   }

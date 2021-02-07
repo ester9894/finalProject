@@ -47,7 +47,7 @@ namespace BL
         {
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
-              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate > DateTime.Now && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
+              return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Today && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
             }
         }
     }
