@@ -17,6 +17,7 @@
   </ion-toolbar>
 
 <ion-content>
+  <ion-label *ngIf="alerts.length == 0" class="emptyPage"> אין לך התראות </ion-label>
   <ion-list *ngFor="let alert of alerts">
     <ion-item>
       <ion-label>{{alert.ProductName}}</ion-label>

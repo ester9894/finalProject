@@ -14,7 +14,7 @@ namespace BL.CONVERTERS
         {
             return new ProductToList
             {
-                ProductToListId= p.ProductToListId,
+                ProductToListId_= p.ProductToListId,
                 ProductId = p.ProductId,
                 ListId = p.ListId,
                 BuyerId = p.BuyerId,
@@ -28,7 +28,7 @@ namespace BL.CONVERTERS
         {
             return new ProductToListDTO
             {
-              ProductToListId=p.ProductToListId,
+              ProductToListId=p.ProductToListId_,
               ProductId=p.ProductId,
               ListId=p.ListId,
               BuyerId=p.BuyerId,

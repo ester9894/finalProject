@@ -19,7 +19,7 @@ namespace BL.CONVERTERS
                 Days = a.days,
                 FollowUpListId = a.FollowUpListId,
                 IsActivated = a.IsActivated,
-                ProductId = a.ProductId
+                ProductId = a.ProductId.Value
             };
         }
 
@@ -31,7 +31,7 @@ namespace BL.CONVERTERS
                 Date = a.Date,
                 days = a.Days,
                 FollowUpListId = a.FollowUpListId,
-                IsActivated = a.IsActivated,
+                IsActivated = a.IsActivated.Value,
                 ProductId = a.ProductId,
                 ProductName = a.Product.ProductName
             };

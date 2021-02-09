@@ -203,7 +203,7 @@ namespace BL
                         alert.Days = days;
                         if (alert.Days / follow.Frequency.NumDays >= 3)//אם לא קנה 3 פעמים בתדירות המוגדרת
                         {
-                            follow.FrequencyId = 0;//מאפסים את התדירות
+                            follow.Frequency =null;//מאפסים את התדירות
                             db.Alerts.Remove(alert);//ומוחקים את ההתראה
                             db.SaveChanges();
                             continue;
@@ -224,12 +224,12 @@ namespace BL
 
         private static double GetAvgBuy(List<ProductToList> products, Frequency frequency)
         {
-            for (int i = 0; i < products.Count - 2; i++)
+            for (int i = products.Count-1; i >= 2; i--)
             {
-                if (IsNumberInFreequencyRange(GetNumDays(products[i + 2].DateOfBuy.Value, products[i + 1].DateOfBuy.Value), frequency) &&
-               IsNumberInFreequencyRange(GetNumDays(products[i + 1].DateOfBuy.Value, products[i].DateOfBuy.Value), frequency))
+                if (IsNumberInFreequencyRange(GetNumDays(products[i].DateOfBuy.Value, products[i - 1].DateOfBuy.Value), frequency) &&
+               IsNumberInFreequencyRange(GetNumDays(products[i - 1].DateOfBuy.Value, products[i-2].DateOfBuy.Value), frequency))
                 {
-                    return (double)(products[i + 2].Amount + products[i + 1].Amount + products[i].Amount) / 3;
+                    return (double)(products[i -2].Amount + products[i - 1].Amount + products[i].Amount) / 3;
                 }
             }
             return -1;
@@ -237,7 +237,7 @@ namespace BL
 
         private static int GetNumDays(DateTime end, DateTime start)
         {
-            return (int)(end - start).TotalDays;
+            return Math.Abs((int)(end - start).TotalDays);
         }
 
         private static bool IsNumberInFreequencyRange(int num, Frequency frequency)

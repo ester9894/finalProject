@@ -12,7 +12,7 @@ export class HomePagePage implements OnInit {
   accountId: number
   userId: number
   lastEnterDate: Date
-  alerts: Alert[]
+  alerts: Alert[] = []
   constructor(private followUpService: FollowUpService, private route: ActivatedRoute, private router: Router) {
     this.route.paramMap.subscribe(params => {
       if (localStorage.getItem('status') == "true") { this.followUpService.creteAlerts(this.accountId).subscribe(res => console.log(res)) }
@@ -31,6 +31,7 @@ export class HomePagePage implements OnInit {
     console.log(new Date().setHours(0, 0, 0).valueOf())
     let d = new Date(this.lastEnterDate).valueOf();
 console.log(d);
+this.followUpService.creteAlerts(this.accountId).subscribe(res => console.log(res))
 
     if (this.accountId != 0 && (isNaN(d) || (new Date().setHours(0, 0, 0).valueOf() - new Date(this.lastEnterDate.setHours(0, 0, 0)).valueOf()).valueOf() / (1000 * 3600 * 24) >= 1)) {
       this.followUpService.creteAlerts(this.accountId).subscribe(res => console.log(res))
