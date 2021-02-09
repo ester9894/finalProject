@@ -22,11 +22,11 @@
       <PropertyRef Name="AlertId" />
     </Key>
     <Property Name="AlertId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="days" Type="bigint" Nullable="false" />
-    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="IsActivated" Type="bit" Nullable="false" />
     <Property Name="FollowUpListId" Type="bigint" Nullable="false" />
     <Property Name="ProductId" Type="bigint" />
+    <Property Name="Days" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -153,7 +153,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Alert__FollowUpL__74AE54BC">
+  <Association Name="FK__Alert__FollowUpL__02FC7413">
     <End Role="FollowUpList" Type="Self.FollowUpList" Multiplicity="1" />
     <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
     <ReferentialConstraint>
@@ -165,7 +165,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Alert__ProductId__75A278F5">
+  <Association Name="FK__Alert__ProductId__03F0984C">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
     <ReferentialConstraint>
@@ -359,11 +359,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Accounts" EntitySet="Accounts" />
     </AssociationSet>
-    <AssociationSet Name="FK__Alert__FollowUpL__74AE54BC" Association="Self.FK__Alert__FollowUpL__74AE54BC">
+    <AssociationSet Name="FK__Alert__FollowUpL__02FC7413" Association="Self.FK__Alert__FollowUpL__02FC7413">
       <End Role="FollowUpList" EntitySet="FollowUpList" />
       <End Role="Alert" EntitySet="Alert" />
     </AssociationSet>
-    <AssociationSet Name="FK__Alert__ProductId__75A278F5" Association="Self.FK__Alert__ProductId__75A278F5">
+    <AssociationSet Name="FK__Alert__ProductId__03F0984C" Association="Self.FK__Alert__ProductId__03F0984C">
       <End Role="Products" EntitySet="Products" />
       <End Role="Alert" EntitySet="Alert" />
     </AssociationSet>

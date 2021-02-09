@@ -15,11 +15,11 @@ namespace DAL
     public partial class Alert
     {
         public long AlertId { get; set; }
-        public long days { get; set; }
         public System.DateTime Date { get; set; }
         public bool IsActivated { get; set; }
         public long FollowUpListId { get; set; }
         public Nullable<long> ProductId { get; set; }
+        public long Days { get; set; }
     
         public virtual FollowUpList FollowUpList { get; set; }
         public virtual Product Product { get; set; }

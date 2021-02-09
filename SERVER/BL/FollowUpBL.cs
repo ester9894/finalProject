@@ -192,7 +192,7 @@ namespace BL
                                 Date = DateTime.Now,
                                 FollowUpListId = follow.FollowUpListId,
                                 IsActivated = true,
-                                days = days,
+                                Days = days,
                                 ProductId = follow.ProductId
 
                             });
@@ -200,8 +200,8 @@ namespace BL
                     }
                     else// אם יש לו התראה
                     {
-                        alert.days = days;
-                        if (alert.days / follow.Frequency.NumDays >= 3)//אם לא קנה 3 פעמים בתדירות המוגדרת
+                        alert.Days = days;
+                        if (alert.Days / follow.Frequency.NumDays >= 3)//אם לא קנה 3 פעמים בתדירות המוגדרת
                         {
                             follow.FrequencyId = 0;//מאפסים את התדירות
                             db.Alerts.Remove(alert);//ומוחקים את ההתראה
@@ -209,7 +209,7 @@ namespace BL
                             continue;
                         }
 
-                        if (alert.IsActivated == false && alert.days % follow.Frequency.NumDays == 0)//אם ההתראה במצב התעלמות והגיע תאריך התדירות
+                        if (alert.IsActivated == false && alert.Days % follow.Frequency.NumDays == 0)//אם ההתראה במצב התעלמות והגיע תאריך התדירות
                         {
                             alert.IsActivated = true;//מפעיל את ההתראה
                             db.SaveChanges();

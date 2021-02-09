@@ -16,7 +16,7 @@ namespace BL.CONVERTERS
             {
                 AlertId = a.AlertId,
                 Date = a.Date,
-                days = a.days,
+                Days = a.days,
                 FollowUpListId = a.FollowUpListId,
                 IsActivated = a.IsActivated,
                 ProductId = a.ProductId
@@ -29,7 +29,7 @@ namespace BL.CONVERTERS
             {
                 AlertId = a.AlertId,
                 Date = a.Date,
-                days = a.days,
+                days = a.Days,
                 FollowUpListId = a.FollowUpListId,
                 IsActivated = a.IsActivated,
                 ProductId = a.ProductId,
