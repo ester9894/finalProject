@@ -41,7 +41,7 @@
     <Property Name="EndDate" Type="DateTime" Precision="3" />
     <Property Name="TypeListId" Type="Int64" Nullable="false" />
     <NavigationProperty Name="TypesList" Relationship="Self.FK__Lists__TypeListI__4316F928" FromRole="Lists" ToRole="TypesList" />
-    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__ListI__3F466844" FromRole="List" ToRole="ProductToList" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__ListI__4D94879B" FromRole="List" ToRole="ProductToList" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -54,8 +54,8 @@
     <NavigationProperty Name="ProductsToTypeLists" Relationship="Self.FK__ProductsT__Produ__3C69FB99" FromRole="Products" ToRole="ProductsToTypeList" />
     <NavigationProperty Name="Accounts" Relationship="Self.AccountProducts" FromRole="Products" ToRole="Accounts" />
     <NavigationProperty Name="FollowUpLists" Relationship="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" FromRole="Product" ToRole="FollowUpList" />
-    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Produ__3E52440B" FromRole="Product" ToRole="ProductToList" />
-    <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__ProductId__75A278F5" FromRole="Product" ToRole="Alert" />
+    <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__ProductId__2A164134" FromRole="Product" ToRole="Alert" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Produ__4CA06362" FromRole="Product" ToRole="ProductToList" />
   </EntityType>
   <EntityType Name="ProductsToTypeList">
     <Key>
@@ -215,36 +215,36 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="FollowUpList" EntitySet="FollowUpLists" />
     </AssociationSet>
-    <EntitySet Name="ProductToLists" EntityType="ProjectDBModel.ProductToList" />
-    <AssociationSet Name="FK__ProductTo__ListI__3F466844" Association="ProjectDBModel.FK__ProductTo__ListI__3F466844">
-      <End Role="List" EntitySet="Lists" />
-      <End Role="ProductToList" EntitySet="ProductToLists" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProductTo__Produ__3E52440B" Association="ProjectDBModel.FK__ProductTo__Produ__3E52440B">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="ProductToList" EntitySet="ProductToLists" />
-    </AssociationSet>
-    <EntitySet Name="Alerts" EntityType="ProjectDBModel.Alert" />
-    <AssociationSet Name="FK__Alert__FollowUpL__74AE54BC" Association="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC">
-      <End Role="FollowUpList" EntitySet="FollowUpLists" />
-      <End Role="Alert" EntitySet="Alerts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Alert__ProductId__75A278F5" Association="ProjectDBModel.FK__Alert__ProductId__75A278F5">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Alert" EntitySet="Alerts" />
-    </AssociationSet>
     <EntitySet Name="Users" EntityType="ProjectDBModel.User" />
     <AssociationSet Name="FK__Accounts__Manage__36B12243" Association="ProjectDBModel.FK__Accounts__Manage__36B12243">
       <End Role="User" EntitySet="Users" />
       <End Role="Account" EntitySet="Accounts" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductTo__Buyer__5AEE82B9" Association="ProjectDBModel.FK__ProductTo__Buyer__5AEE82B9">
-      <End Role="User" EntitySet="Users" />
-      <End Role="ProductToList" EntitySet="ProductToLists" />
-    </AssociationSet>
     <AssociationSet Name="FK__UsersAcco__UserI__4222D4EF" Association="ProjectDBModel.FK__UsersAcco__UserI__4222D4EF">
       <End Role="User" EntitySet="Users" />
       <End Role="UsersAccount" EntitySet="UsersAccounts" />
+    </AssociationSet>
+    <EntitySet Name="Alerts" EntityType="ProjectDBModel.Alert" />
+    <AssociationSet Name="FK__Alert__FollowUpL__29221CFB" Association="ProjectDBModel.FK__Alert__FollowUpL__29221CFB">
+      <End Role="FollowUpList" EntitySet="FollowUpLists" />
+      <End Role="Alert" EntitySet="Alerts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Alert__ProductId__2A164134" Association="ProjectDBModel.FK__Alert__ProductId__2A164134">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Alert" EntitySet="Alerts" />
+    </AssociationSet>
+    <EntitySet Name="ProductToLists" EntityType="ProjectDBModel.ProductToList" />
+    <AssociationSet Name="FK__ProductTo__ListI__4D94879B" Association="ProjectDBModel.FK__ProductTo__ListI__4D94879B">
+      <End Role="List" EntitySet="Lists" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductTo__Produ__4CA06362" Association="ProjectDBModel.FK__ProductTo__Produ__4CA06362">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductTo__Buyer__01142BA1" Association="ProjectDBModel.FK__ProductTo__Buyer__01142BA1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ProductToList" EntitySet="ProductToLists" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="FollowUpList">
@@ -259,7 +259,7 @@
     <NavigationProperty Name="Account" Relationship="ProjectDBModel.FK__FollowUpL__Accou__5165187F" FromRole="FollowUpList" ToRole="Account" />
     <NavigationProperty Name="Frequency" Relationship="ProjectDBModel.FK__FollowUpL__Frequ__5070F446" FromRole="FollowUpList" ToRole="Frequency" />
     <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" FromRole="FollowUpList" ToRole="Product" />
-    <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC" FromRole="FollowUpList" ToRole="Alert" />
+    <NavigationProperty Name="Alerts" Relationship="ProjectDBModel.FK__Alert__FollowUpL__29221CFB" FromRole="FollowUpList" ToRole="Alert" />
   </EntityType>
   <Association Name="FK__FollowUpL__Accou__5165187F">
     <End Type="ProjectDBModel.Account" Role="Account" Multiplicity="1" />
@@ -297,81 +297,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="ProductToList">
-    <Key>
-      <PropertyRef Name="ProductToListId" />
-    </Key>
-    <Property Name="ProductToListId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductId" Type="Int64" Nullable="false" />
-    <Property Name="ListId" Type="Int64" Nullable="false" />
-    <Property Name="BuyerId" Type="Int64" />
-    <Property Name="DateOfBuy" Type="DateTime" Precision="3" />
-    <Property Name="Amount" Type="Int32" />
-    <NavigationProperty Name="List" Relationship="ProjectDBModel.FK__ProductTo__ListI__3F466844" FromRole="ProductToList" ToRole="List" />
-    <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__ProductTo__Produ__3E52440B" FromRole="ProductToList" ToRole="Product" />
-    <NavigationProperty Name="User" Relationship="ProjectDBModel.FK__ProductTo__Buyer__5AEE82B9" FromRole="ProductToList" ToRole="User" />
-  </EntityType>
-  <Association Name="FK__ProductTo__ListI__3F466844">
-    <End Type="ProjectDBModel.List" Role="List" Multiplicity="1" />
-    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="List">
-        <PropertyRef Name="ListId" />
-      </Principal>
-      <Dependent Role="ProductToList">
-        <PropertyRef Name="ListId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ProductTo__Produ__3E52440B">
-    <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="1" />
-    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ProductId" />
-      </Principal>
-      <Dependent Role="ProductToList">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Alert">
-    <Key>
-      <PropertyRef Name="AlertId" />
-    </Key>
-    <Property Name="AlertId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="days" Type="Int64" Nullable="false" />
-    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="IsActivated" Type="Boolean" Nullable="false" />
-    <Property Name="FollowUpListId" Type="Int64" Nullable="false" />
-    <Property Name="ProductId" Type="Int64" />
-    <NavigationProperty Name="FollowUpList" Relationship="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC" FromRole="Alert" ToRole="FollowUpList" />
-    <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__Alert__ProductId__75A278F5" FromRole="Alert" ToRole="Product" />
-  </EntityType>
-  <Association Name="FK__Alert__FollowUpL__74AE54BC">
-    <End Type="ProjectDBModel.FollowUpList" Role="FollowUpList" Multiplicity="1" />
-    <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="FollowUpList">
-        <PropertyRef Name="FollowUpListId" />
-      </Principal>
-      <Dependent Role="Alert">
-        <PropertyRef Name="FollowUpListId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Alert__ProductId__75A278F5">
-    <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ProductId" />
-      </Principal>
-      <Dependent Role="Alert">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserId" />
@@ -380,10 +305,10 @@
     <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Accounts" Relationship="ProjectDBModel.FK__Accounts__Manage__36B12243" FromRole="User" ToRole="Account" />
-    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Buyer__5AEE82B9" FromRole="User" ToRole="ProductToList" />
     <NavigationProperty Name="UsersAccounts" Relationship="ProjectDBModel.FK__UsersAcco__UserI__4222D4EF" FromRole="User" ToRole="UsersAccount" />
+    <NavigationProperty Name="ProductToLists" Relationship="ProjectDBModel.FK__ProductTo__Buyer__01142BA1" FromRole="User" ToRole="ProductToList" />
   </EntityType>
   <Association Name="FK__Accounts__Manage__36B12243">
     <End Type="ProjectDBModel.User" Role="User" Multiplicity="1" />
@@ -397,18 +322,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductTo__Buyer__5AEE82B9">
-    <End Type="ProjectDBModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="ProductToList">
-        <PropertyRef Name="BuyerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__UsersAcco__UserI__4222D4EF">
     <End Type="ProjectDBModel.User" Role="User" Multiplicity="1" />
     <End Type="ProjectDBModel.UsersAccount" Role="UsersAccount" Multiplicity="*" />
@@ -418,6 +331,93 @@
       </Principal>
       <Dependent Role="UsersAccount">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Alert">
+    <Key>
+      <PropertyRef Name="AlertId" />
+    </Key>
+    <Property Name="AlertId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Days" Type="Int64" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActivated" Type="Boolean" />
+    <Property Name="FollowUpListId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="FollowUpList" Relationship="ProjectDBModel.FK__Alert__FollowUpL__29221CFB" FromRole="Alert" ToRole="FollowUpList" />
+    <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__Alert__ProductId__2A164134" FromRole="Alert" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK__Alert__FollowUpL__29221CFB">
+    <End Type="ProjectDBModel.FollowUpList" Role="FollowUpList" Multiplicity="1" />
+    <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FollowUpList">
+        <PropertyRef Name="FollowUpListId" />
+      </Principal>
+      <Dependent Role="Alert">
+        <PropertyRef Name="FollowUpListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Alert__ProductId__2A164134">
+    <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ProjectDBModel.Alert" Role="Alert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Alert">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductToList">
+    <Key>
+      <PropertyRef Name="ProductToListId_" />
+    </Key>
+    <Property Name="ProductToListId_" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int64" Nullable="false" />
+    <Property Name="ListId" Type="Int64" Nullable="false" />
+    <Property Name="BuyerId" Type="Int64" />
+    <Property Name="DateOfBuy" Type="DateTime" Precision="3" />
+    <Property Name="Amount" Type="Int32" />
+    <NavigationProperty Name="List" Relationship="ProjectDBModel.FK__ProductTo__ListI__4D94879B" FromRole="ProductToList" ToRole="List" />
+    <NavigationProperty Name="Product" Relationship="ProjectDBModel.FK__ProductTo__Produ__4CA06362" FromRole="ProductToList" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="ProjectDBModel.FK__ProductTo__Buyer__01142BA1" FromRole="ProductToList" ToRole="User" />
+  </EntityType>
+  <Association Name="FK__ProductTo__ListI__4D94879B">
+    <End Type="ProjectDBModel.List" Role="List" Multiplicity="1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="List">
+        <PropertyRef Name="ListId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductTo__Produ__4CA06362">
+    <End Type="ProjectDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductTo__Buyer__01142BA1">
+    <End Type="ProjectDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.ProductToList" Role="ProductToList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ProductToList">
+        <PropertyRef Name="BuyerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

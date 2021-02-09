@@ -94,15 +94,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductToLists">
-      <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
-        <MappingFragment StoreEntitySet="ProductToList">
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="DateOfBuy" ColumnName="DateOfBuy" />
-          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
-          <ScalarProperty Name="ListId" ColumnName="ListId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="ProductToListId" ColumnName="ProductToListId" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ProjectDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -113,19 +112,20 @@
           <ScalarProperty Name="FollowUpListId" ColumnName="FollowUpListId" />
           <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
           <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="days" ColumnName="days" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
           <ScalarProperty Name="AlertId" ColumnName="AlertId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="ProjectDBModel.User">
-        <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
+    <EntitySetMapping Name="ProductToLists">
+      <EntityTypeMapping TypeName="ProjectDBModel.ProductToList">
+        <MappingFragment StoreEntitySet="ProductToList">
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="DateOfBuy" ColumnName="DateOfBuy" />
+          <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductToListId_" ColumnName="ProductToListId " />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -10,7 +10,7 @@ import { ListsService } from 'src/app/shared/services/lists.service';
 })
 export class ActiveBuyListPage implements OnInit {
   accountId = + localStorage.getItem('accountId')
-  activeLists: List[]
+  activeLists: List[] = []
   constructor(private listService: ListsService, private router: Router) { }
 
   ngOnInit() {

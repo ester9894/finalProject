@@ -11,7 +11,7 @@ import { ListsService } from 'src/app/shared/services/lists.service';
 })
 export class TypesListPage implements OnInit {
   accountId: number;
-  typeListArray: Array<TypeList>;
+  typeListArray: Array<TypeList>= [];
 
   constructor(private listsService: ListsService, private router: Router) { }
 

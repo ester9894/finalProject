@@ -16,10 +16,10 @@ namespace BL.CONVERTERS
             {
                 AlertId = a.AlertId,
                 Date = a.Date,
-                days = a.days,
+                Days = a.days,
                 FollowUpListId = a.FollowUpListId,
                 IsActivated = a.IsActivated,
-                ProductId = a.ProductId
+                ProductId = a.ProductId.Value
             };
         }
 
@@ -29,9 +29,9 @@ namespace BL.CONVERTERS
             {
                 AlertId = a.AlertId,
                 Date = a.Date,
-                days = a.days,
+                days = a.Days,
                 FollowUpListId = a.FollowUpListId,
-                IsActivated = a.IsActivated,
+                IsActivated = a.IsActivated.Value,
                 ProductId = a.ProductId,
                 ProductName = a.Product.ProductName
             };

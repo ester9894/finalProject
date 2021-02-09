@@ -116,8 +116,8 @@ export class ProductsPage implements OnInit {
 
   selectText(index)
   {
-    let text
-    if(this.selectedsArray[index]!= undefined)
+    let text='';
+    if(this.selectedsArray[index].length>0)
       text=Object(this.selectedsArray[index]).map(s=>s.ProductName).toString()
     return text;
   }
@@ -323,10 +323,16 @@ async showAlert(message: string)
   }
   compareById(o1,o2)
   {
+    
     for(let p of o2)
     if(p.ProductId==o1.ProductId)
     return true;
     return false;
+  }
+
+  showSelected()
+  {
+    console.log(this.selectedsArray)
   }
 }
 

@@ -24,6 +24,7 @@
 
 <ion-content>
   <ion-label class="list-header" style="font-size: 12px; color: darkgrey;"> להצגת פרטים ו/או לעריכה לחץ על רשימה מסוימת</ion-label>
+  <ion-label *ngIf="typeListArray.length == 0" class="emptyPage"> אין רשימות  </ion-label>
   <ion-item button *ngFor="let item of typeListArray" (click)="editList(item.TypeListId, item.TypeListName)">
     {{item.TypeListName}}
   </ion-item>

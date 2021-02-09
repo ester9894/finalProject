@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="27a924fedcf049179e1e82ed2fa4b82d" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="27a924fedcf049179e1e82ed2fa4b82d" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="ProjectDBModel.Account" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Category" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectDBModel.Frequency" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
@@ -24,16 +24,16 @@
         <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Accou__5165187F" />
         <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Frequ__5070F446" />
         <AssociationConnector Association="ProjectDBModel.FK__FollowUpL__Produ__4F7CD00D" />
-        <EntityTypeShape EntityType="ProjectDBModel.ProductToList" Width="1.5" PointX="9.75" PointY="9.625" />
-        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__ListI__3F466844" />
-        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__Produ__3E52440B" />
-        <EntityTypeShape EntityType="ProjectDBModel.Alert" Width="1.5" PointX="9.75" PointY="4.25" />
-        <AssociationConnector Association="ProjectDBModel.FK__Alert__FollowUpL__74AE54BC" />
-        <AssociationConnector Association="ProjectDBModel.FK__Alert__ProductId__75A278F5" />
         <EntityTypeShape EntityType="ProjectDBModel.User" Width="1.5" PointX="0.75" PointY="8.375" />
         <AssociationConnector Association="ProjectDBModel.FK__Accounts__Manage__36B12243" />
-        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__Buyer__5AEE82B9" />
         <AssociationConnector Association="ProjectDBModel.FK__UsersAcco__UserI__4222D4EF" />
+        <EntityTypeShape EntityType="ProjectDBModel.Alert" Width="1.5" PointX="9.75" PointY="4.25" />
+        <AssociationConnector Association="ProjectDBModel.FK__Alert__FollowUpL__29221CFB" />
+        <AssociationConnector Association="ProjectDBModel.FK__Alert__ProductId__2A164134" />
+        <EntityTypeShape EntityType="ProjectDBModel.ProductToList" Width="1.5" PointX="9.75" PointY="9.625" />
+        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__ListI__4D94879B" />
+        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__Produ__4CA06362" />
+        <AssociationConnector Association="ProjectDBModel.FK__ProductTo__Buyer__01142BA1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

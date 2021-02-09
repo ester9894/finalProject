@@ -30,7 +30,15 @@
 <ion-content>
    <ion-item  *ngFor="let item of arrKind; let j=index">
     <ion-label>{{item}}</ion-label>
-    <ion-select  multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]"  [selectedText]="selectText(j)" [compareWith]="compareById">
+    <ion-select *ngIf="selectedsArray[j].length>0"  multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]"  [selectedText]="selectText(j)" [compareWith]="compareById">
+      <div  *ngFor= "let p of arrProducts">
+        <div *ngFor = "let i of p">
+          <ion-select-option [id]="i.ProductId" checked="true" [value]="i" *ngIf="i.CategoryName===item">{{i.ProductName}} </ion-select-option>
+        </div>
+     </div>
+    </ion-select> 
+
+    <ion-select *ngIf="selectedsArray[j].length==0" multiple="true" cancelText="ביטול" okText="עדכן" [(ngModel)]="selectedsArray[j]"  [selectedText]="selectText(j)" >
       <div  *ngFor= "let p of arrProducts">
         <div *ngFor = "let i of p">
           <ion-select-option [id]="i.ProductId" checked="true" [value]="i" *ngIf="i.CategoryName===item">{{i.ProductName}} </ion-select-option>
@@ -38,5 +46,6 @@
      </div>
     </ion-select> 
    </ion-item> 
+
 </ion-content>
 
