@@ -32,4 +32,4 @@ C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.dll
 C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.pdb
-C:\Users\User\Documents\מגמת מחשבים\פרוייקט חדש\Project\SERVER\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\User\Documents\פרויקט גמר\finalProject\finalProject\SERVER\DAL\obj\Debug\DAL.csprojAssemblyReference.cache

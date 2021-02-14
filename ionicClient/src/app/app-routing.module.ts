@@ -72,16 +72,12 @@ const routes: Routes = [
   {
     path: 'active-buy-list',
 loadChildren: () => import('./pages/active-buy-list/active-buy-list.module').then( m => m.ActiveBuyListPageModule)
-  },  {
-    path: 'for-future-buy',
-    loadChildren: () => import('./pages/for-future-buy/for-future-buy.module').then( m => m.ForFutureBuyPageModule)
   },
-
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]
 })
