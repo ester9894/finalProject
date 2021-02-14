@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-toolbar>
-    <ion-title class="title">לוח ההתראות שלך</ion-title>
+    <ion-title class="title">הגיע זמן קניה..</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button id="menu"></ion-menu-button>
     </ion-buttons>
@@ -21,7 +21,7 @@
   <ion-list *ngFor="let alert of alerts">
     <ion-item>
       <ion-label>{{alert.ProductName}}</ion-label>
-      <ion-label> לפני {{alert.days}} ימים </ion-label>
+      <ion-label style="color: gray;"> {{alert.days}} ימים </ion-label>
       <ion-icon name="close-outline" (click)="CancelAlert(alert)" ></ion-icon>
       <!-- <ion-button value="הסר" (click)="CancelAlert(alert)"></ion-button> -->
     </ion-item>

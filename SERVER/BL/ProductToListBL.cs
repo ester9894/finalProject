@@ -30,8 +30,29 @@ namespace BL
                 }
 
             }
-
-
         }
+
+        public static void SaveOneProductsToList(int accountId, ProductToListDTO[] products)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                Account account = db.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+                List list = account.TypesLists.SelectMany(l => l.Lists).FirstOrDefault(li=> li.ListId == products[0].ListId);
+                foreach (var pr in products)
+                {
+                    if (list.ProductToLists.FirstOrDefault(l => l.ProductId == pr.ProductId) == null)
+                    {
+                    ProductToList productToList = new ProductToList();
+                    productToList.ListId = pr.ListId;
+                    productToList.ProductId = pr.ProductId;
+                        productToList.Amount = 1;
+                    list.ProductToLists.Add(productToList);
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+        }
+
     }
 }

@@ -45,4 +45,9 @@ export class FollowUpService
    {
      return this.http.post<boolean>(environment.url + '/followUp/CancelAlertOfProduct', alert)
    }
+
+   getForFutureBuyAlerts(accountId: Number):Observable<followUpList[]>
+   {
+    return this.http.get<followUpList[]>(environment.url + `/followUp/GetForFutureBuyAlerts/${accountId}`)
+   }
 }

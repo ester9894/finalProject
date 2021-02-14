@@ -29,3 +29,7 @@
   </ion-list>
   <ion-label *ngIf="activeLists.length == 0" class="emptyPage">אין קניות פעילות </ion-label>
 </ion-content>
+
+  <ion-toolbar>
+  <ion-item style="margin-right: 50px; color:rgb(253, 186, 14);" *ngIf="activeLists.length != 0" (click)="showAllProducts()">כל המוצרים שעוד לא נקנו</ion-item>
+</ion-toolbar>

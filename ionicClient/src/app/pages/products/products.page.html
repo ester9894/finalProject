@@ -26,7 +26,7 @@
 <ion-toolbar>
 <ion-searchbar  placeholder="חפש מוצר" showcancelbutton="" (ionInput)="getItems($event)" class="list-header"></ion-searchbar></ion-toolbar>
 <ion-item-divider button *ngFor="let item of currentItems" (click)="addForSaveList(item)">{{item.ProductName}} </ion-item-divider>
-
+<ion-item *ngIf="isPageForUpdateFollowList"><ion-checkbox slot="start" [(ngModel)]="allChecked"></ion-checkbox> <ion-text>בחר הכל</ion-text> </ion-item>
 <ion-content>
    <ion-item  *ngFor="let item of arrKind; let j=index">
     <ion-label>{{item}}</ion-label>

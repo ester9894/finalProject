@@ -3,4 +3,5 @@ export class followUpList {
     ProductId: number
     Amount: number
     FrequencyId: number
+    ProductName: string
 }

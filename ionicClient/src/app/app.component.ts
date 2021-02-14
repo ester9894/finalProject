@@ -23,10 +23,19 @@ export class AppComponent implements OnInit {
   accountsList: Account[]
   public appPages = [
     {
+      title: 'לוח התראות',
+      url: '/home-page',
+      icon: 'notifications'
+    },
+    {
+      title: 'כמעט ונגמר',
+      url: '/for-future-buy',
+      icon: 'notifications'
+    },
+    {
       title: 'הרשימות שלי',
       url: '/types-list',
       icon: 'list'
-
     },
     {
       title: 'רשימות פעילות',
@@ -42,13 +51,7 @@ export class AppComponent implements OnInit {
       title: 'מוצרים למעקב',
       url: '/follow-list',
       icon: 'alert'
-    },
-    {
-      title: 'לוח התראות',
-      url: '/home-page',
-      icon: 'notifications'
     }
-
   ];
 
   constructor(
@@ -71,9 +74,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-      
+  ngOnInit() {  
      const path = window.location.pathname.split('login/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());

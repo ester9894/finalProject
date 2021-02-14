@@ -61,4 +61,11 @@ export class ListsService
   GetAllActiveProductOfList(listId: Number): Observable<ProductToList[]> {
     return this.http.get<ProductToList[]>(environment.url + `/lists/GetProductsOfBuyList/${listId}`)
   }
+  GetProductsNotBuyOfAllActiveList(accountId: Number): Observable<ProductToList[]> {
+    return this.http.get<ProductToList[]>(environment.url + `/lists/GetProductsNotBuyOfAllActiveList/${accountId}`)
+  }
+  
+  SaveOneProductsToList(accountId: Number, products: ProductToList[]): Observable<boolean> {
+    return this.http.post<boolean>(environment.url + `/lists/SaveOneProductsToList/${accountId}`, products )
+  }
 }

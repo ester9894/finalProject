@@ -26,12 +26,30 @@ export class BuyListPage implements OnInit {
   list:List
   groupByCategory = []// productsList groupby categories
   categories : any// arr of products category
+  groupByListId=[]
+  listsId: any[];
+  OneTimeproductsList=[]
   constructor(private listsService: ListsService, private followUpService: FollowUpService, private route: ActivatedRoute, private alertController: AlertController, private router: Router) 
   {
     // restart data from previous page
     this.route.params.subscribe(params => 
       { 
         this.listDetails.AccountId =+ localStorage.getItem('accountId')
+        if( params['typeListName'] == "all" )
+        {
+            this.listsService.GetProductsNotBuyOfAllActiveList(this.listDetails.AccountId).subscribe(products=> {
+            this.productsList = [].concat.apply([],products)
+            this.categories = this.productsList.map(item => item.CategotyName); //מערך של קטגוריות המוצרים שברשימה
+            this.categories = this.categories.filter(function(elem, index, self) {return index === self.indexOf(elem);})// מסנן את המערך שלא יהיו כפילויות
+            this.groupByCategory = [];
+            this.categories.forEach(category => 
+            this.groupByCategory.push({'CategoryName': category, 'values': this.productsList.filter(i => i.CategotyName == category)}))
+            this.productsList = [].concat.apply([], this.groupByCategory.map(f=> f.values));
+            console.log(this.productsList)
+      })
+        }
+        this.OneTimeproductsList= params['OneTimeproductsList']
+        console.log(this.OneTimeproductsList)
         this.listDetails.TypeListId= params['typeListId']; 
         this.listDetails.TypeListName = params['typeListName']; 
         this.buyList.ListId=params['listId'];
@@ -41,7 +59,8 @@ export class BuyListPage implements OnInit {
 
   ngOnInit() 
   {
-    this.getAllProducts()
+    if(this.buyList.ListId != undefined)
+        this.getAllProducts()
     this.getFollowProductsList()
   }
 
@@ -77,15 +96,36 @@ export class BuyListPage implements OnInit {
     console.log(this.arrProductsBuy)
     if(this.arrProductsBuy.length)
     {
-      this.buyList.userId = this.userId
-      this.buyList.typeListId = this.listDetails.TypeListId
-      this.buyList.products = this.arrProductsBuy
-      this.listsService.updateBuyList(this.buyList).subscribe(res=>
+      if( this.buyList.ListId ==undefined)
+      {
+        this.listsId = this.arrProductsBuy.map(item => item.ListId); //מערך של קטגוריות המוצרים שברשימה
+        this.listsId = this.listsId.filter(function(elem, index, self) {return index === self.indexOf(elem);})// מסנן את המערך שלא יהיו כפילויות
+        this.groupByListId = [];
+        this.listsId.forEach(listId => 
+        this.groupByListId.push({'ListId': listId, 'values': this.arrProductsBuy.filter(i => i.ListId == listId)}))
+        this.groupByListId = [].concat.apply([], this.groupByListId.map(f=> f.values));
+        console.log(this.groupByListId)
+        for(let id of this.listsId)
+        {
+          const arr = this.groupByListId.filter(product => product.ListId == id)
+          this.buyList.userId = this.userId
+          this.buyList.ListId = arr[0].ListId
+          this.buyList.products = arr     
+          this.listsService.updateBuyList(this.buyList).subscribe(res=>{});
+        }
+      }
+      else
+      {
+        this.buyList.userId = this.userId
+        this.buyList.typeListId = this.listDetails.TypeListId
+        this.buyList.products = this.arrProductsBuy
+        this.listsService.updateBuyList(this.buyList).subscribe(res=>
         {
           this.showMessage("הקניה בוצעה בהצלחה")
           this.router.navigate(['home-page']);
         });
     }
+  }
     else
     {
       this.showMessage('לא קנית כלום??!!')
@@ -132,5 +172,9 @@ export class BuyListPage implements OnInit {
         arr.forEach(pro => { if(pro.ProductId == product.ProductId) {this.showAlertSelectAmount(product)}
       });
    }
+  }
+  moveToProductsListPage()
+  {
+    this.router.navigate(['products',{"isFromBuyList": "true", "listId": this.buyList.ListId}]);
   }
 }

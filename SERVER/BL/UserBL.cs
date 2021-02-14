@@ -36,8 +36,7 @@ namespace BL
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                 return CONVERTERS.UserConverter.ConvertUserToDTO( db.Users.Where(u => u.UserId == userId).ToList()[0]);
-            }
-               
+            }            
         }
     }
 }

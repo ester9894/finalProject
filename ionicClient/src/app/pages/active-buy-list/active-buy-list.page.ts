@@ -34,4 +34,9 @@ export class ActiveBuyListPage implements OnInit {
   goToBuyList(list: List) {
     this.router.navigate(['buy-list', { "endDate": list.EndDate, "typeListId": list.TypeListId, "typeListName": list.TypeListName, "listId": list.ListId }]);
   }
+
+  showAllProducts()
+  {
+    this.router.navigate(['buy-list', {"typeListName":"all"}]);
+  }
 }

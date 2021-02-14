@@ -1,0 +1,25 @@
+<ion-header >
+  <ion-toolbar dir="ltr" class="BackgroundGrey" >
+    <ion-row>
+      <ion-label style="width: 9px;"></ion-label> 
+      <img src="/assets/images/LogoDarkWR.png" width="50px">
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar>
+    <ion-title class="title">כמעט ונגמר</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+<ion-content>
+  <ion-label *ngIf="products.length == 0" class="emptyPage"> אין לך התראות </ion-label>
+  <ion-list *ngFor="let product of products">
+    <ion-item>
+      <ion-label>{{product.ProductName}}</ion-label>
+      <ion-label> לפני {{product.Amount}} ימים </ion-label>
+      <ion-icon name="close-outline" (click)="CancelAlert(product)" ></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

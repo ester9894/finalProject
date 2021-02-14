@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 import { ListsService } from 'src/app/shared/services/lists.service';
 import {Location} from '@angular/common'
 import { Key } from 'protractor';
+import { ProductToList } from 'src/app/shared/models/product_to_list.model';
 // הערה
 @Component({
   selector: 'app-products',
@@ -34,10 +35,18 @@ export class ProductsPage implements OnInit {
   typeListName: string;
   selectedItemsLength: Number
   selectedArrayId: Number[] =[]
+  allChecked: boolean = false
+  isFromBuyList: boolean
+  oneTimes=[]
+  listId: number
+  oneTime: ProductToList[]=[]
   constructor(private _location: Location, private productService: ProductsService, private followUpService: FollowUpService, private listService: ListsService, private router: Router, private route: ActivatedRoute, private alertController: AlertController) 
   {   
       this.route.params.subscribe(params => 
       {
+        this.isFromBuyList = JSON.parse(params['isFromBuyList']) 
+        this.listId = +params['listId']
+        console.log(this.isFromBuyList)
         this.isPageForUpdateFollowList = params['isForFollowList']; 
         this.addProductsToList=params['addProducts']
         this.typeListId = +params['typeListId']
@@ -57,7 +66,9 @@ export class ProductsPage implements OnInit {
     if(this.isPageForUpdateFollowList)
       this.getSortedFolowList()
     if(this.addProductsToList)
-      this.GetAllProductsByTypeId()   
+      this.GetAllProductsByTypeId()  
+    if(this.isFromBuyList)
+      this.selectedsArray =  this.oneTimes
   }
 
 // get all products of account from DB
@@ -75,6 +86,9 @@ export class ProductsPage implements OnInit {
         if(this.allSelectedProducts.length>0)
         this.setSelectedArray(this.allSelectedProducts.map(p=>p))    
         Object.values(res).forEach(element => {this.arrProducts.push(element)});// arrProducts
+        console.log(this.arrProducts)
+      //  console.log(" nnncj"+this.arrProducts.map(p=>p.ProductId))
+
       });
   }
 
@@ -307,6 +321,16 @@ async showAlert(message: string)
       this.allSelectedProducts.push(...this.newListId)
       if(this.isPageForUpdateFollowList)
       {
+        if(this.allChecked)
+        {
+          const arrAll= new Array()
+          for(var arr of this.arrProducts)
+          {
+            for(let p of arr)
+              arrAll.push(p.ProductId)    
+          }
+          this.allSelectedProducts = arrAll
+        }
        this.followUpService.saveList(this.allSelectedProducts, this.idAccount).
        subscribe((res) => { this.router.navigateByUrl('follow-list');});
       }
@@ -314,6 +338,17 @@ async showAlert(message: string)
          {
            this.router.navigate(['show-list',{"status":"true", "allSelectedProducts":JSON.stringify(this.allSelectedProducts),"typeListId":this.typeListId, "typeListName":this.typeListName}]);
          }
+         else if(this.isFromBuyList == true)
+        {
+          this.allSelectedProducts.map(p => { 
+            var p1 = new ProductToList()
+            p1.ListId = this.listId
+            p1.ProductId = p
+            this.oneTime.push(p1)  
+        });
+        this.listService.SaveOneProductsToList(this.idAccount, this.oneTime).subscribe(res=>          
+          this.router.navigate(['buy-list', {"listId":this.listId}])
+        ) }
        else
          {
            this.router.navigate(['create-list',{"productsList": this.allSelectedProducts}]);

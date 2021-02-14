@@ -21,6 +21,9 @@
   <ion-button (click)="finishShopping()">
     <ion-label>סיימתי קניה</ion-label>
   </ion-button>
+  <ion-button (click)="moveToProductsListPage()">
+    <ion-icon name="add-sharp"></ion-icon>
+  </ion-button>
 </ion-list-header>
 <ion-label class="list-header" style="font-size: 11px; height: 18px; color: darkgrey;"> לתשומת לבך למוצרים הנמצאים תחת מעקב תתבקש/י להקיש כמות </ion-label>
 <ion-content>
@@ -30,8 +33,13 @@
       <ion-skeleton-text style="height: 1px; "></ion-skeleton-text>
       <ion-item *ngFor="let product of group.values">
         <ion-checkbox checked slot="start" [(ngModel)]="product.isChecked" (click)="checkIfFollowProduct(product)" ></ion-checkbox> 
-        <ion-label>{{product.Amount}}</ion-label>
-        <ion-label>{{product.ProductName}}</ion-label>
-      </ion-item>
+        <ion-col size="3" class="number">
+          <ion-input type="number" name="amount" [(ngModel)]="product.Amount"  min="1"></ion-input>
+        </ion-col>
+        <ion-label style="margin-right: 10px;">{{product.ProductName}}</ion-label>
+      <div>
+        <ion-label *ngIf="this.buyList.ListId== undefined " style="font-size: 10px ; " >{{product.ListName}}</ion-label>
+    </div>
+   </ion-item>
     </ion-list>
 </ion-content>

@@ -129,7 +129,7 @@ namespace BL
                 {
                     rangeDates = (lastBuys[0].DateOfBuy - lastBuys[1].DateOfBuy).Value.TotalDays;
                 }
-                // אם תקין- קיימת תדירות ויש יותר וקנה את המוצר יותר מ 3 םעמים וגם קניית המוצר עכשיו היא עדיין בטווח החריגה או שבכלל אין תדירות עדיין
+                // אם תקין- קיימת תדירות ויש יותר וקנה את המוצר יותר מ 3 םעמים וגם קניית המוצר עכשיו היא עדיין בטווח החריגה או שבכלל אין לו על מה לעבוד עדיין כי אין לו כמות מספקת בשביל החישוב 
                 if ((follow.Frequency != null && lastBuys.Count >= 3 && rangeDates >= daysbefore && rangeDates <= daysafter) ||
                     lastBuys.Count < 3)
                 {
@@ -214,8 +214,6 @@ namespace BL
                             alert.IsActivated = true;//מפעיל את ההתראה
                             db.SaveChanges();
                         }
-
-
                     }
                 }
 
@@ -268,6 +266,38 @@ namespace BL
                    db.SaveChanges();
             }
         }
-        
+
+        public static List<FollowUpListDTO> AlertsForFutureAccount(long accountId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+                List<FollowUpListDTO> products = new List<FollowUpListDTO>();
+                Account account = db.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+                var productList = account.TypesLists.SelectMany(l => l.Lists).SelectMany(p => p.ProductToLists.Where(d => d.DateOfBuy != null)).OrderByDescending(d => d.DateOfBuy).ToList();
+                //  var followList =  db.FollowUpLists.Where(a => a.AccountId == accountId).ToList();
+                foreach (var follow in account.FollowUpLists.ToList())//עובר על המוצרים למעקב של חשבון זה
+                {
+                    if (follow.FrequencyId == null)//אם אין לו תדירות לא בודק אותו
+                        continue;
+                    var lastBuy = productList.FirstOrDefault(p => p.ProductId == follow.ProductId);//קניה אחרונה של המוצר הנוכחי
+                    int days = (int)(DateTime.Today - lastBuy.DateOfBuy).Value.TotalDays;//הימים שעברו מאז הקניה האחרונה
+                    var specificProduct = productList.Where(p => p.ProductId == follow.ProductId).ToList();//כל הקניות של מוצר למעקב מסוים
+                    double avg = GetAvgBuy(specificProduct, follow.Frequency);// מציאת ממוצע הקניות לפי התדירות
+                    double dayAvg = avg / follow.Frequency.NumDays;
+                    if (days == 0)//אני הוספתי את זה!!!!!!!
+                        continue;
+                    if (lastBuy.Amount / days >= dayAvg)//אם הוא קנה בקניה האחרונה מעל הממוצע לא מתריע אותו
+                        continue;
+                    var alert = db.Alerts.FirstOrDefault(a => a.FollowUpListId == follow.FollowUpListId);//מחפש התראה על המוצר הנוכחי
+                    //אם עבר 70 אחוז מהקניה האחרונה של מוצר זה ועוד לא חרג מהטווח שחסר המוצר וגם עוד לא התריעו על מוצר זה
+                    if (days >= 0.5 * follow.Frequency.NumDays && days <= follow.Frequency.NumDays + follow.Frequency.Exception && alert == null )
+                    {
+                        products.Add(CONVERTERS.FollowUpListConverter.ConvertFollowUpListToDTO(follow));
+                    }
+                }
+                return products;
+            }
+        }
+
     }
 }

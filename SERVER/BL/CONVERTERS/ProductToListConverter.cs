@@ -28,14 +28,15 @@ namespace BL.CONVERTERS
         {
             return new ProductToListDTO
             {
-              ProductToListId=p.ProductToListId_,
-              ProductId=p.ProductId,
-              ListId=p.ListId,
-              BuyerId=p.BuyerId,
-              DateOfBuy=p.DateOfBuy,
-              Amount=p.Amount,
-              ProductName=p.Product.ProductName,
-              CategotyName = p.Product.Category.CategoryName
+                ProductToListId = p.ProductToListId_,
+                ProductId = p.ProductId,
+                ListId = p.ListId,
+                BuyerId = p.BuyerId,
+                DateOfBuy = p.DateOfBuy,
+                Amount = p.Amount,
+                ProductName = p.Product.ProductName,
+                CategotyName = p.Product.Category.CategoryName ,
+                ListName = p.List.TypesList.TypeListName
               
             };
         }

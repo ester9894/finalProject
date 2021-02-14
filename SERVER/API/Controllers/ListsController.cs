@@ -54,6 +54,13 @@ namespace API.Controllers
             return Ok(BL.ProductsToTypeListBL.addNewProductsToList(newProducts, typeListId));
         }
 
+        [Route("SaveOneProductsToList/{accountId}"), HttpPost]
+        public IHttpActionResult SaveOneProductsToList([FromUri] int accountId, [FromBody] ProductToListDTO [] products)
+        {
+            BL.ProductToListBL.SaveOneProductsToList(accountId, products);
+            return Ok(true);
+        }
+
         [Route("removeProduct/{TypeListId}/{ProductId}")]
         [HttpGet]
         public IHttpActionResult RemoveProduct(long TypeListId, long ProductId)
@@ -80,6 +87,13 @@ namespace API.Controllers
         public IHttpActionResult GetProductsOfBuyList(long listId)
         {
             return Ok(BL.ListsBL.GetProductsOfBuyList(listId));
+        }
+
+        [Route("GetProductsNotBuyOfAllActiveList/{accountId}")]
+        [HttpGet]
+        public IHttpActionResult GetProductsNotBuyOfAllActiveList(int accountId)
+        {
+            return Ok(BL.ListsBL.GetProductsNotBuyOfAllActiveList(accountId));
         }
     }
 }

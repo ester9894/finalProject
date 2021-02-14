@@ -34,7 +34,11 @@ namespace BL
             using (ProjectDBEntities db = new ProjectDBEntities())
             {
                 var prods = db.ProductToLists.Where(p => p.ListId == listId && p.DateOfBuy == null).ToList();
-                prods.ForEach( p=>p.Amount=p.List.TypesList.ProductsToTypeLists.FirstOrDefault(pr=>pr.ProductId==p.ProductId).Amount);
+                prods.ForEach(p => 
+                {
+                    if (p.Amount == null)
+                        p.Amount = p.List.TypesList.ProductsToTypeLists.FirstOrDefault(pr => pr.ProductId == p.ProductId).Amount;
+                }); 
                 return CONVERTERS.ProductToListConverter.ConvertProductToListToDTO(prods);
             }
         }
@@ -49,6 +53,24 @@ namespace BL
             {
               return CONVERTERS.ListConverter.ConvertArrayListToDTO(db.Lists.Where(list => list.TypesList.AccountId == accountId && list.EndDate != null && list.EndDate >= DateTime.Today && list.ProductToLists.Count(p=> p.DateOfBuy == null)>0).ToList());
             }
+        }
+
+        public static List<ProductToListDTO> GetProductsNotBuyOfAllActiveList(int accountId)
+        {
+            using (ProjectDBEntities db = new ProjectDBEntities())
+            {
+               List<ProductToListDTO>productToLists = new List<ProductToListDTO>();
+                Account account = db.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+                var ListsForAccount = account.TypesLists.SelectMany(l => l.Lists);
+                foreach (var list in ListsForAccount)
+                {
+                    var prods = db.ProductToLists.Where(p => p.ListId == list.ListId && p.DateOfBuy == null && p.List.EndDate >= DateTime.Today).ToList();
+                    prods.ForEach(p => p.Amount = p.List.TypesList.ProductsToTypeLists.FirstOrDefault(pr => pr.ProductId == p.ProductId).Amount);
+                   productToLists = productToLists.Concat(CONVERTERS.ProductToListConverter.ConvertProductToListToDTO(prods)).ToList().OrderBy(p => p.ProductName).ToList();
+                }
+                return productToLists;
+            }
+
         }
     }
   }

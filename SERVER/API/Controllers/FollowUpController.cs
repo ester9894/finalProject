@@ -20,7 +20,7 @@ namespace API.Controllers
              return Ok(true);
         }
 
-        [Route("getListById/{id}")]// ניתוב לפונקציה  המקבלת פרמטר
+        [Route("getListById/{id}")]// ניתוב לפונקציה המקבלת פרמטר
         [HttpGet]
         public IHttpActionResult GetListById(int id)
         {
@@ -64,6 +64,14 @@ namespace API.Controllers
         {
             BL.FollowUpBL.CancelAlertOfProduct(alert);
             return Ok(true);
+        }
+
+
+        [Route("GetForFutureBuyAlerts/{accountId}")]// קבלת התראות של החשבון
+        [HttpGet]
+        public IHttpActionResult GetForFutureBuyAlerts(int accountId)
+        {
+            return Ok(BL.FollowUpBL.AlertsForFutureAccount(accountId));
         }
     }
 }

@@ -16,5 +16,7 @@ namespace DTO
         public System.DateTime? DateOfBuy { get; set; }
         public int? Amount { get; set; }
         public string CategotyName { get; set; }
+        public string ListName { get; set; }
+
     }
 }
